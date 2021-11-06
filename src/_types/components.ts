@@ -1,24 +1,27 @@
-export interface FComponentProps {
+export interface ClassNameComponentProps {
   className?: string;
 }
 export interface FullMenuInformation {
   id: number;
-  menuImage: string;
+  picture: string;
   name: string;
   burger: string;
   sauce: string;
-  price: number;
   description: string;
-  drink: string;
+  extra: string;
+  price: number;
+  // drink: string;
 }
 
-export interface MenuDetail {
+export interface MenuDetails {
   menu: {
     id: number;
-    menuImage: string;
+    picture: string;
     name: string;
     burger: string;
     sauce: string;
+    description: string;
+    extra: string;
     price: number;
   };
 }

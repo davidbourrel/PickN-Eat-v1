@@ -9,9 +9,9 @@ const Admin = () => {
   const [name, setName] = useState('');
   const [burger, setBurger] = useState('');
   const [sauce, setSauce] = useState('');
-  const [menuImage, setMenuImage] = useState('');
+  const [picture, setMenuImage] = useState('');
   const [description, setDescription] = useState('');
-  const [extras, setExtras] = useState('');
+  const [extra, setExtras] = useState('');
   const [price, setPrice] = useState('');
   const maxLength = 300;
 
@@ -33,9 +33,9 @@ const Admin = () => {
               name: name,
               burger: burger,
               sauce: sauce,
-              menuImage: menuImage,
+              picture: picture,
               description: description,
-              extras: extras,
+              extra: extra,
               price: price,
             })
             .then(() => {
@@ -51,7 +51,7 @@ const Admin = () => {
         }
       });
     },
-    [name, burger, sauce, menuImage, description, extras, price]
+    [name, burger, sauce, picture, description, extra, price]
   );
 
   const handleMenuChange = useCallback((e) => {
@@ -111,12 +111,12 @@ const Admin = () => {
               />
             </div>
             <div className='flex flex-col '>
-              <label htmlFor='extras-select' className='font-semibold mb-2'>
+              <label htmlFor='extra-select' className='font-semibold mb-2'>
                 Extras
               </label>
               <select
-                value={extras}
-                id='extras-select'
+                value={extra}
+                id='extra-select'
                 className='border-2 rounded p-1 shadow-inner focus:border-red-700'
                 onChange={handleExtrasChange}
               >
@@ -166,7 +166,7 @@ const Admin = () => {
               </label>
               <input
                 required
-                value={menuImage}
+                value={picture}
                 onChange={handleMenuImageChange}
                 id='urlImage'
                 type='text'

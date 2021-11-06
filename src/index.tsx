@@ -4,17 +4,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ScrollToTop from './components/modules/ScrollToTop';
 import './styles/index.css';
 import App from './App';
-import { MenuProvider } from './contexts/menuContext/';
+import { CartProvider } from './contexts/cartContext';
 import { UserProvider } from './contexts/userContext/';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <UserProvider>
-        <MenuProvider>
+        <CartProvider>
           <ScrollToTop />
           <App />
-        </MenuProvider>
+        </CartProvider>
       </UserProvider>
     </Router>
   </React.StrictMode>,

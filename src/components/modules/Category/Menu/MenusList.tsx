@@ -2,31 +2,34 @@ import { FC, useMemo, useState } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
 } from '../../../../hooks/useFetchingData';
-// import { BurgerDetails } from './BurgerDetails';
 import Loading from '../../../images/icons/Loading';
 import { menusUrl } from '../../const';
-// import { DessertDetails } from './DessertDetails';
-// import { SaladDetails } from './SaladDetails';
 import MenuCard from './MenuCard';
 import SearchMenu from '../../SearchMenu';
 import Section from '../../Section';
 import HeaderTwo from '../../../elements/HeaderTwo';
 
 const MenusList: FC = () => {
+  const {
+    data: menusList,
+    loading,
+    error,
+  } = useFetchingData(menusUrl as unknown as FUseFetchingDataArgs);
+
   const [searchValue, setSearchValue] = useState('');
-  const { data, loading, error } = useFetchingData(
-    menusUrl as unknown as FUseFetchingDataArgs
-  );
+
+  const menusTitle = 'Menus';
+
   const allMenus = useMemo(
     () =>
-      data &&
-      data
+      menusList &&
+      menusList
         .filter((e) => e.name.toLowerCase().includes(searchValue.toLowerCase()))
         .map((menu) => <MenuCard key={menu.id} menu={menu} />),
-    [data, searchValue]
+    [menusList, searchValue]
   );
 
-  const result = useMemo(
+  const menuSection = useMemo(
     () =>
       allMenus.length > 0 ? (
         <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -59,9 +62,9 @@ const MenusList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text='Menus' />
+      <HeaderTwo text={menusTitle} />
       <SearchMenu searchValue={searchValue} setSearchValue={setSearchValue} />
-      {result}
+      {menuSection}
     </Section>
   );
 };

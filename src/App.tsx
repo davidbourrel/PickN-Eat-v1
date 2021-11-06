@@ -9,7 +9,8 @@ import Delivery from './components/pages/Delivery';
 import UserPage from './components/pages/UserPage';
 import Admin from './components/pages/Admin';
 import LateralNavbar from './components/modules/Navigation/LateralNavbar';
-// import Cart from './components/pages/Cart';
+import MenuDetails from './components/pages/MenuDetails';
+import Cart from './components/pages/Cart';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,9 +49,9 @@ const App: FC = () => {
             <Route path='/' exact component={Home} />
             <Route path='/restaurant' exact component={Restaurant} />
             <Route path='/delivery' exact component={Delivery} />
-            {/* <Route path='/cart' exact component={Cart} /> */}
+            <Route path='/cart' exact component={Cart} />
             <Route path='/user-page' exact component={UserPage} />
-            {/* <Route path='/menus/:id' exact component={MenuDetail} /> */}
+            <Route path='/menus/:id' exact component={MenuDetails} />
             <Route path='/admin' exact component={Admin} />
             <Route component={NotFound} />
           </Switch>

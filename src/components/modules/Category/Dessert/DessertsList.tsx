@@ -9,14 +9,18 @@ import { dessertsUrl } from '../../const';
 import MenuCard from '../../../elements/MenuCard';
 
 const DessertsList: FC = () => {
-  const { data, loading, error } = useFetchingData(
-    dessertsUrl as unknown as FUseFetchingDataArgs
-  );
+  const {
+    data: dessertsList,
+    loading,
+    error,
+  } = useFetchingData(dessertsUrl as unknown as FUseFetchingDataArgs);
+
+  const dessertsTitle = 'Desserts';
 
   const allDesserts = useMemo(
     () =>
-      data &&
-      data.map((dessert) => (
+      dessertsList &&
+      dessertsList.map((dessert) => (
         <MenuCard
           key={dessert.id}
           imageUrl={dessert.dessertImage}
@@ -24,7 +28,7 @@ const DessertsList: FC = () => {
           description={dessert.description}
         />
       )),
-    [data]
+    [dessertsList]
   );
 
   if (error)
@@ -45,7 +49,7 @@ const DessertsList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text='Desserts' />
+      <HeaderTwo text={dessertsTitle} />
       <div className='grid grid-cols-1 my-8 gap-8 items-start sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {allDesserts}
       </div>

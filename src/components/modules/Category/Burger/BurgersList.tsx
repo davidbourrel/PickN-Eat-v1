@@ -9,21 +9,26 @@ import HeaderTwo from '../../../elements/HeaderTwo';
 import MenuCard from '../../../elements/MenuCard';
 
 const BurgersList: FC = () => {
-  const { data, loading, error } = useFetchingData(
-    menusUrl as unknown as FUseFetchingDataArgs
-  );
+  const {
+    data: burgersList,
+    loading,
+    error,
+  } = useFetchingData(menusUrl as unknown as FUseFetchingDataArgs);
+
+  const burgersTitle = 'Burgers';
+
   const allBurgers = useMemo(
     () =>
-      data &&
-      data.map((menu) => (
+      burgersList &&
+      burgersList.map((menu) => (
         <MenuCard
           key={menu.id}
-          imageUrl={menu.menuImage}
+          imageUrl={menu.picture}
           title={menu.burger}
           description={menu.description}
         />
       )),
-    [data]
+    [burgersList]
   );
 
   if (error)
@@ -44,8 +49,7 @@ const BurgersList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text='Burgers' />
-      {/* Ce code se répète */}
+      <HeaderTwo text={burgersTitle} />
       <div className='grid grid-cols-1 my-8 gap-8 items-start sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {allBurgers}
       </div>

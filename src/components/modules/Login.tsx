@@ -15,9 +15,9 @@ interface userLoginInterface {
 }
 
 const Login: FC = () => {
-  const [errorLogin, setErrorLogin] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const { setIsConnected } = useContext(userContext);
+  const [errorLogin, setErrorLogin] = useState(false);
 
   const history = useHistory();
 
@@ -62,7 +62,7 @@ const Login: FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='m-5 p-6 text-gray-700 border-2 rounded shadow-md max-w-lg mx-auto'
       >
-        <h1 className='text-2xl text-center p-3 font-semibold'>Welcome !</h1>
+        <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
         <img
           src={logo}
           alt='Logo Breaking Cook'

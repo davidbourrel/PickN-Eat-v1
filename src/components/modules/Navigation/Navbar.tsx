@@ -10,10 +10,10 @@ interface FNavbarProps {
 
 const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
   const { isConnected } = useContext(userContext);
-  
+
   const isAdmin = useMemo(
     () =>
-      Cookies.get('role') === '1' && isConnected ? (
+      !!Cookies.get('id') && Cookies.get('role') === '1' && isConnected ? (
         <li className='mr-3 transition text-red-600 hover:text-red-700'>
           <Link to='/admin' onClick={closeMenu} className={LINK_itemClassName}>
             ADMIN

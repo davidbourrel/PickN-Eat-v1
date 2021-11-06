@@ -17,7 +17,7 @@ export interface UserContextInterface {
 
 // Create an initial provider value.
 const initialProviderValue: UserContextInterface = {
-  isConnected: null as unknown as UserContextInterface['isConnected'],
+  isConnected: false as unknown as UserContextInterface['isConnected'],
   setIsConnected: null as unknown as UserContextInterface['setIsConnected'],
   lastName: null as unknown as UserContextInterface['lastName'],
   setLastName: null as unknown as UserContextInterface['setLastName'],

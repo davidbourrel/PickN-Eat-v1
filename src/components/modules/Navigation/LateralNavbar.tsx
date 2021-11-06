@@ -75,7 +75,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
             <DeliverySvg />
           </Link>
         </li>
-        {Cookies.get('role') === '1' ? (
+        {!!Cookies.get('id') && Cookies.get('role') === '1' ? (
           <li className='mr-3 transition mb-7 text-red-600 hover:text-red-800'>
             <Link
               to='/admin'

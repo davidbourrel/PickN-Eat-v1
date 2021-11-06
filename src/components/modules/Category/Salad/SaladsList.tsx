@@ -9,14 +9,18 @@ import HeaderTwo from '../../../elements/HeaderTwo';
 import MenuCard from '../../../elements/MenuCard';
 
 const SaladsList: FC = () => {
-  const { data, loading, error } = useFetchingData(
-    saladsUrl as unknown as FUseFetchingDataArgs
-  );
+  const {
+    data: saladsList,
+    loading,
+    error,
+  } = useFetchingData(saladsUrl as unknown as FUseFetchingDataArgs);
+
+  const saladsTitle = 'Salads';
 
   const allSalads = useMemo(
     () =>
-      data &&
-      data.map((salad) => (
+      saladsList &&
+      saladsList.map((salad) => (
         <MenuCard
           key={salad.id}
           imageUrl={salad.saladImage}
@@ -24,7 +28,7 @@ const SaladsList: FC = () => {
           description={salad.description}
         />
       )),
-    [data]
+    [saladsList]
   );
 
   if (error)
@@ -45,7 +49,7 @@ const SaladsList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text='Salads' />
+      <HeaderTwo text={saladsTitle} />
       <div className='grid grid-cols-1 my-8 gap-8 items-start sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {allSalads}
       </div>

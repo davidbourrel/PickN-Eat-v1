@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // import ApplicationContext from '../context/ApplicationContext';
 import Navbar from './Navigation/Navbar';
@@ -6,6 +6,7 @@ import ShopSvg from '../images/icons/ShopSvg';
 import UserSvg from '../images/icons/UserSvg';
 import BCLogo from '../images/BCLogo';
 import BurgerButton from '../elements/BurgerButton';
+import cartContext from '../../contexts/cartContext';
 
 interface FHeaderProps {
   handleToggleMenu: () => void;
@@ -14,15 +15,15 @@ interface FHeaderProps {
 }
 
 const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
-  // const { countGlobalItems } = useContext(ApplicationContext);
+  const { cart } = useContext(cartContext);
 
-  // const itemsClassName = useMemo(
-  //   () =>
-  //     countGlobalItems === 0
-  //       ? 'hidden'
-  //       : 'select-none absolute -top-3 right-10 bg-red-600 rounded-full w-7 h-7 text-white flex items-center justify-center',
-  //   []
-  // );
+  const itemsClassName = useMemo(
+    () =>
+      cart.length === 0
+        ? 'hidden'
+        : 'select-none absolute bottom-5 left-7 bg-red-600 rounded-full w-7 h-7 text-white flex items-center justify-center',
+    [cart]
+  );
 
   return (
     <header className='w-full shadow-md bg-gray-50'>
@@ -41,8 +42,8 @@ const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
           <div className='grid grid-cols-2 gap-5 items-center'>
             <Link to='/cart' className='relative'>
               <ShopSvg />
-              <div className='select-none absolute bottom-5 left-7 bg-red-600 rounded-full w-7 h-7 text-white flex items-center justify-center'>
-                <span>6</span>
+              <div className={itemsClassName}>
+                <span>{cart.length}</span>
               </div>
             </Link>
             <Link to='/user-page'>

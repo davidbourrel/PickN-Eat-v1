@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
-import { FComponentProps } from '../../../_types/components';
+import { ClassNameComponentProps } from '../../../_types/components';
 
-const RestaurantsSvg: FC<FComponentProps> = ({ className }) => {
+const RestaurantsSvg: FC<ClassNameComponentProps> = ({ className }) => {
   const computedClassName = useMemo(
     () => `w-14 h-16 cursor-pointer ${className}`,
     [className]

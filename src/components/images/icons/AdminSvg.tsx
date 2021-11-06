@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
-import { FComponentProps } from '../../../_types/components';
+import { ClassNameComponentProps } from '../../../_types/components';
 
-const AdminSvg: FC<FComponentProps> = ({ className }) => {
+const AdminSvg: FC<ClassNameComponentProps> = ({ className }) => {
   const computedClassName = useMemo(
     () => `w-16 h-16 cursor-pointer ${className}`,
     [className]
