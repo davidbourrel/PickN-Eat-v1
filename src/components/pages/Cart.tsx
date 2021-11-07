@@ -1,81 +1,99 @@
 import { FC, useContext, useMemo } from 'react';
 import cartContext from '../../contexts/cartContext';
+import HeaderThree from '../elements/HeaderThree';
 import HeaderTwo from '../elements/HeaderTwo';
-import SubmitButton from '../elements/SubmitButton';
+import SubmitButton from '../elements/Buttons/SubmitButton';
 import MinusSvg from '../images/icons/MinusSvg';
 import PlusSvg from '../images/icons/PlusSvg';
 import Section from '../modules/Section';
 
 const Cart: FC = () => {
-  const { addToCart, removeFromCart, cart, cartTotalPrice, amountOfItems } =
+  const { addToCart, removeFromCart, cart, cartTotalPrice } =
     useContext(cartContext);
 
   const emptyCart = useMemo(
     () =>
-      cart.length === 0 && (
-        <div className='flex items-center justify-center flex-1 mb-10'>
-          <HeaderTwo text='Your cart is empty' className='font-bold text-2xl' />
+      cart.length === 0 ? (
+        <HeaderTwo
+          text='Your cart is empty'
+          className='font-bold border-none text-center'
+        />
+      ) : null,
+    [cart]
+  );
+
+  const cartContent = useMemo(
+    () =>
+      cart.map((item) => (
+        <div
+          key={item.id}
+          className='grid grid-cols-3 gap-2 items-center pb-2 border-b-2 border-gray-300 my-5 sm:mx-5'
+        >
+          <HeaderThree
+            text={item.title}
+            className='font-bold mb-2 capitalize'
+          />
+          <div>
+            <button
+              onClick={() => removeFromCart(item.id)}
+              className={
+                cart.length <= 0
+                  ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
+                  : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
+              }
+            >
+              <MinusSvg />
+            </button>
+            <button
+              onClick={() => addToCart(item)}
+              className={
+                cart.length >= 20
+                  ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
+                  : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
+              }
+            >
+              <PlusSvg />
+            </button>
+          </div>
+
+          <div className='text-right font-bold'>
+            <span className='text-red-700'>{item.amount}</span>
+            <span>{` x ${item.price.toFixed(2)} = ${(
+              item.amount * item.price
+            ).toFixed(2)}`}</span>
+          </div>
+        </div>
+      )),
+    [addToCart, removeFromCart, cart]
+  );
+
+  const cartCheckout = useMemo(
+    () =>
+      cart.length !== 0 && (
+        <div className='pt-5 sm:mx-5'>
+          <div className='flex justify-between mb-4'>
+            <strong className='text-xl'>Total Price</strong>
+            <strong className='text-red-700 text-xl'>
+              ${cartTotalPrice.toFixed(2)}
+            </strong>
+          </div>
+
+          <SubmitButton
+            children='Checkout'
+            className='bg-green-800 hover:bg-green-700'
+          />
         </div>
       ),
-    [cart]
+    [cart, cartTotalPrice]
   );
 
   return (
     <Section>
       <HeaderTwo text='Your cart' />
-      <div>
+      <div className='pt-4 sm:px-4'>
         {emptyCart}
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className='m-5 pb-5 border-b-2 border-gray-300 grid grid-cols-3 gap-2'
-          >
-            <h3 className='font-bold mb-2'>{item.name}</h3>
-            <div>
-              <button
-                onClick={() => removeFromCart(item)}
-                className={
-                  cart.length <= 0
-                    ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
-                    : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
-                }
-              >
-                <MinusSvg />
-              </button>
-              <button
-                onClick={() => addToCart(item)}
-                className={
-                  cart.length >= 20
-                    ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
-                    : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
-                }
-              >
-                <PlusSvg />
-              </button>
-            </div>
-
-            <div className='col-2 text-right'>
-              <span className='font-bold text-red-700'>
-                {amountOfItems(item.id)} x
-              </span>{' '}
-              <span>${item.price.toFixed(2)}</span>
-            </div>
-          </div>
-        ))}
-
-        {cart.length !== 0 && (
-          <div className='mx-5 divide-y-2 divide-black'>
-            <div className='flex justify-between pb-2'>
-              <strong className='text-xl'>Total Price</strong>
-              <strong className='text-red-700 text-xl'>
-                ${cartTotalPrice.toFixed(2)}
-              </strong>
-            </div>
-            <div className='text-right'>
-              <SubmitButton children='Checkout' />
-            </div>
-          </div>
-        )}
+        {cartContent}
+        {cartCheckout}
       </div>
     </Section>
   );

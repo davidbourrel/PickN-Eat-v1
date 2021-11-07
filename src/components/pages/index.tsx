@@ -1,16 +1,18 @@
 import { FC } from 'react';
-import BurgersList from '../modules/Category/Burger/BurgersList';
-import DessertsList from '../modules/Category/Dessert/DessertsList';
-import MenusList from '../modules/Category/Menu/MenusList';
-import SaladsList from '../modules/Category/Salad/SaladsList';
+import BurgersList from '../modules/Categories/BurgersList';
+import DessertsList from '../modules/Categories/DessertsList';
+import DrinksList from '../modules/Categories/DrinksList';
+import SaladsList from '../modules/Categories/SaladsList';
+import SidesList from '../modules/Categories/SidesList';
 
 const HomePage: FC = () => {
   return (
     <>
-      <MenusList />
       <BurgersList />
-      <DessertsList />
       <SaladsList />
+      <SidesList />
+      <DessertsList />
+      <DrinksList />
     </>
   );
 };

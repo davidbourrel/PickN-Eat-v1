@@ -1,19 +1,20 @@
 import { FC, useMemo } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
-} from '../../../../hooks/useFetchingData';
-import Loading from '../../../images/icons/Loading';
-import Section from '../../Section';
-import { saladsUrl } from '../../const';
-import HeaderTwo from '../../../elements/HeaderTwo';
-import MenuCard from '../../../elements/MenuCard';
+} from '../../../hooks/useFetchingData';
+import Loading from '../../images/icons/Loading';
+import Section from '../Section';
+import HeaderTwo from '../../elements/HeaderTwo';
+import { fetchSaladsData } from '../../../_constants/urls';
+import { SaladType } from '../../../_types/components';
+import CartCard from '../../elements/Cards/CartCard';
 
 const SaladsList: FC = () => {
   const {
     data: saladsList,
     loading,
     error,
-  } = useFetchingData(saladsUrl as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(fetchSaladsData as unknown as FUseFetchingDataArgs);
 
   const saladsTitle = 'Salads';
 
@@ -21,12 +22,7 @@ const SaladsList: FC = () => {
     () =>
       saladsList &&
       saladsList.map((salad) => (
-        <MenuCard
-          key={salad.id}
-          imageUrl={salad.saladImage}
-          title={salad.title}
-          description={salad.description}
-        />
+        <CartCard key={salad.id} item={salad as SaladType} />
       )),
     [saladsList]
   );

@@ -6,9 +6,9 @@ import RestaurantsSvg from '../../images/icons/RestaurantsSvg';
 import DeliverySvg from '../../images/icons/DeliverySvg';
 import AdminSvg from '../../images/icons/AdminSvg';
 import BCLogo from '../../images/BCLogo';
-import { OPENED_itemClassName, LINK_itemClassName } from '../const';
-import BurgerButton from '../../elements/BurgerButton';
+import BurgerToggleButton from '../../elements/Buttons/BurgerToggleButton';
 import useOutsideClick from '../../../hooks/useOutsideClick';
+import { LINK_itemClassName, OPENED_itemClassName } from '../../../_constants/urls';
 
 interface FLateralNavbarProps {
   closeMenu: () => void;
@@ -39,14 +39,14 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
   return (
     <nav className={navClassName} ref={NavbarRef}>
       <div className='absolute right-9 top-9'>
-        <BurgerButton
+        <BurgerToggleButton
           isOpen={isOpen}
           handleToggleMenu={handleToggleMenu}
           color='white'
         />
       </div>
-      <ul className='text-base xxs:text-lg font-semibold mt-16 px-8'>
-        <li className='mb-8 text-center py-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 via-red-600 to-yellow-500 text-2xl xxs:text-3xl'>
+      <ul className='text-base xxs:text-md font-semibold mt-16 px-8'>
+        <li className='mb-8 text-center py-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 via-red-600 to-yellow-500 text-2xl xxs:text-2xl'>
           <h2 className='truncate'>Breaking Cook</h2>
         </li>
         <li className={OPENED_itemClassName}>

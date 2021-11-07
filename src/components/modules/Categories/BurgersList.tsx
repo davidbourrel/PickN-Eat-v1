@@ -1,32 +1,28 @@
 import { FC, useMemo } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
-} from '../../../../hooks/useFetchingData';
-import Loading from '../../../images/icons/Loading';
-import { menusUrl } from '../../const';
-import Section from '../../Section';
-import HeaderTwo from '../../../elements/HeaderTwo';
-import MenuCard from '../../../elements/MenuCard';
+} from '../../../hooks/useFetchingData';
+import Loading from '../../images/icons/Loading';
+import Section from '../Section';
+import HeaderTwo from '../../elements/HeaderTwo';
+import { fetchBurgersData } from '../../../_constants/urls';
+import CartCard from '../../elements/Cards/CartCard';
+import { BurgerType } from '../../../_types/components';
 
 const BurgersList: FC = () => {
   const {
     data: burgersList,
     loading,
     error,
-  } = useFetchingData(menusUrl as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(fetchBurgersData as unknown as FUseFetchingDataArgs);
 
   const burgersTitle = 'Burgers';
 
   const allBurgers = useMemo(
     () =>
       burgersList &&
-      burgersList.map((menu) => (
-        <MenuCard
-          key={menu.id}
-          imageUrl={menu.picture}
-          title={menu.burger}
-          description={menu.description}
-        />
+      burgersList.map((burger) => (
+        <CartCard key={burger.id} item={burger as BurgerType} />
       )),
     [burgersList]
   );

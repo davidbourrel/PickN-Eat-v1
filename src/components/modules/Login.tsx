@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { login } from '../../API/userApi';
 import userContext from '../../contexts/userContext/';
-import SubmitButton from '../elements/SubmitButton';
+import SubmitButton from '../elements/Buttons/SubmitButton';
 import logo from '../images/logo.png';
 import Section from './Section';
 

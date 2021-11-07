@@ -16,7 +16,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ searchValue, setSearchValue }) => {
   return (
     <form className='flex flex-col my-6'>
       <label htmlFor='searchmenu' className='font-semibold mb-2'>
-        Search your menu:
+        Search your burger:
       </label>
       <input
         id='searchmenu'

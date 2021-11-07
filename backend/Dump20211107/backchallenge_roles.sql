@@ -16,30 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `menus_has_users`
+-- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `menus_has_users`;
+DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `menus_has_users` (
-  `menus_id` int NOT NULL,
-  `users_id` int NOT NULL,
-  PRIMARY KEY (`menus_id`,`users_id`),
-  KEY `fk_menus_has_users_users1_idx` (`users_id`),
-  KEY `fk_menus_has_users_menus1_idx` (`menus_id`),
-  CONSTRAINT `fk_menus_has_users_menus1` FOREIGN KEY (`menus_id`) REFERENCES `menus` (`id`),
-  CONSTRAINT `fk_menus_has_users_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idrole_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `menus_has_users`
+-- Dumping data for table `roles`
 --
 
-LOCK TABLES `menus_has_users` WRITE;
-/*!40000 ALTER TABLE `menus_has_users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `menus_has_users` ENABLE KEYS */;
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'admin'),(2,'user');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-22 19:20:14
+-- Dump completed on 2021-11-07 16:58:03

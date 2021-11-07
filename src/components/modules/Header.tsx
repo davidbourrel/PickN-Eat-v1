@@ -1,11 +1,11 @@
-import { FC, useContext, useMemo } from 'react';
+import { FC, useCallback, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // import ApplicationContext from '../context/ApplicationContext';
 import Navbar from './Navigation/Navbar';
 import ShopSvg from '../images/icons/ShopSvg';
 import UserSvg from '../images/icons/UserSvg';
 import BCLogo from '../images/BCLogo';
-import BurgerButton from '../elements/BurgerButton';
+import BurgerToggleButton from '../elements/Buttons/BurgerToggleButton';
 import cartContext from '../../contexts/cartContext';
 
 interface FHeaderProps {
@@ -15,7 +15,7 @@ interface FHeaderProps {
 }
 
 const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
-  const { cart } = useContext(cartContext);
+  const { cart, cartTotalItems } = useContext(cartContext);
 
   const itemsClassName = useMemo(
     () =>
@@ -25,11 +25,16 @@ const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
     [cart]
   );
 
+  const handleCartTotalItems = useCallback(
+    () => cartTotalItems(cart),
+    [cart, cartTotalItems]
+  );
+
   return (
     <header className='w-full shadow-md bg-gray-50'>
       <div className='tracking-wider font-bold xl:mx-auto xl:max-w-7xl'>
         <div className='flex items-center justify-between py-3 px-8'>
-          <BurgerButton
+          <BurgerToggleButton
             isOpen={isOpen}
             handleToggleMenu={handleToggleMenu}
             color='black'
@@ -43,7 +48,7 @@ const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
             <Link to='/cart' className='relative'>
               <ShopSvg />
               <div className={itemsClassName}>
-                <span>{cart.length}</span>
+                <span>{handleCartTotalItems}</span>
               </div>
             </Link>
             <Link to='/user-page'>

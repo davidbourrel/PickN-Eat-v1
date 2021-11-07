@@ -1,26 +1,26 @@
 import { useCallback, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import SubmitButton from '../elements/SubmitButton';
+import SubmitButton from '../elements/Buttons/SubmitButton';
 import Section from '../modules/Section';
 import HeaderTwo from '../elements/HeaderTwo';
+import { fetchBurgersData } from '../../_constants/urls';
 
 const Admin = () => {
-  const [name, setName] = useState('');
-  const [burger, setBurger] = useState('');
-  const [sauce, setSauce] = useState('');
-  const [picture, setMenuImage] = useState('');
-  const [description, setDescription] = useState('');
-  const [extra, setExtras] = useState('');
-  const [price, setPrice] = useState('');
+  const [title, setTitle] = useState(null as unknown as string);
+  const [price, setPrice] = useState(null as unknown as number);
+  const [description, setDescription] = useState(null as unknown as string);
+  const [image, setImage] = useState(null as unknown as string);
+  const [allergens, setAllergens] = useState(null as unknown as string);
+
   const maxLength = 300;
 
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
       Swal.fire({
-        title: 'Add this menu?',
-        text: 'Are you sure that you want to add this menu?',
+        title: 'Add this burger?',
+        text: 'Are you sure that you want to add this burger?',
         icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -29,136 +29,62 @@ const Admin = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .post(`${process.env.REACT_APP_API_URL}menus`, {
-              name: name,
-              burger: burger,
-              sauce: sauce,
-              picture: picture,
-              description: description,
-              extra: extra,
-              price: price,
+            .post(fetchBurgersData, {
+              title,
+              price,
+              description,
+              image,
+              allergens,
             })
             .then(() => {
-              setName('');
-              setBurger('');
-              setSauce('');
-              setMenuImage('');
-              setDescription('');
-              setExtras('');
-              setPrice('');
+              setTitle(null as unknown as string);
+              setPrice(null as unknown as number);
+              setDescription(null as unknown as string);
+              setImage(null as unknown as string);
+              setAllergens(null as unknown as string);
             });
-          Swal.fire('Added!', 'Your menu has been added!', 'success');
+          Swal.fire('Added!', 'Your burger has been added!', 'success');
         }
       });
     },
-    [name, burger, sauce, picture, description, extra, price]
+    [title, image, description, price, allergens]
   );
 
-  const handleMenuChange = useCallback((e) => {
-    setName(e.target.value);
+  const handleTitleChange = useCallback((e) => {
+    setTitle(e.target.value);
   }, []);
-  const handleBurgerChange = useCallback((e) => {
-    setBurger(e.target.value);
-  }, []);
-  const handleSaucesChange = useCallback((e) => {
-    setSauce(e.target.value);
-  }, []);
-  const handleMenuImageChange = useCallback((e) => {
-    setMenuImage(e.target.value);
+  const handleImageChange = useCallback((e) => {
+    setImage(e.target.value);
   }, []);
   const handleDescriptionChange = useCallback((e) => {
     setDescription(e.target.value);
   }, []);
-  const handleExtrasChange = useCallback((e) => {
-    setExtras(e.target.value);
-  }, []);
   const handlePriceChange = useCallback((e) => {
     setPrice(e.target.value);
+  }, []);
+  const handleAllergensChange = useCallback((e) => {
+    setAllergens(e.target.value);
   }, []);
 
   return (
     <Section>
       <div className='mx-auto xl:max-w-7xl'>
-        <HeaderTwo text='Add your new menu' />
+        <HeaderTwo text='Add your new burger' />
         <form className='mx-5 my-6' onSubmit={handleSubmit}>
           <div className='mb-5 grid gap-4 grid-flow-col grid-cols-1 grid-rows-6 sm:grid-cols-2 sm:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2'>
-            <div className='flex flex-col '>
-              <label htmlFor='menuName' className='font-semibold mb-2'>
-                Menu
-              </label>
-              <input
-                required
-                value={name}
-                onChange={handleMenuChange}
-                id='menuName'
-                type='text'
-                placeholder='Name...'
-                className='border-2 rounded p-1 shadow-inner focus:border-red-700'
-              />
-            </div>
             <div className='flex flex-col'>
               <label htmlFor='burgerName' className='font-semibold mb-2'>
                 Burger
               </label>
               <input
                 required
-                value={burger}
-                onChange={handleBurgerChange}
+                value={title}
+                onChange={handleTitleChange}
                 id='burgerName'
                 type='text'
                 placeholder='Burger...'
                 className='border-2 rounded p-1 shadow-inner focus:border-red-700'
               />
-            </div>
-            <div className='flex flex-col '>
-              <label htmlFor='extra-select' className='font-semibold mb-2'>
-                Extras
-              </label>
-              <select
-                value={extra}
-                id='extra-select'
-                className='border-2 rounded p-1 shadow-inner focus:border-red-700'
-                onChange={handleExtrasChange}
-              >
-                <option value=''>Choose an extra</option>
-                <option value='Fries'>Fries</option>
-                <option value='Potatoes'>Potatoes</option>
-                <option value='Popcorn Chicken'>Popcorn Chicken</option>
-                <option value='Wings'>Wings</option>
-              </select>
-            </div>
-            <div className='flex flex-col '>
-              <label htmlFor='price' className='font-semibold mb-2'>
-                Price
-              </label>
-              <input
-                type='number'
-                min='1'
-                max='100'
-                value={price}
-                onChange={handlePriceChange}
-                id='price'
-                placeholder='Price...'
-                className='border-2 rounded p-1 shadow-inner focus:border-red-700'
-                required
-              />
-            </div>
-            <div className='flex flex-col '>
-              <label htmlFor='sauce-select' className='font-semibold mb-2'>
-                Sauces
-              </label>
-              <select
-                value={sauce}
-                id='sauce-select'
-                className='border-2 rounded p-1 shadow-inner focus:border-red-700'
-                onChange={handleSaucesChange}
-              >
-                <option value=''>Choose a sauce</option>
-                <option value='Ketchup'>Ketchup</option>
-                <option value='BBQ'>BBQ</option>
-                <option value='Gravy'>Gravy</option>
-                <option value='Deluxe'>Deluxe</option>
-              </select>
             </div>
             <div className='flex flex-col'>
               <label htmlFor='urlImage' className='font-semibold mb-2'>
@@ -166,8 +92,8 @@ const Admin = () => {
               </label>
               <input
                 required
-                value={picture}
-                onChange={handleMenuImageChange}
+                value={image}
+                onChange={handleImageChange}
                 id='urlImage'
                 type='text'
                 placeholder='Url...'
@@ -187,6 +113,36 @@ const Admin = () => {
               maxLength={maxLength}
               placeholder='Description...'
               className='border-2 rounded p-1 shadow-inner max-w-lg max-h-72 focus:border-red-700'
+            />
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor='burgerName' className='font-semibold mb-2'>
+              Allergens
+            </label>
+            <input
+              required
+              value={allergens}
+              onChange={handleAllergensChange}
+              id='burgerName'
+              type='text'
+              placeholder='Burger...'
+              className='border-2 rounded p-1 shadow-inner focus:border-red-700'
+            />
+          </div>
+          <div className='flex flex-col '>
+            <label htmlFor='price' className='font-semibold mb-2'>
+              Price
+            </label>
+            <input
+              type='number'
+              min='1'
+              max='100'
+              value={price}
+              onChange={handlePriceChange}
+              id='price'
+              placeholder='Price...'
+              className='border-2 rounded p-1 shadow-inner focus:border-red-700'
+              required
             />
           </div>
           <SubmitButton>Send !</SubmitButton>

@@ -23,13 +23,16 @@ DROP TABLE IF EXISTS `desserts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `desserts` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL,
   `title` varchar(100) NOT NULL,
+  `price` int NOT NULL,
   `description` varchar(300) NOT NULL,
-  `dessertImage` varchar(300) NOT NULL,
+  `image` varchar(300) NOT NULL,
+  `allergens` varchar(300) NOT NULL,
+  `category` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `iddesserts_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +41,7 @@ CREATE TABLE `desserts` (
 
 LOCK TABLES `desserts` WRITE;
 /*!40000 ALTER TABLE `desserts` DISABLE KEYS */;
-INSERT INTO `desserts` VALUES (1,'Ultimate Choco Brownie','The generous meeting of a creamy vanilla, an authentic brownie, under a chocolate-hazelnut topping and a greedy layer of whipped cream','https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80'),(2,'Sweet Vanilla','Vanilla ice cream with chocolate-hazelnut topping','https://images.unsplash.com/photo-1543255006-d6395b6f1171?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80'),(3,'Fabulous crepe','A delicious chocolate flavored crepewith crunchy hazelnut chips','https://images.unsplash.com/photo-1587314168485-3236d6710814?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=670&q=80'),(4,'Chocolate cake','The best chocolate cake we ever made! We love it !','https://images.unsplash.com/photo-1541780171255-b162a3a147e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80');
+INSERT INTO `desserts` VALUES ('AAAarmohmhjtmh','Ultimate Choco Brownie',4,'The generous meeting of a creamy vanilla, an authentic brownie, under a chocolate-hazelnut topping and a greedy layer of whipped cream','https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80','gluten, milk','desserts'),('AAAbmgkrmokrmhr','Sweet Vanilla',5,'Vanilla ice cream with chocolate-hazelnut topping','https://images.unsplash.com/photo-1543255006-d6395b6f1171?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80','gluten, milk','desserts'),('AAAcorhmejhmre','Fabulous crepe',3,'A delicious chocolate flavored crepewith crunchy hazelnut chips','https://images.unsplash.com/photo-1587314168485-3236d6710814?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=670&q=80','gluten, milk','desserts'),('AAAdhmorhmejrmh','Chocolate cake',4,'The best chocolate cake we ever made! We love it !','https://images.unsplash.com/photo-1541780171255-b162a3a147e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80','gluten, milk','desserts');
 /*!40000 ALTER TABLE `desserts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-22 19:20:14
+-- Dump completed on 2021-11-07 16:58:03

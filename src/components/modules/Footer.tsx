@@ -1,6 +1,10 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { colClassName, headingClassName, itemClassName } from './const';
+import {
+  colClassName,
+  headingClassName,
+  itemClassName,
+} from '../../_constants/urls';
 
 const Footer: FC = () => {
   return (

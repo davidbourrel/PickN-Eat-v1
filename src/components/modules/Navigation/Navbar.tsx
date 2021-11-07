@@ -2,7 +2,10 @@ import Cookies from 'js-cookie';
 import { FC, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import userContext from '../../../contexts/userContext';
-import { LIST_itemClassName, LINK_itemClassName } from '../const';
+import {
+  LINK_itemClassName,
+  LIST_itemClassName,
+} from '../../../_constants/urls';
 
 interface FNavbarProps {
   closeMenu: () => void;

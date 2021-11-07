@@ -9,7 +9,7 @@ import Delivery from './components/pages/Delivery';
 import UserPage from './components/pages/UserPage';
 import Admin from './components/pages/Admin';
 import LateralNavbar from './components/modules/Navigation/LateralNavbar';
-import MenuDetails from './components/pages/MenuDetails';
+import SeeMore from './components/pages/SeeMore';
 import Cart from './components/pages/Cart';
 
 const App: FC = () => {
@@ -51,7 +51,11 @@ const App: FC = () => {
             <Route path='/delivery' exact component={Delivery} />
             <Route path='/cart' exact component={Cart} />
             <Route path='/user-page' exact component={UserPage} />
-            <Route path='/menus/:id' exact component={MenuDetails} />
+            <Route path='/burgers/:id' exact component={SeeMore} />
+            <Route path='/desserts/:id' exact component={SeeMore} />
+            <Route path='/salads/:id' exact component={SeeMore} />
+            <Route path='/drinks/:id' exact component={SeeMore} />
+            <Route path='/sides/:id' exact component={SeeMore} />
             <Route path='/admin' exact component={Admin} />
             <Route component={NotFound} />
           </Switch>

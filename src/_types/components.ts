@@ -1,41 +1,61 @@
 export interface ClassNameComponentProps {
   className?: string;
 }
-export interface FullMenuInformation {
+export interface BurgerType {
   id: number;
-  picture: string;
-  name: string;
-  burger: string;
-  sauce: string;
-  description: string;
-  extra: string;
+  title: string;
   price: number;
-  // drink: string;
-}
-
-export interface MenuDetails {
-  menu: {
-    id: number;
-    picture: string;
-    name: string;
-    burger: string;
-    sauce: string;
-    description: string;
-    extra: string;
-    price: number;
-  };
-}
-
-export interface DessertDetail {
-  id: number;
-  dessertImage: string;
-  title: string;
   description: string;
+  image: string;
+  allergens: string;
+  category: string;
+  amount: number;
+}
+export interface DessertType {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  allergens: string;
+  category: string;
+  amount: number;
+}
+export interface DrinkType {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  allergens: string;
+  category: string;
+  amount: number;
+}
+export interface SaladType {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  allergens: string;
+  category: string;
+  amount: number;
+}
+export interface SideType {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  allergens: string;
+  pieces: number;
+  category: string;
+  amount: number;
 }
 
-export interface SaladDetail {
-  id: number;
-  saladImage: string;
-  title: string;
-  description: string;
-}
+export type CartCardTypes =
+  | BurgerType
+  | DessertType
+  | DrinkType
+  | SaladType
+  | SideType;

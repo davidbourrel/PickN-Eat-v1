@@ -1,17 +1,19 @@
-const menuRouter = require('./menus');
+const burgerRouter = require('./burgers');
 const dessertRouter = require('./desserts');
-const saladRouter = require('./salads');
-const userRouter = require('./users');
+const drinkRouter = require('./drinks');
 const roleRouter = require('./roles');
+const saladRouter = require('./salads');
+const sideRouter = require('./sides');
 const loginRouter = require('./authentification');
-const favoritRouter = require('./favorites');
+const userRouter = require('./users');
 
 module.exports = (app) => {
-  app.use('/menus', menuRouter);
+  app.use('/burgers', burgerRouter);
   app.use('/desserts', dessertRouter);
-  app.use('/salads', saladRouter);
-  app.use('/users', userRouter);
+  app.use('/drinks', drinkRouter);
   app.use('/roles', roleRouter);
+  app.use('/salads', saladRouter);
+  app.use('/sides', sideRouter);
   app.use('/login', loginRouter);
-  app.use('/favorites', favoritRouter);
+  app.use('/users', userRouter);
 };

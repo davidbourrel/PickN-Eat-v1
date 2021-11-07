@@ -3,7 +3,7 @@ import { HeaderProps } from './types';
 
 const HeaderThree: FC<HeaderProps> = ({ text, className }) => {
   const computedClassName = useMemo(
-    () => `py-2 text-xl text-gray-800 font-bold ${className || ''}`,
+    () => `text-md py-2 text-gray-800 font-bold md:text-xl ${className || ''}`,
     [className]
   );
 

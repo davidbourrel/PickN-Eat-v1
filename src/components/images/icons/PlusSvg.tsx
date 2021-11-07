@@ -7,7 +7,7 @@ const PlusSvg: FC = () => {
       focusable='false'
       data-prefix='fas'
       data-icon='plus'
-      className='w-5 h-5'
+      className='w-4 h-4 sm:w-5 sm:h-5'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 448 512'
     >

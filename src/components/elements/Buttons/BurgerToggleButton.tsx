@@ -1,13 +1,13 @@
 import { FC, useMemo } from 'react';
-import { BURGER_CLASSNAME } from '../modules/const';
+import { BURGER_CLASSNAME } from '../../../_constants/urls';
 
-interface BurgerButtonProps {
+interface BurgerToggleButtonProps {
   handleToggleMenu: () => void;
   isOpen: boolean;
   color: string;
 }
 
-const BurgerButton: FC<BurgerButtonProps> = ({
+const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
   handleToggleMenu,
   isOpen,
   color,
@@ -40,4 +40,4 @@ const BurgerButton: FC<BurgerButtonProps> = ({
   );
 };
 
-export default BurgerButton;
+export default BurgerToggleButton;

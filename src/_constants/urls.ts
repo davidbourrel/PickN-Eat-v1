@@ -16,6 +16,8 @@ export const headingClassName = 'font-bold text-lg py-5';
 export const itemClassName = 'text-sm mb-2 hover:underline cursor-pointer';
 
 // FETCH ALL MENUS
-export const getMenusUrl = `${process.env.REACT_APP_API_URL}menus`;
-export const getDessertsUrl = `${process.env.REACT_APP_API_URL}desserts`;
-export const getSaladsUrl = `${process.env.REACT_APP_API_URL}salads`;
+export const fetchBurgersData = `${process.env.REACT_APP_API_URL}burgers`;
+export const fetchDessertsData = `${process.env.REACT_APP_API_URL}desserts`;
+export const fetchDrinksData = `${process.env.REACT_APP_API_URL}drinks`;
+export const fetchSaladsData = `${process.env.REACT_APP_API_URL}salads`;
+export const fetchSidesData = `${process.env.REACT_APP_API_URL}sides`;

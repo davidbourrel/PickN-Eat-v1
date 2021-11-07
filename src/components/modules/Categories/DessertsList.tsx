@@ -1,19 +1,20 @@
 import { FC, useMemo } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
-} from '../../../../hooks/useFetchingData';
-import Loading from '../../../images/icons/Loading';
-import HeaderTwo from '../../../elements/HeaderTwo';
-import Section from '../../Section';
-import { dessertsUrl } from '../../const';
-import MenuCard from '../../../elements/MenuCard';
+} from '../../../hooks/useFetchingData';
+import Loading from '../../images/icons/Loading';
+import HeaderTwo from '../../elements/HeaderTwo';
+import Section from '../Section';
+import { fetchDessertsData } from '../../../_constants/urls';
+import { DessertType } from '../../../_types/components';
+import CartCard from '../../elements/Cards/CartCard';
 
 const DessertsList: FC = () => {
   const {
     data: dessertsList,
     loading,
     error,
-  } = useFetchingData(dessertsUrl as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(fetchDessertsData as unknown as FUseFetchingDataArgs);
 
   const dessertsTitle = 'Desserts';
 
@@ -21,12 +22,7 @@ const DessertsList: FC = () => {
     () =>
       dessertsList &&
       dessertsList.map((dessert) => (
-        <MenuCard
-          key={dessert.id}
-          imageUrl={dessert.dessertImage}
-          title={dessert.title}
-          description={dessert.description}
-        />
+        <CartCard key={dessert.id} item={dessert as DessertType} />
       )),
     [dessertsList]
   );

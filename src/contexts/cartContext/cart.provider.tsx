@@ -2,19 +2,19 @@ import {
   FC,
   createContext,
   useState,
-  useCallback,
   Dispatch,
   SetStateAction,
+  useCallback,
 } from 'react';
-import { FullMenuInformation } from '../../_types/components';
+import { CartCardTypes } from '../../_types/components';
 
 export interface CartContextInterface {
-  cart: FullMenuInformation[];
-  setCart: Dispatch<SetStateAction<FullMenuInformation[]>>;
+  cart: CartCardTypes[];
+  setCart: Dispatch<SetStateAction<CartCardTypes[]>>;
   cartTotalPrice: number;
-  addToCart: (item: FullMenuInformation) => void;
-  removeFromCart: (item: FullMenuInformation) => void;
-  amountOfItems: (id: number) => void;
+  addToCart: (item: CartCardTypes) => void;
+  removeFromCart: (id: number) => void;
+  cartTotalItems: (items: CartCardTypes[]) => number;
 }
 
 // Create an initial provider value.
@@ -24,56 +24,68 @@ const initialProviderValue: CartContextInterface = {
   cartTotalPrice: null as unknown as CartContextInterface['cartTotalPrice'],
   addToCart: null as unknown as CartContextInterface['addToCart'],
   removeFromCart: null as unknown as CartContextInterface['removeFromCart'],
-  amountOfItems: null as unknown as CartContextInterface['amountOfItems'],
+  cartTotalItems: null as unknown as CartContextInterface['cartTotalItems'],
 };
 // Create the store or 'context'.
 export const cartContext = createContext(initialProviderValue);
 const { Provider } = cartContext;
 
 const CartProvider: FC = ({ children }) => {
-  const [cart, setCart] = useState([] as unknown as FullMenuInformation[]);
+  const [cart, setCart] = useState([] as unknown as CartCardTypes[]);
 
+  /*****************
+   GET TOTAL PRICE
+  ******************/
   const cartTotalPrice = cart.reduce(
-    (total, { price = 0 }) => total + price,
+    (total: number, item) => total + item.amount * item.price,
     0
   );
 
-  const addToCart = useCallback(
-    (item) => setCart((currentCart) => [...currentCart, item]),
+  // const calculateTotal = (cart: CartCardTypes[]) =>
+  //   cart.reduce((total: number, item) => total + item.amount * item.price, 0);
+  // const cartTotalPrice = Number(calculateTotal(cart).toFixed(2));
+
+  /*****************
+   GET TOTAL ITEMS
+  ******************/
+  const cartTotalItems = useCallback(
+    (items: CartCardTypes[]) =>
+      items.reduce((total: number, item) => total + item.amount, 0),
     []
   );
 
-  const removeFromCart = useCallback((item) => {
+  /*****************
+   ADD AND REMOVE FROM CART FUNCTION
+  ******************/
+  const addToCart = useCallback((clickedItem: CartCardTypes) => {
     setCart((currentCart) => {
-      const indexOfItemToRemove = currentCart.findIndex(
-        (cartItem) => cartItem.id === item.id
-      );
+      // 1. Is the item already added in the cart?
+      const exist = currentCart.find((item) => item.id === clickedItem.id);
 
-      if (indexOfItemToRemove === -1) {
-        return currentCart;
+      if (exist) {
+        return currentCart.map((item) =>
+          item.id === clickedItem.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
       }
-
-      return [
-        ...currentCart.slice(0, indexOfItemToRemove),
-        ...currentCart.slice(indexOfItemToRemove + 1),
-      ];
+      // First time the item is added
+      return [...currentCart, { ...clickedItem, amount: 1 }];
     });
   }, []);
 
-  const amountOfItems = useCallback(
-    (id) => cart.filter((item) => item.id === id).length,
-    [cart]
-  );
-
-  // const listItemsInCart = () =>
-  //   items.map((item) => (
-  //     <div key={item.id}>
-  //       ({amountOfItems(item.id)} x ${item.price}) {`${item.name}`}
-  //       <button type='submit' onClick={() => removeFromCart(item)}>
-  //         Remove
-  //       </button>
-  //     </div>
-  //   ));
+  const removeFromCart = useCallback((id: number) => {
+    setCart((currentCart) =>
+      currentCart.reduce((total, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return total;
+          return [...total, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...total, item];
+        }
+      }, [] as CartCardTypes[])
+    );
+  }, []);
 
   return (
     <Provider
@@ -83,7 +95,7 @@ const CartProvider: FC = ({ children }) => {
         cartTotalPrice,
         addToCart,
         removeFromCart,
-        amountOfItems,
+        cartTotalItems,
       }}
     >
       {children}

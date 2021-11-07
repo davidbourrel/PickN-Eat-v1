@@ -4,7 +4,7 @@ import { HeaderProps } from './types';
 const HeaderOne: FC<HeaderProps> = ({ text, className }) => {
   const computedClassName = useMemo(
     () =>
-      `py-2 text-4xl text-red-700 font-bold border-b border-gray-300 ${
+      `text-3xl py-2 text-red-700 font-bold border-b border-gray-300 md:text-4xl ${
         className || ''
       }`,
     [className]
