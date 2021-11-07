@@ -15,7 +15,10 @@ const Section: ForwardRefRenderFunction<
   PropsWithChildren<FSectionProps>
 > = ({ id, className, children }, ref) => {
   const computedClassName = useMemo(
-    () => `flex flex-col p-8 w-full xl:mx-auto xl:max-w-7xl ${className ?? ''}`,
+    () =>
+      `flex flex-col p-4 w-full sm:p-8 xl:mx-auto xl:max-w-7xl ${
+        className ?? ''
+      }`,
     [className]
   );
 

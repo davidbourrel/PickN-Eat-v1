@@ -11,7 +11,7 @@ export const OPENED_itemClassName =
 export const LINK_itemClassName = 'flex justify-between items-center';
 
 // FOOTER
-export const colClassName = 'px-8 sm:flex-1';
+export const colClassName = 'p-4 sm:p-8 sm:flex-1';
 export const headingClassName = 'font-bold text-lg py-5';
 export const itemClassName = 'text-sm mb-2 hover:underline cursor-pointer';
 

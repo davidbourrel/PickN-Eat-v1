@@ -46,7 +46,7 @@ const SidesList: FC = () => {
   return (
     <Section>
       <HeaderTwo text={sidesTitle} />
-      <div className='grid grid-cols-1 my-8 gap-8 items-start sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      <div className='grid grid-cols-1 xs:grid-cols-2 my-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allSides}
       </div>
     </Section>

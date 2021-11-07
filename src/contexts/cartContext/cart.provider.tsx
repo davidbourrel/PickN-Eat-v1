@@ -5,6 +5,7 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
+  useMemo,
 } from 'react';
 import { CartCardTypes } from '../../_types/components';
 
@@ -12,9 +13,9 @@ export interface CartContextInterface {
   cart: CartCardTypes[];
   setCart: Dispatch<SetStateAction<CartCardTypes[]>>;
   cartTotalPrice: number;
+  cartTotalItems: number;
   addToCart: (item: CartCardTypes) => void;
   removeFromCart: (id: number) => void;
-  cartTotalItems: (items: CartCardTypes[]) => number;
 }
 
 // Create an initial provider value.
@@ -22,9 +23,9 @@ const initialProviderValue: CartContextInterface = {
   cart: null as unknown as CartContextInterface['cart'],
   setCart: null as unknown as CartContextInterface['setCart'],
   cartTotalPrice: null as unknown as CartContextInterface['cartTotalPrice'],
+  cartTotalItems: null as unknown as CartContextInterface['cartTotalItems'],
   addToCart: null as unknown as CartContextInterface['addToCart'],
   removeFromCart: null as unknown as CartContextInterface['removeFromCart'],
-  cartTotalItems: null as unknown as CartContextInterface['cartTotalItems'],
 };
 // Create the store or 'context'.
 export const cartContext = createContext(initialProviderValue);
@@ -33,30 +34,17 @@ const { Provider } = cartContext;
 const CartProvider: FC = ({ children }) => {
   const [cart, setCart] = useState([] as unknown as CartCardTypes[]);
 
-  /*****************
-   GET TOTAL PRICE
-  ******************/
-  const cartTotalPrice = cart.reduce(
-    (total: number, item) => total + item.amount * item.price,
-    0
+  const cartTotalPrice = useMemo(
+    () =>
+      cart.reduce((total: number, item) => total + item.amount * item.price, 0),
+    [cart]
   );
 
-  // const calculateTotal = (cart: CartCardTypes[]) =>
-  //   cart.reduce((total: number, item) => total + item.amount * item.price, 0);
-  // const cartTotalPrice = Number(calculateTotal(cart).toFixed(2));
-
-  /*****************
-   GET TOTAL ITEMS
-  ******************/
-  const cartTotalItems = useCallback(
-    (items: CartCardTypes[]) =>
-      items.reduce((total: number, item) => total + item.amount, 0),
-    []
+  const cartTotalItems = useMemo(
+    () => cart.reduce((total: number, item) => total + item.amount, 0),
+    [cart]
   );
 
-  /*****************
-   ADD AND REMOVE FROM CART FUNCTION
-  ******************/
   const addToCart = useCallback((clickedItem: CartCardTypes) => {
     setCart((currentCart) => {
       // 1. Is the item already added in the cart?

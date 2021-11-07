@@ -8,18 +8,18 @@ import PlusSvg from '../images/icons/PlusSvg';
 import Section from '../modules/Section';
 
 const Cart: FC = () => {
-  const { addToCart, removeFromCart, cart, cartTotalPrice } =
+  const { addToCart, removeFromCart, cart, cartTotalPrice, cartTotalItems } =
     useContext(cartContext);
 
   const emptyCart = useMemo(
     () =>
-      cart.length === 0 ? (
+      cartTotalItems === 0 ? (
         <HeaderTwo
           text='Your cart is empty'
           className='font-bold border-none text-center'
         />
       ) : null,
-    [cart]
+    [cartTotalItems]
   );
 
   const cartContent = useMemo(
@@ -37,7 +37,7 @@ const Cart: FC = () => {
             <button
               onClick={() => removeFromCart(item.id)}
               className={
-                cart.length <= 0
+                cartTotalItems <= 0
                   ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
                   : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
               }
@@ -47,7 +47,7 @@ const Cart: FC = () => {
             <button
               onClick={() => addToCart(item)}
               className={
-                cart.length >= 20
+                cartTotalItems >= 20
                   ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
                   : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
               }
@@ -64,7 +64,7 @@ const Cart: FC = () => {
           </div>
         </div>
       )),
-    [addToCart, removeFromCart, cart]
+    [addToCart, removeFromCart, cart, cartTotalItems]
   );
 
   const cartCheckout = useMemo(

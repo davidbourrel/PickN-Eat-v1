@@ -11,12 +11,13 @@ interface CartCardProps {
 
 const CartCard: FC<CartCardProps> = ({ item }) => {
   const { image, title, id, category, description, price } = item;
-  const { addToCart, cart } = useContext(cartContext);
+  const { addToCart, cart, cartTotalItems } = useContext(cartContext);
 
   const [isActive, setIsActive] = useState(false);
   const handleToggle = useCallback(() => setIsActive(!isActive), [isActive]);
 
   const handleAddToCart = useCallback(() => addToCart(item), [addToCart, item]);
+
   const addToCartSection = useMemo(
     () => (
       <div className='flex justify-between items-center w-full'>
@@ -24,7 +25,7 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
         <span
           onClick={handleAddToCart}
           className={
-            cart && cart.length >= 20
+            cart && cartTotalItems >= 20
               ? 'opacity-50 pointer-events-none select-none'
               : 'opacity-100 pointer-events-auto select-auto'
           }
@@ -33,7 +34,7 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
         </span>
       </div>
     ),
-    [cart, handleAddToCart, price]
+    [cart, handleAddToCart, price, cartTotalItems]
   );
 
   const seeMoreClassName = useMemo(
@@ -79,7 +80,7 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
         <img
           src={image}
           alt={title}
-          className='h-44 w-full object-cover transition duration-300 transform-gpu hover:scale-125 filter contrast-75 hover:contrast-100'
+          className='h-36 w-full object-cover transition duration-300 transform-gpu hover:scale-125 filter contrast-75 hover:contrast-100'
         />
       </div>
       <div className='flex flex-wrap px-3'>
