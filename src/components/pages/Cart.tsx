@@ -1,7 +1,7 @@
 import { FC, useContext, useMemo } from 'react';
 import cartContext from '../../contexts/cartContext';
-import HeaderThree from '../elements/HeaderThree';
-import HeaderTwo from '../elements/HeaderTwo';
+import HeaderThree from '../elements/Headings/HeaderThree';
+import HeaderTwo from '../elements/Headings/HeaderTwo';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import MinusSvg from '../images/icons/MinusSvg';
 import PlusSvg from '../images/icons/PlusSvg';

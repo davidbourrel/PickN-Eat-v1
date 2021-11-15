@@ -7,14 +7,14 @@ import {
   useCallback,
   useMemo,
 } from 'react';
-import { CartCardTypes } from '../../_types/components';
+import { CardItemTypes } from '../../_types/components';
 
 export interface CartContextInterface {
-  cart: CartCardTypes[];
-  setCart: Dispatch<SetStateAction<CartCardTypes[]>>;
+  cart: CardItemTypes[];
+  setCart: Dispatch<SetStateAction<CardItemTypes[]>>;
   cartTotalPrice: number;
   cartTotalItems: number;
-  addToCart: (item: CartCardTypes) => void;
+  addToCart: (item: CardItemTypes) => void;
   removeFromCart: (id: number) => void;
 }
 
@@ -32,7 +32,7 @@ export const cartContext = createContext(initialProviderValue);
 const { Provider } = cartContext;
 
 const CartProvider: FC = ({ children }) => {
-  const [cart, setCart] = useState([] as unknown as CartCardTypes[]);
+  const [cart, setCart] = useState([] as unknown as CardItemTypes[]);
 
   const cartTotalPrice = useMemo(
     () =>
@@ -45,7 +45,7 @@ const CartProvider: FC = ({ children }) => {
     [cart]
   );
 
-  const addToCart = useCallback((clickedItem: CartCardTypes) => {
+  const addToCart = useCallback((clickedItem: CardItemTypes) => {
     setCart((currentCart) => {
       // 1. Is the item already added in the cart?
       const exist = currentCart.find((item) => item.id === clickedItem.id);
@@ -71,7 +71,7 @@ const CartProvider: FC = ({ children }) => {
         } else {
           return [...total, item];
         }
-      }, [] as CartCardTypes[])
+      }, [] as CardItemTypes[])
     );
   }, []);
 

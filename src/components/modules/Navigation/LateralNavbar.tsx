@@ -46,7 +46,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
         />
       </div>
       <ul className='text-base xxs:text-md font-semibold mt-16 px-8'>
-        <li className='mb-8 text-center py-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 via-red-600 to-yellow-500 text-2xl xxs:text-2xl'>
+        <li className='mb-8 text-center py-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 via-red-600 to-yellow-500 text-2xl xxs:text-3xl'>
           <h2 className='truncate'>Breaking Cook</h2>
         </li>
         <li className={OPENED_itemClassName}>

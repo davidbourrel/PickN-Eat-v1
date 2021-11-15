@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { HeaderProps } from './types';
+import { HeaderProps } from '../types';
 
 const HeaderOne: FC<HeaderProps> = ({ text, className }) => {
   const computedClassName = useMemo(

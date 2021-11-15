@@ -1,15 +1,16 @@
 import { FC, useCallback, useContext, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import cartContext from '../../../contexts/cartContext';
-import { CartCardTypes } from '../../../_types/components';
-import HeaderThree from '../HeaderThree';
+import { CardItemTypes } from '../../../_types/components';
+import HeaderThree from '../Headings/HeaderThree';
 import OrderButton from '../Buttons/OrderButton';
+import SeeMoreButton from '../Buttons/SeeMoreButton';
 
-interface CartCardProps {
-  item: CartCardTypes;
+interface CardItemProps {
+  item: CardItemTypes;
 }
 
-const CartCard: FC<CartCardProps> = ({ item }) => {
+const CardItem: FC<CardItemProps> = ({ item }) => {
   const { image, title, id, category, description, price } = item;
   const { addToCart, cart, cartTotalItems } = useContext(cartContext);
 
@@ -18,23 +19,38 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
 
   const handleAddToCart = useCallback(() => addToCart(item), [addToCart, item]);
 
-  const addToCartSection = useMemo(
+  const cardImage = useMemo(
     () => (
-      <div className='flex justify-between items-center w-full'>
-        <span className='font-bold text-lg md:text-xl'>{`$${price}`}</span>
-        <span
-          onClick={handleAddToCart}
-          className={
-            cart && cartTotalItems >= 20
-              ? 'opacity-50 pointer-events-none select-none'
-              : 'opacity-100 pointer-events-auto select-auto'
-          }
-        >
-          <OrderButton>Add to cart</OrderButton>
-        </span>
+      <div className='image overflow-hidden'>
+        <img
+          src={image}
+          alt={title}
+          className='h-36 w-full object-cover transition duration-300 transform-gpu hover:scale-125 filter contrast-75 hover:contrast-100'
+        />
       </div>
     ),
-    [cart, handleAddToCart, price, cartTotalItems]
+    [image, title]
+  );
+  const addToCartSection = useMemo(
+    () => (
+      <div className='flex flex-wrap px-3'>
+        <HeaderThree text={title} className='w-full capitalize' />
+        <div className='flex justify-between items-center w-full'>
+          <span className='font-bold text-lg md:text-xl'>{`$${price}`}</span>
+          <span
+            onClick={handleAddToCart}
+            className={
+              cart && cartTotalItems >= 20
+                ? 'opacity-50 pointer-events-none select-none'
+                : 'opacity-100 pointer-events-auto select-auto'
+            }
+          >
+            <OrderButton>Add to cart</OrderButton>
+          </span>
+        </div>
+      </div>
+    ),
+    [cart, handleAddToCart, price, cartTotalItems, title]
   );
 
   const seeMoreClassName = useMemo(
@@ -47,7 +63,7 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
 
   const seeMoreSection = useMemo(
     () => (
-      <div className='pt-3'>
+      <div className='pt-6'>
         <div
           className='relative flex justify-center items-center w-100 text-left pb-4 font-semibold outline-none select-none transition hover:text-red-700'
           onClick={handleToggle}
@@ -64,10 +80,12 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
           />
         </div>
         <div className={seeMoreClassName}>
-          <p className='pb-3 px-3'>{description}</p>
-          <Link to={`/${category}/${id}`}>
-            <OrderButton children='See more' />
-          </Link>
+          <p className='pb-3 px-3'>
+            {description}{' '}
+            <Link to={`/${category}/${id}`}>
+              <SeeMoreButton children='See more' />
+            </Link>
+          </p>
         </div>
       </div>
     ),
@@ -76,20 +94,11 @@ const CartCard: FC<CartCardProps> = ({ item }) => {
 
   return (
     <div className='card flex flex-col shadow-md rounded transition sm:hover:shadow-lg overflow-hidden'>
-      <div className='image overflow-hidden'>
-        <img
-          src={image}
-          alt={title}
-          className='h-36 w-full object-cover transition duration-300 transform-gpu hover:scale-125 filter contrast-75 hover:contrast-100'
-        />
-      </div>
-      <div className='flex flex-wrap px-3'>
-        <HeaderThree text={title} className='w-full capitalize' />
-        {addToCartSection}
-      </div>
+      {cardImage}
+      {addToCartSection}
       {seeMoreSection}
     </div>
   );
 };
 
-export default CartCard;
+export default CardItem;

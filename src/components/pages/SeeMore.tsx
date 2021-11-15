@@ -6,8 +6,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { fetchBurgersData } from '../../_constants/urls';
 import { BurgerType } from '../../_types/components';
-import HeaderThree from '../elements/HeaderThree';
-import HeaderTwo from '../elements/HeaderTwo';
+import HeaderThree from '../elements/Headings/HeaderThree';
+import HeaderTwo from '../elements/Headings/HeaderTwo';
 import Section from '../modules/Section';
 
 type MenuParams = {
@@ -33,8 +33,8 @@ const SeeMore: FC = () => {
 
   const descriptionSection = useMemo(
     () => (
-      <div className='flex flex-col sm:grid sm:grid-cols-1 sm:auto-cols-fr sm:mx-5'>
-        <div className='sm:w-80 sm:justify-self-end overflow-hidden sm:rounded mb-4'>
+      <div className='flex flex-col sm:grid sm:grid-cols-2 sm:gap-4'>
+        <div className='overflow-hidden sm:rounded'>
           <img
             src={burger?.image}
             alt={burger?.title}
@@ -51,7 +51,7 @@ const SeeMore: FC = () => {
 
   const detailsSection = useMemo(
     () => (
-      <div className='bg-red-900 text-gray-300 max-w-2xl transition hover:text-white sm:rounded sm:mx-5'>
+      <div className='bg-red-900 text-gray-300 max-w-2xl transition hover:text-white sm:rounded'>
         <ul className='p-5'>
           <li>
             <span className='font-semibold mr-1'>Burger:</span>
@@ -94,18 +94,14 @@ const SeeMore: FC = () => {
       !!Cookies.get('id') &&
       Cookies.get('role') === '1' && (
         <div>
-          <h2 className='mx-5 mt-6 mb-3 text-2xl font-bold text-right'>
-            Admin section
-          </h2>
-          <div className='flex justify-end'>
-            <button
-              type='button'
-              onClick={handleMenuDelete}
-              className='text-right rounded transition bg-red-600 text-white font-semibold px-4 py-2 mb-5 mx-5 hover:bg-red-700'
-            >
-              Delete this burger
-            </button>
-          </div>
+          <HeaderTwo text='Admin section' className='mt-6 mb-3 font-bold' />
+          <button
+            type='button'
+            onClick={handleMenuDelete}
+            className='rounded transition bg-red-600 text-white font-semibold px-4 py-2 mt-4 hover:bg-red-700'
+          >
+            Delete this burger
+          </button>
         </div>
       ),
     [handleMenuDelete]
@@ -116,13 +112,10 @@ const SeeMore: FC = () => {
       {mainTitle}
       <HeaderThree
         text='Description'
-        className='mx-5 mt-6 mb-3 text-2xl font-bold text-left sm:text-right'
+        className='font-bold mt-6 mb-3 md:text-2xl'
       />
       {descriptionSection}
-      <HeaderThree
-        text='Détails'
-        className='mx-5 mt-6 mb-3 text-2xl font-bold'
-      />
+      <HeaderThree text='Détails' className='font-bold mt-6 mb-3 md:text-2xl' />
       {detailsSection}
       {adminSection}
     </Section>

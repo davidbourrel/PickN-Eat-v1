@@ -3,28 +3,28 @@ import useFetchingData, {
   FUseFetchingDataArgs,
 } from '../../../hooks/useFetchingData';
 import Loading from '../../images/icons/Loading';
-import HeaderTwo from '../../elements/HeaderTwo';
 import Section from '../Section';
-import { fetchDessertsData } from '../../../_constants/urls';
-import { DessertType } from '../../../_types/components';
-import CartCard from '../../elements/Cards/CartCard';
+import HeaderTwo from '../../elements/Headings/HeaderTwo';
+import { fetchSaladsData } from '../../../_constants/urls';
+import { SaladType } from '../../../_types/components';
+import CardItem from '../../elements/Cards/CardItem';
 
-const DessertsList: FC = () => {
+const SaladsList: FC = () => {
   const {
-    data: dessertsList,
+    data: saladsList,
     loading,
     error,
-  } = useFetchingData(fetchDessertsData as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(fetchSaladsData as unknown as FUseFetchingDataArgs);
 
-  const dessertsTitle = 'Desserts';
+  const saladsTitle = 'Salads';
 
-  const allDesserts = useMemo(
+  const allSalads = useMemo(
     () =>
-      dessertsList &&
-      dessertsList.map((dessert) => (
-        <CartCard key={dessert.id} item={dessert as DessertType} />
+      saladsList &&
+      saladsList.map((salad) => (
+        <CardItem key={salad.id} item={salad as SaladType} />
       )),
-    [dessertsList]
+    [saladsList]
   );
 
   if (error)
@@ -45,11 +45,11 @@ const DessertsList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text={dessertsTitle} />
+      <HeaderTwo text={saladsTitle} />
       <div className='grid grid-cols-1 xs:grid-cols-2 my-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
-        {allDesserts}
+        {allSalads}
       </div>
     </Section>
   );
 };
-export default DessertsList;
+export default SaladsList;

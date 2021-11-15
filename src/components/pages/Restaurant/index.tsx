@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
-import GoogleMapMarker from '../../elements/GoogleMapMarker';
+import GoogleMapMarker from '../../elements/GoogleMap/GoogleMapMarker';
 import GOOGLE_MAP_API_KEY from '../../../_constants/googleMapApiKey';
 import Section from '../../modules/Section';
 import RestaurantTable from './RestaurantTable';
-import HeaderTwo from '../../elements/HeaderTwo';
+import HeaderTwo from '../../elements/Headings/HeaderTwo';
 
 const Restaurant: FC = () => {
   const [defaultView] = useState({

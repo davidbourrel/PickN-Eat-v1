@@ -53,7 +53,7 @@ export interface SideType {
   amount: number;
 }
 
-export type CartCardTypes =
+export type CardItemTypes =
   | BurgerType
   | DessertType
   | DrinkType

@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useMemo } from 'react';
-import HeaderTwo from '../elements/HeaderTwo';
+import HeaderTwo from '../elements/Headings/HeaderTwo';
 import Cookies from 'js-cookie';
 import Section from './Section';
 import userContext from '../../contexts/userContext';

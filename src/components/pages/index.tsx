@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import BurgersList from '../modules/Categories/BurgersList';
-import DessertsList from '../modules/Categories/DessertsList';
-import DrinksList from '../modules/Categories/DrinksList';
-import SaladsList from '../modules/Categories/SaladsList';
-import SidesList from '../modules/Categories/SidesList';
+import BurgersList from '../modules/CategoriesLists/BurgersList';
+import DessertsList from '../modules/CategoriesLists/DessertsList';
+import DrinksList from '../modules/CategoriesLists/DrinksList';
+import SaladsList from '../modules/CategoriesLists/SaladsList';
+import SidesList from '../modules/CategoriesLists/SidesList';
 
 const HomePage: FC = () => {
   return (

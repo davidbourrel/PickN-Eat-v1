@@ -4,9 +4,9 @@ import useFetchingData, {
 } from '../../../hooks/useFetchingData';
 import Loading from '../../images/icons/Loading';
 import Section from '../Section';
-import HeaderTwo from '../../elements/HeaderTwo';
+import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { fetchBurgersData } from '../../../_constants/urls';
-import CartCard from '../../elements/Cards/CartCard';
+import CardItem from '../../elements/Cards/CardItem';
 import { BurgerType } from '../../../_types/components';
 
 const BurgersList: FC = () => {
@@ -22,7 +22,7 @@ const BurgersList: FC = () => {
     () =>
       burgersList &&
       burgersList.map((burger) => (
-        <CartCard key={burger.id} item={burger as BurgerType} />
+        <CardItem key={burger.id} item={burger as BurgerType} />
       )),
     [burgersList]
   );
