@@ -7,7 +7,7 @@ import {
   useCallback,
   useMemo,
 } from 'react';
-import { CardItemTypes } from '../../_types/components';
+import { CardItemTypes } from '../../_types/dataType';
 
 export interface CartContextInterface {
   cart: CardItemTypes[];
@@ -16,6 +16,8 @@ export interface CartContextInterface {
   cartTotalItems: number;
   addToCart: (item: CardItemTypes) => void;
   removeFromCart: (id: number) => void;
+  removeItemsFromCart: (id: number) => void;
+  removeAllFromCart: () => void;
 }
 
 // Create an initial provider value.
@@ -26,6 +28,10 @@ const initialProviderValue: CartContextInterface = {
   cartTotalItems: null as unknown as CartContextInterface['cartTotalItems'],
   addToCart: null as unknown as CartContextInterface['addToCart'],
   removeFromCart: null as unknown as CartContextInterface['removeFromCart'],
+  removeItemsFromCart:
+    null as unknown as CartContextInterface['removeItemsFromCart'],
+  removeAllFromCart:
+    null as unknown as CartContextInterface['removeAllFromCart'],
 };
 // Create the store or 'context'.
 export const cartContext = createContext(initialProviderValue);
@@ -75,15 +81,39 @@ const CartProvider: FC = ({ children }) => {
     );
   }, []);
 
+  const removeItemsFromCart = useCallback((id) => {
+    setCart((currentCart) => {
+      const indexOfItemToRemove = currentCart.findIndex(
+        (cartItem) => cartItem.id === id
+      );
+
+      if (indexOfItemToRemove === -1) {
+        return currentCart;
+      }
+
+      return [
+        ...currentCart.slice(0, indexOfItemToRemove),
+        ...currentCart.slice(indexOfItemToRemove + 1),
+      ];
+    });
+  }, []);
+
+  const removeAllFromCart = useCallback(
+    () => setCart([] as unknown as CardItemTypes[]),
+    []
+  );
+
   return (
     <Provider
       value={{
         cart,
         setCart,
         cartTotalPrice,
+        cartTotalItems,
         addToCart,
         removeFromCart,
-        cartTotalItems,
+        removeItemsFromCart,
+        removeAllFromCart,
       }}
     >
       {children}

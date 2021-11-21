@@ -6,10 +6,19 @@ import SubmitButton from '../elements/Buttons/SubmitButton';
 import MinusSvg from '../images/icons/MinusSvg';
 import PlusSvg from '../images/icons/PlusSvg';
 import Section from '../modules/Section';
+import TrashSvg from '../images/icons/TrashSvg';
+import RemoveButton from '../elements/Buttons/RemoveButton';
 
 const Cart: FC = () => {
-  const { addToCart, removeFromCart, cart, cartTotalPrice, cartTotalItems } =
-    useContext(cartContext);
+  const {
+    cart,
+    cartTotalPrice,
+    cartTotalItems,
+    addToCart,
+    removeFromCart,
+    removeItemsFromCart,
+    removeAllFromCart,
+  } = useContext(cartContext);
 
   const emptyCart = useMemo(
     () =>
@@ -27,56 +36,83 @@ const Cart: FC = () => {
       cart.map((item) => (
         <div
           key={item.id}
-          className='grid grid-cols-3 gap-2 items-center pb-2 border-b-2 border-gray-300 my-5 sm:mx-5'
+          className='flex my-5 pb-2 border-b-2 border-gray-300'
         >
-          <HeaderThree
-            text={item.title}
-            className='font-bold mb-2 capitalize'
-          />
-          <div>
-            <button
-              onClick={() => removeFromCart(item.id)}
-              className={
-                cartTotalItems <= 0
-                  ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
-                  : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
-              }
-            >
-              <MinusSvg />
-            </button>
-            <button
-              onClick={() => addToCart(item)}
-              className={
-                cartTotalItems >= 20
-                  ? 'bg-gray-200 p-1 border-2 border-gray-900 rounded ml-2 opacity-50 pointer-events-none select-none'
-                  : 'bg-gray-200 p-1 border-2 border-gray-900 rounded transition hover:bg-red-700 ml-2 hover:text-white opacity-100 pointer-events-auto select-auto'
-              }
-            >
-              <PlusSvg />
-            </button>
+          <div className='image-container w-20 md:w-28 overflow-hidden flex-shrink-0'>
+            <img
+              src={item.image}
+              alt={item.title}
+              className='h-20 rounded  w-full object-cover contrast-100 transition duration-300 transform-gpu hover:contrast-100 filter md:hover:scale-125 md:contrast-75 md:h-28 '
+            />
           </div>
 
-          <div className='text-right font-bold'>
-            <span className='text-red-700'>{item.amount}</span>
-            <span>{` x ${item.price.toFixed(2)} = ${(
+          <div className='flex flex-col flex-grow px-4'>
+            <HeaderThree
+              text={item.title}
+              className='font-bold capitalize mb-4 md:text-xl'
+            />
+            <div className='flex items-center justify-between w-24'>
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
+                  ${
+                    cartTotalItems <= 0
+                      ? ' opacity-50 pointer-events-none select-none'
+                      : ' opacity-100 transition hover:bg-red-700 hover:text-white pointer-events-auto select-auto'
+                  }
+                    `}
+              >
+                <MinusSvg />
+              </button>
+              <span className='text-lg text-red-700 font-bold h-full flex items-center justify-center'>
+                {item.amount}
+              </span>
+              <button
+                onClick={() => addToCart(item)}
+                className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
+                ${
+                  cartTotalItems <= 0
+                    ? ' opacity-50 pointer-events-none select-none'
+                    : ' opacity-100 transition hover:bg-red-700 hover:text-white pointer-events-auto select-auto'
+                }
+                  `}
+              >
+                <PlusSvg />
+              </button>
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <span className='flex text-lg font-bold mb-6'>{`$${(
               item.amount * item.price
             ).toFixed(2)}`}</span>
+            <RemoveButton
+              className='flex justify-end cursor-pointer'
+              onClick={() => removeItemsFromCart(item.id)}
+            >
+              <TrashSvg />
+            </RemoveButton>
           </div>
         </div>
       )),
-    [addToCart, removeFromCart, cart, cartTotalItems]
+    [addToCart, removeFromCart, removeItemsFromCart, cart, cartTotalItems]
   );
 
   const cartCheckout = useMemo(
     () =>
       cart.length !== 0 && (
-        <div className='pt-5 sm:mx-5'>
-          <div className='flex justify-between mb-4'>
+        <div className='pt-5'>
+          <div className='flex justify-between'>
             <strong className='text-xl'>Total Price</strong>
             <strong className='text-red-700 text-xl'>
               ${cartTotalPrice.toFixed(2)}
             </strong>
           </div>
+          <RemoveButton
+            className='flex items-center justify-end  mb-4 cursor-pointer'
+            onClick={removeAllFromCart}
+          >
+            Remove all
+          </RemoveButton>
 
           <SubmitButton
             children='Checkout'
@@ -84,17 +120,15 @@ const Cart: FC = () => {
           />
         </div>
       ),
-    [cart, cartTotalPrice]
+    [cart, cartTotalPrice, removeAllFromCart]
   );
 
   return (
     <Section>
-      <HeaderTwo text='Your cart' />
-      <div className='pt-4 sm:px-4'>
-        {emptyCart}
-        {cartContent}
-        {cartCheckout}
-      </div>
+      <HeaderTwo text='Your cart' className='mb-4' />
+      {emptyCart}
+      {cartContent}
+      {cartCheckout}
     </Section>
   );
 };

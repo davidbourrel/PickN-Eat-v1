@@ -1,10 +1,10 @@
 import { FC, useCallback, useContext, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import cartContext from '../../../contexts/cartContext';
-import { CardItemTypes } from '../../../_types/components';
 import HeaderThree from '../Headings/HeaderThree';
 import OrderButton from '../Buttons/OrderButton';
 import SeeMoreButton from '../Buttons/SeeMoreButton';
+import { CardItemTypes } from '../../../_types/dataType';
 
 interface CardItemProps {
   item: CardItemTypes;
@@ -34,7 +34,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   const addToCartSection = useMemo(
     () => (
       <div className='flex flex-wrap px-3'>
-        <HeaderThree text={title} className='w-full capitalize' />
+        <HeaderThree text={title} className='w-full py-2 capitalize' />
         <div className='flex justify-between items-center w-full'>
           <span className='font-bold text-lg md:text-xl'>{`$${price}`}</span>
           <span

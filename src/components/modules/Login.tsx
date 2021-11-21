@@ -5,14 +5,10 @@ import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { login } from '../../API/userApi';
 import userContext from '../../contexts/userContext/';
+import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import logo from '../images/logo.png';
 import Section from './Section';
-
-interface userLoginInterface {
-  email: string;
-  password: any;
-}
 
 const Login: FC = () => {
   const { register, handleSubmit, reset } = useForm();

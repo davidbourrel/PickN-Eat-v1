@@ -1,12 +1,10 @@
 import { FC } from 'react';
 
-const Loading: FC = () => (
+const Loader: FC = () => (
   <div className='flex items-center justify-center h-80'>
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 100 100'
-      preserveAspectRatio='xMidYMid'
       className='animate-spin h-12 w-12 mr-3 text-red-700'
+      viewBox='0 0 100 100'
     >
       <g transform='translate(80,50)'>
         <g transform='rotate(0)'>
@@ -100,4 +98,4 @@ const Loading: FC = () => (
   </div>
 );
 
-export default Loading;
+export default Loader;

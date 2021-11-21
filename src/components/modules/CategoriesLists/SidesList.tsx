@@ -2,12 +2,12 @@ import { FC, useMemo } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
 } from '../../../hooks/useFetchingData';
-import Loading from '../../images/icons/Loading';
+import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { fetchSidesData } from '../../../_constants/urls';
-import { SideType } from '../../../_types/components';
+import { fetchSidesData } from '../../../_constants/dataUrls';
 import CardItem from '../../elements/Cards/CardItem';
+import { SideType } from '../../../_types/dataType';
 
 const SidesList: FC = () => {
   const {

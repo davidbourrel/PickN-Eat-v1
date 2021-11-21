@@ -3,16 +3,13 @@ import { ClassNameComponentProps } from '../../../_types/components';
 
 const RestaurantsSvg: FC<ClassNameComponentProps> = ({ className }) => {
   const computedClassName = useMemo(
-    () => `w-14 h-16 cursor-pointer ${className}`,
+    () => `fill-current w-14 h-16 cursor-pointer ${className}`,
     [className]
   );
+
   return (
-    <svg
-      data-name='Layer 1'
-      xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 842 678.37637'
-      className={computedClassName}
-    >
+    <svg className={computedClassName} viewBox='0 0 842 678.37637'>
+      <title>Restaurant</title>
       <ellipse cx='426' cy='645.87637' rx='416' ry='32.5' fill='#3f3d56' />
       <polygon
         points='779.369 585.5 783.268 614.093 755.975 616.692 759.874 581.601 779.369 585.5'

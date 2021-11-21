@@ -2,12 +2,12 @@ import { FC, useMemo } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
 } from '../../../hooks/useFetchingData';
-import Loading from '../../images/icons/Loading';
+import Loading from '../../images/icons/Loader';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../Section';
-import { fetchDessertsData } from '../../../_constants/urls';
-import { DessertType } from '../../../_types/components';
+import { fetchDessertsData } from '../../../_constants/dataUrls';
 import CardItem from '../../elements/Cards/CardItem';
+import { DessertType } from '../../../_types/dataType';
 
 const DessertsList: FC = () => {
   const {

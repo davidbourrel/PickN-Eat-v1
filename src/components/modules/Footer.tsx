@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { colClassName, headingClassName, itemClassName } from '../../_constants/urls';
+
+const colClassName = 'p-4 sm:p-8 sm:flex-1';
+const headingClassName = 'font-bold text-lg py-5';
+const itemClassName = 'text-sm mb-2 hover:underline cursor-pointer';
 
 const Footer: FC = () => {
   return (

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import GoogleMapMarker from '../../elements/GoogleMap/GoogleMapMarker';
-import GOOGLE_MAP_API_KEY from '../../../_constants/googleMapApiKey';
+import { GOOGLE_MAP_API_KEY } from '../../../_constants/googleMapApiKey';
 import Section from '../../modules/Section';
 import RestaurantTable from './RestaurantTable';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';

@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
-import { BURGER_CLASSNAME } from '../../../_constants/urls';
+
+const burgerClassName = `w-8 h-2 border-t-2 transition duration-300`;
 
 interface BurgerToggleButtonProps {
   handleToggleMenu: () => void;
@@ -13,17 +14,17 @@ const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
   color,
 }) => {
   const borderTopClassName = useMemo(
-    () => `border-${color} ${BURGER_CLASSNAME}
+    () => `border-${color} ${burgerClassName}
       ${isOpen ? 'transform -rotate-45 translate-y-2' : ''}`,
     [isOpen, color]
   );
   const borderMiddleClassName = useMemo(
-    () => `border-${color} ${BURGER_CLASSNAME}
+    () => `border-${color} ${burgerClassName}
       ${isOpen ? 'opacity-0' : 'opacity-100'}`,
     [isOpen, color]
   );
   const borderBottomClassName = useMemo(
-    () => `border-${color} ${BURGER_CLASSNAME}
+    () => `border-${color} ${burgerClassName}
       ${isOpen ? 'transform rotate-45 -translate-y-2 -translate-x-1' : ''}`,
     [isOpen, color]
   );

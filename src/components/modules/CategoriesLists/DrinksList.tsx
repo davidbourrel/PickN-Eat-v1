@@ -2,12 +2,12 @@ import { FC, useMemo } from 'react';
 import useFetchingData, {
   FUseFetchingDataArgs,
 } from '../../../hooks/useFetchingData';
-import Loading from '../../images/icons/Loading';
+import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { fetchDrinksData } from '../../../_constants/urls';
-import { DrinkType } from '../../../_types/components';
+import { fetchDrinksData } from '../../../_constants/dataUrls';
 import CardItem from '../../elements/Cards/CardItem';
+import { DrinkType } from '../../../_types/dataType';
 
 const DrinksList: FC = () => {
   const {

@@ -7,8 +7,8 @@ export interface UserContextInterface {
   setLastName: (lastName: string) => void;
   firstName: string;
   setFirstName: (firstName: string) => void;
-  age: string;
-  setAge: (age: string) => void;
+  age: number;
+  setAge: (age: number) => void;
   email: string;
   setEmail: (email: string) => void;
   userRole: number;
@@ -35,12 +35,12 @@ export const userContext = createContext(initialProviderValue);
 const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(null as unknown as boolean);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState(null as unknown as number);
   const [email, setEmail] = useState('');
-  const [userRole, setUserRole] = useState(0);
+  const [userRole, setUserRole] = useState(null as unknown as number);
 
   return (
     <Provider
