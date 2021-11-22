@@ -1,10 +1,12 @@
-import { FC, useCallback, useContext, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import cartContext from '../../../contexts/cartContext';
 import HeaderThree from '../Headings/HeaderThree';
 import OrderButton from '../Buttons/OrderButton';
 import SeeMoreButton from '../Buttons/SeeMoreButton';
 import { CardItemTypes } from '../../../_types/dataType';
+import useCart from '../../../contexts/cartContext/useCart';
+import useAddToCart from '../../../contexts/cartContext/useAddToCart ';
+import useTotalCart from '../../../contexts/cartContext/useCartTotal';
 
 interface CardItemProps {
   item: CardItemTypes;
@@ -12,7 +14,10 @@ interface CardItemProps {
 
 const CardItem: FC<CardItemProps> = ({ item }) => {
   const { image, title, id, category, description, price } = item;
-  const { addToCart, cart, cartTotalItems } = useContext(cartContext);
+
+  const addToCart = useAddToCart();
+  const { cart } = useCart();
+  const { cartTotalItems } = useTotalCart();
 
   const [isActive, setIsActive] = useState(false);
   const handleToggle = useCallback(() => setIsActive(!isActive), [isActive]);

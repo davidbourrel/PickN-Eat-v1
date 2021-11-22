@@ -5,7 +5,7 @@ import useFetchingData, {
 import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { fetchBurgersData } from '../../../_constants/dataUrls';
+import { FETCH_BURGERS_URL } from '../../../_constants/dataUrls';
 import CardItem from '../../elements/Cards/CardItem';
 import { BurgerType } from '../../../_types/dataType';
 
@@ -14,7 +14,7 @@ const BurgersList: FC = () => {
     data: burgersList,
     loading,
     error,
-  } = useFetchingData(fetchBurgersData as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(FETCH_BURGERS_URL as unknown as FUseFetchingDataArgs);
 
   const burgersTitle = 'Burgers';
 

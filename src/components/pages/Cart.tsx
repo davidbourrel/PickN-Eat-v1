@@ -1,5 +1,4 @@
-import { FC, useContext, useMemo } from 'react';
-import cartContext from '../../contexts/cartContext';
+import { FC, useMemo } from 'react';
 import HeaderThree from '../elements/Headings/HeaderThree';
 import HeaderTwo from '../elements/Headings/HeaderTwo';
 import SubmitButton from '../elements/Buttons/SubmitButton';
@@ -8,17 +7,17 @@ import PlusSvg from '../images/icons/PlusSvg';
 import Section from '../modules/Section';
 import TrashSvg from '../images/icons/TrashSvg';
 import RemoveButton from '../elements/Buttons/RemoveButton';
+import useCart from '../../contexts/cartContext/useCart';
+import useAddToCart from '../../contexts/cartContext/useAddToCart ';
+import useRemoveCart from '../../contexts/cartContext/useRemoveCart';
+import useTotalCart from '../../contexts/cartContext/useCartTotal';
 
 const Cart: FC = () => {
-  const {
-    cart,
-    cartTotalPrice,
-    cartTotalItems,
-    addToCart,
-    removeFromCart,
-    removeItemsFromCart,
-    removeAllFromCart,
-  } = useContext(cartContext);
+  const { cart } = useCart();
+  const { cartTotalPrice, cartTotalItems } = useTotalCart();
+  const addToCart = useAddToCart();
+  const { removeFromCart, removeItemsFromCart, removeAllFromCart } =
+    useRemoveCart();
 
   const emptyCart = useMemo(
     () =>
@@ -51,7 +50,7 @@ const Cart: FC = () => {
               text={item.title}
               className='font-bold capitalize md:text-xl'
             />
-            <div className='flex flex-grow items-end'>
+            <div className='flex flex-grow items-end pb-1'>
               <div className='flex items-center justify-between w-24'>
                 <button
                   onClick={() => removeFromCart(item.id)}
@@ -65,9 +64,7 @@ const Cart: FC = () => {
                 >
                   <MinusSvg />
                 </button>
-                <span className='text-lg text-red-700 font-bold'>
-                  {item.amount}
-                </span>
+                <span className='text-lg font-bold'>{item.amount}</span>
                 <button
                   onClick={() => addToCart(item)}
                   className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
@@ -88,7 +85,7 @@ const Cart: FC = () => {
               item.amount * item.price
             ).toFixed(2)}`}</span>
             <RemoveButton
-              className='flex flex-grow justify-end items-end cursor-pointer'
+              className='flex flex-grow justify-end items-end cursor-pointer pb-1'
               onClick={() => removeItemsFromCart(item.id)}
             >
               <TrashSvg />

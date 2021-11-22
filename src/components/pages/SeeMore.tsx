@@ -1,10 +1,9 @@
-// import { useContext } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { fetchBurgersData } from '../../_constants/dataUrls';
+import { FETCH_BURGERS_URL } from '../../_constants/dataUrls';
 import { BurgerType } from '../../_types/dataType';
 import HeaderThree from '../elements/Headings/HeaderThree';
 import HeaderTwo from '../elements/Headings/HeaderTwo';
@@ -21,7 +20,7 @@ const SeeMore: FC = () => {
 
   useEffect(() => {
     axios
-      .get(`${fetchBurgersData}/${id}`)
+      .get(`${FETCH_BURGERS_URL}/${id}`)
       .then((res) => res.data)
       .then((menuDTO) => setBurger(menuDTO));
   }, [id]);
@@ -80,7 +79,7 @@ const SeeMore: FC = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           setTimeout(() => {
-            axios.delete(`${fetchBurgersData}/${id}`);
+            axios.delete(`${FETCH_BURGERS_URL}/${id}`);
             Swal.fire('Deleted!', 'Your burger has been deleted.', 'success');
             history.push('/');
           }, 400);

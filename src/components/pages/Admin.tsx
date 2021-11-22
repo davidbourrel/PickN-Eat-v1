@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Section from '../modules/Section';
 import HeaderTwo from '../elements/Headings/HeaderTwo';
-import { fetchBurgersData } from '../../_constants/dataUrls';
+import { FETCH_BURGERS_URL } from '../../_constants/dataUrls';
 
 const Admin = () => {
   const [title, setTitle] = useState(null as unknown as string);
@@ -29,7 +29,7 @@ const Admin = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .post(fetchBurgersData, {
+            .post(FETCH_BURGERS_URL, {
               title,
               price,
               description,

@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 // import ApplicationContext from '../context/ApplicationContext';
 import Navbar from './Navigation/Navbar';
@@ -6,7 +6,7 @@ import ShopSvg from '../images/icons/ShopSvg';
 import UserSvg from '../images/icons/UserSvg';
 import BCLogo from '../images/BCLogo';
 import BurgerToggleButton from '../elements/Buttons/BurgerToggleButton';
-import cartContext from '../../contexts/cartContext';
+import useTotalCart from '../../contexts/cartContext/useCartTotal';
 
 interface FHeaderProps {
   handleToggleMenu: () => void;
@@ -15,7 +15,7 @@ interface FHeaderProps {
 }
 
 const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
-  const { cartTotalItems } = useContext(cartContext);
+  const { cartTotalItems } = useTotalCart();
 
   const itemsClassName = useMemo(
     () =>

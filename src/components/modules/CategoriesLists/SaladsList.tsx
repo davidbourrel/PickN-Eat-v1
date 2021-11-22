@@ -5,7 +5,7 @@ import useFetchingData, {
 import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { fetchSaladsData } from '../../../_constants/dataUrls';
+import { FETCH_SALADS_URL } from '../../../_constants/dataUrls';
 import CardItem from '../../elements/Cards/CardItem';
 import { SaladType } from '../../../_types/dataType';
 
@@ -14,7 +14,7 @@ const SaladsList: FC = () => {
     data: saladsList,
     loading,
     error,
-  } = useFetchingData(fetchSaladsData as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(FETCH_SALADS_URL as unknown as FUseFetchingDataArgs);
 
   const saladsTitle = 'Salads';
 

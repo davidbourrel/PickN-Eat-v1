@@ -5,7 +5,7 @@ import useFetchingData, {
 import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { fetchSidesData } from '../../../_constants/dataUrls';
+import { FETCH_SIDES_URL } from '../../../_constants/dataUrls';
 import CardItem from '../../elements/Cards/CardItem';
 import { SideType } from '../../../_types/dataType';
 
@@ -14,7 +14,7 @@ const SidesList: FC = () => {
     data: sidesList,
     loading,
     error,
-  } = useFetchingData(fetchSidesData as unknown as FUseFetchingDataArgs);
+  } = useFetchingData(FETCH_SIDES_URL as unknown as FUseFetchingDataArgs);
 
   const sidesTitle = 'Sides';
 
