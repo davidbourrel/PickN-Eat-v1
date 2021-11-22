@@ -38,55 +38,57 @@ const Cart: FC = () => {
           key={item.id}
           className='flex my-5 pb-2 border-b-2 border-gray-300'
         >
-          <div className='image-container w-20 md:w-28 overflow-hidden flex-shrink-0'>
+          <div className='cart-image w-20 overflow-hidden flex-shrink-0 sm:w-28 md:w-1/5'>
             <img
               src={item.image}
               alt={item.title}
-              className='h-20 rounded  w-full object-cover contrast-100 transition duration-300 transform-gpu hover:contrast-100 filter md:hover:scale-125 md:contrast-75 md:h-28 '
+              className='h-20 w-full rounded object-cover contrast-100 transition duration-300 transform-gpu hover:contrast-100 filter md:hover:scale-125 md:contrast-75 sm:h-24'
             />
           </div>
 
-          <div className='flex flex-col flex-grow px-4'>
+          <div className='cart-information flex flex-col flex-grow self-stretch px-4'>
             <HeaderThree
               text={item.title}
-              className='font-bold capitalize mb-4 md:text-xl'
+              className='font-bold capitalize md:text-xl'
             />
-            <div className='flex items-center justify-between w-24'>
-              <button
-                onClick={() => removeFromCart(item.id)}
-                className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
+            <div className='flex flex-grow items-end'>
+              <div className='flex items-center justify-between w-24'>
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
                   ${
                     cartTotalItems <= 0
                       ? ' opacity-50 pointer-events-none select-none'
                       : ' opacity-100 transition hover:bg-red-700 hover:text-white pointer-events-auto select-auto'
                   }
                     `}
-              >
-                <MinusSvg />
-              </button>
-              <span className='text-lg text-red-700 font-bold h-full flex items-center justify-center'>
-                {item.amount}
-              </span>
-              <button
-                onClick={() => addToCart(item)}
-                className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
+                >
+                  <MinusSvg />
+                </button>
+                <span className='text-lg text-red-700 font-bold'>
+                  {item.amount}
+                </span>
+                <button
+                  onClick={() => addToCart(item)}
+                  className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
                 ${
                   cartTotalItems <= 0
                     ? ' opacity-50 pointer-events-none select-none'
                     : ' opacity-100 transition hover:bg-red-700 hover:text-white pointer-events-auto select-auto'
                 }
                   `}
-              >
-                <PlusSvg />
-              </button>
+                >
+                  <PlusSvg />
+                </button>
+              </div>
             </div>
           </div>
-          <div className='flex flex-col'>
-            <span className='flex text-lg font-bold mb-6'>{`$${(
+          <div className='cart-price flex flex-col self-stretch'>
+            <span className='flex items-end text-lg font-bold'>{`$${(
               item.amount * item.price
             ).toFixed(2)}`}</span>
             <RemoveButton
-              className='flex justify-end cursor-pointer'
+              className='flex flex-grow justify-end items-end cursor-pointer'
               onClick={() => removeItemsFromCart(item.id)}
             >
               <TrashSvg />
@@ -103,12 +105,10 @@ const Cart: FC = () => {
         <div className='pt-5'>
           <div className='flex justify-between'>
             <strong className='text-xl'>Total Price</strong>
-            <strong className='text-red-700 text-xl'>
-              ${cartTotalPrice.toFixed(2)}
-            </strong>
+            <strong className='text-xl'>${cartTotalPrice.toFixed(2)}</strong>
           </div>
           <RemoveButton
-            className='flex items-center justify-end  mb-4 cursor-pointer'
+            className='flex items-center justify-end mb-4 cursor-pointer'
             onClick={removeAllFromCart}
           >
             Remove all
