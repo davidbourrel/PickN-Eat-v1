@@ -17,7 +17,7 @@ interface FHeaderProps {
 const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
   const { cartTotalItems } = useTotalCart();
 
-  const itemsClassName = useMemo(
+  const computedClassName = useMemo(
     () =>
       cartTotalItems === 0
         ? 'hidden'
@@ -42,9 +42,9 @@ const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
           <div className='grid grid-cols-2 gap-5 items-center'>
             <Link to='/cart' className='relative'>
               <ShopSvg />
-              <span className={itemsClassName}>{cartTotalItems}</span>
+              <span className={computedClassName}>{cartTotalItems}</span>
             </Link>
-            <Link to='/user-page'>
+            <Link to='/user'>
               <UserSvg />
             </Link>
           </div>

@@ -6,8 +6,8 @@ import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { FETCH_SALADS_URL } from '../../../_constants/dataUrls';
-import CardItem from '../../elements/Cards/CardItem';
 import { SaladType } from '../../../_types/dataType';
+import CardContent from '../../elements/Card/CardContent';
 
 const SaladsList: FC = () => {
   const {
@@ -22,7 +22,7 @@ const SaladsList: FC = () => {
     () =>
       saladsList &&
       saladsList.map((salad) => (
-        <CardItem key={salad.id} item={salad as SaladType} />
+        <CardContent key={salad.id} item={salad as SaladType} />
       )),
     [saladsList]
   );
@@ -45,8 +45,8 @@ const SaladsList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text={saladsTitle} />
-      <div className='grid grid-cols-1 xs:grid-cols-2 my-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
+      <HeaderTwo>{saladsTitle}</HeaderTwo>
+      <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allSalads}
       </div>
     </Section>

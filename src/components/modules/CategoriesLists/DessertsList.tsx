@@ -6,8 +6,8 @@ import Loading from '../../images/icons/Loader';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../Section';
 import { FETCH_DESSERTS_URL } from '../../../_constants/dataUrls';
-import CardItem from '../../elements/Cards/CardItem';
 import { DessertType } from '../../../_types/dataType';
+import CardContent from '../../elements/Card/CardContent';
 
 const DessertsList: FC = () => {
   const {
@@ -22,7 +22,7 @@ const DessertsList: FC = () => {
     () =>
       dessertsList &&
       dessertsList.map((dessert) => (
-        <CardItem key={dessert.id} item={dessert as DessertType} />
+        <CardContent key={dessert.id} item={dessert as DessertType} />
       )),
     [dessertsList]
   );
@@ -45,8 +45,8 @@ const DessertsList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text={dessertsTitle} />
-      <div className='grid grid-cols-1 xs:grid-cols-2 my-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
+      <HeaderTwo>{dessertsTitle}</HeaderTwo>
+      <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allDesserts}
       </div>
     </Section>

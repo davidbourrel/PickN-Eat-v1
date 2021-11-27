@@ -1,8 +1,8 @@
 // MAIN NAVBAR
-export const navItemClassName =
-  'mr-2 transition text-gray-800 hover:text-red-700';
+export const NAV_ITEM_CLASS_NAME =
+  'mr-2 transition text-gray-800 md:hover:text-red-700';
 
 // LATERAL NAVBAR
-export const openedItemClassName =
-  'mr-2 px-4 rounded transition mb-7 text-gray-800 bg-gray-100 hover:text-red-700 hover:bg-white';
-export const linkClassName = 'flex justify-between items-center';
+export const OPENED_ITEM_CLASS_NAME =
+  'mr-2 px-4 rounded transition mb-7 text-gray-800 bg-gray-100 md:hover:text-red-700 md:hover:bg-white';
+export const LINK_CLASS_NAME = 'flex justify-between items-center';

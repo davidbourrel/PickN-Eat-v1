@@ -11,6 +11,7 @@ import useCart from '../../contexts/cartContext/useCart';
 import useAddToCart from '../../contexts/cartContext/useAddToCart ';
 import useRemoveCart from '../../contexts/cartContext/useRemoveCart';
 import useTotalCart from '../../contexts/cartContext/useCartTotal';
+import HeaderOne from '../elements/Headings/HeaderOne';
 
 const Cart: FC = () => {
   const { cart } = useCart();
@@ -22,10 +23,9 @@ const Cart: FC = () => {
   const emptyCart = useMemo(
     () =>
       cartTotalItems === 0 ? (
-        <HeaderTwo
-          text='Your cart is empty'
-          className='font-bold border-none text-center'
-        />
+        <HeaderTwo className='font-bold border-none text-center'>
+          Your cart is empty
+        </HeaderTwo>
       ) : null,
     [cartTotalItems]
   );
@@ -41,15 +41,14 @@ const Cart: FC = () => {
             <img
               src={item.image}
               alt={item.title}
-              className='h-20 w-full rounded object-cover contrast-100 transition duration-300 transform-gpu hover:contrast-100 filter md:hover:scale-125 md:contrast-75 sm:h-24'
+              className='h-20 w-full rounded object-cover contrast-100 transition duration-300 transform-gpu filter md:hover:scale-125 md:contrast-75 sm:h-24'
             />
           </div>
 
           <div className='cart-information flex flex-col flex-grow self-stretch px-4'>
-            <HeaderThree
-              text={item.title}
-              className='font-bold capitalize md:text-xl'
-            />
+            <HeaderThree className='font-bold capitalize md:text-xl'>
+              {item.title}
+            </HeaderThree>
             <div className='flex flex-grow items-end pb-1'>
               <div className='flex items-center justify-between w-24'>
                 <button
@@ -58,7 +57,7 @@ const Cart: FC = () => {
                   ${
                     cartTotalItems <= 0
                       ? ' opacity-50 pointer-events-none select-none'
-                      : ' opacity-100 transition hover:bg-red-700 hover:text-white pointer-events-auto select-auto'
+                      : ' opacity-100 transition md:hover:bg-red-700 md:hover:text-white pointer-events-auto select-auto'
                   }
                     `}
                 >
@@ -69,9 +68,9 @@ const Cart: FC = () => {
                   onClick={() => addToCart(item)}
                   className={`bg-gray-200 p-1 border-2 border-gray-900 rounded-full
                 ${
-                  cartTotalItems <= 0
+                  (cart && cartTotalItems <= 0) || cartTotalItems >= 20
                     ? ' opacity-50 pointer-events-none select-none'
-                    : ' opacity-100 transition hover:bg-red-700 hover:text-white pointer-events-auto select-auto'
+                    : ' opacity-100 transition md:hover:bg-red-700 md:hover:text-white pointer-events-auto select-auto'
                 }
                   `}
                 >
@@ -99,9 +98,9 @@ const Cart: FC = () => {
   const cartCheckout = useMemo(
     () =>
       cart.length !== 0 && (
-        <div className='pt-5'>
+        <div className='pt-5 w-full sm:w-1/2 sm:ml-auto'>
           <div className='flex justify-between'>
-            <strong className='text-xl'>Total Price</strong>
+            <HeaderThree className='text-xl'>Total Price</HeaderThree>
             <strong className='text-xl'>${cartTotalPrice.toFixed(2)}</strong>
           </div>
           <RemoveButton
@@ -113,7 +112,7 @@ const Cart: FC = () => {
 
           <SubmitButton
             children='Checkout'
-            className='bg-green-800 hover:bg-green-700'
+            className='bg-green-800 md:hover:bg-green-700 w-full'
           />
         </div>
       ),
@@ -122,7 +121,7 @@ const Cart: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text='Your cart' className='mb-4' />
+      <HeaderOne className='mb-4'>Your cart</HeaderOne>
       {emptyCart}
       {cartContent}
       {cartCheckout}

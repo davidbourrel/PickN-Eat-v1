@@ -6,8 +6,8 @@ import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { FETCH_BURGERS_URL } from '../../../_constants/dataUrls';
-import CardItem from '../../elements/Cards/CardItem';
 import { BurgerType } from '../../../_types/dataType';
+import CardContent from '../../elements/Card/CardContent';
 
 const BurgersList: FC = () => {
   const {
@@ -22,7 +22,7 @@ const BurgersList: FC = () => {
     () =>
       burgersList &&
       burgersList.map((burger) => (
-        <CardItem key={burger.id} item={burger as BurgerType} />
+        <CardContent key={burger.id} item={burger as BurgerType} />
       )),
     [burgersList]
   );
@@ -45,8 +45,8 @@ const BurgersList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text={burgersTitle} />
-      <div className='grid grid-cols-1 xs:grid-cols-2 my-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
+      <HeaderTwo>{burgersTitle}</HeaderTwo>
+      <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allBurgers}
       </div>
     </Section>

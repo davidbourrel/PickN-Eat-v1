@@ -55,6 +55,7 @@ module.exports = {
     extend: {
       filter: ['hover', 'focus'],
       contrast: ['hover', 'focus'],
+      scale: ['active'],
     },
   },
   plugins: [],

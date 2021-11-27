@@ -6,8 +6,8 @@ import Loading from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { FETCH_DRINKS_URL } from '../../../_constants/dataUrls';
-import CardItem from '../../elements/Cards/CardItem';
 import { DrinkType } from '../../../_types/dataType';
+import CardContent from '../../elements/Card/CardContent';
 
 const DrinksList: FC = () => {
   const {
@@ -22,7 +22,7 @@ const DrinksList: FC = () => {
     () =>
       drinksList &&
       drinksList.map((drink) => (
-        <CardItem key={drink.id} item={drink as DrinkType} />
+        <CardContent key={drink.id} item={drink as DrinkType} />
       )),
     [drinksList]
   );
@@ -45,8 +45,8 @@ const DrinksList: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text={drinksTitle} />
-      <div className='grid grid-cols-1 xs:grid-cols-2 my-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
+      <HeaderTwo>{drinksTitle}</HeaderTwo>
+      <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allDrinks}
       </div>
     </Section>

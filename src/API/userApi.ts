@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { userInformationInterface, userLoginInterface } from '../_types/user';
-// import { userLoginInterface } from '../_types/components';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 

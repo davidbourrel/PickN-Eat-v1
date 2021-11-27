@@ -1,15 +1,15 @@
 import { FC, useMemo } from 'react';
 import { HeaderProps } from '../types';
 
-const HeaderOne: FC<HeaderProps> = ({ text, className }) => {
+const HeaderOne: FC<HeaderProps> = ({ className, children }) => {
   const computedClassName = useMemo(
     () =>
-      `text-3xl py-2 text-red-700 font-bold border-b border-gray-300 md:text-4xl ${
+      `text-2xl py-2 text-gray-800 font-semibold border-b border-gray-300 md:text-3xl ${
         className || ''
       }`,
     [className]
   );
 
-  return <h1 className={computedClassName}>{text}</h1>;
+  return <h1 className={computedClassName}>{children}</h1>;
 };
 export default HeaderOne;

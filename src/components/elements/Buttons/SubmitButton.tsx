@@ -1,23 +1,24 @@
-import { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
+import { FC, PropsWithChildren, useMemo } from 'react';
 import { ClassNameComponentProps } from '../../../_types/components';
 
-interface SubmitButtonProps extends ClassNameComponentProps {
-  children?: ReactNode;
-}
+interface SubmitButtonProps
+  extends ClassNameComponentProps,
+    React.HTMLProps<HTMLButtonElement> {}
 
 const SubmitButton: FC<PropsWithChildren<SubmitButtonProps>> = ({
-  children,
   className,
+  children,
+  onClick,
 }) => {
   const computedClassName = useMemo(
     () =>
-      `py-2 px-8 mb-5 w-full bg-gray-800 text-white font-semibold rounded cursor-pointer transition hover:bg-gray-700 ${
+      `py-2 px-8 mb-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 ${
         className ?? ''
       }`,
     [className]
   );
   return (
-    <button type='submit' className={computedClassName}>
+    <button type='submit' onClick={onClick} className={computedClassName}>
       {children}
     </button>
   );

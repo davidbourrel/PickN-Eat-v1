@@ -1,19 +1,24 @@
 import { FC } from 'react';
+import HeaderOne from '../elements/Headings/HeaderOne';
 import BurgersList from '../modules/CategoriesLists/BurgersList';
 import DessertsList from '../modules/CategoriesLists/DessertsList';
 import DrinksList from '../modules/CategoriesLists/DrinksList';
 import SaladsList from '../modules/CategoriesLists/SaladsList';
 import SidesList from '../modules/CategoriesLists/SidesList';
 
-const HomePage: FC = () => {
+const Homepage: FC = () => {
   return (
     <>
+      <HeaderOne className='border-none text-center mt-2 p-4 pb-0 w-full sm:p-8 sm:pb-0 xl:mx-auto xl:max-w-7xl'>
+        Choose whatever you want, just{' '}
+        <strong className='font-black'>pick and eat</strong> !
+      </HeaderOne>
       <BurgersList />
-      <SaladsList />
       <SidesList />
-      <DessertsList />
       <DrinksList />
+      <SaladsList />
+      <DessertsList />
     </>
   );
 };
-export default HomePage;
+export default Homepage;

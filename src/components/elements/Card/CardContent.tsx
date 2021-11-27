@@ -12,7 +12,7 @@ interface CardItemProps {
   item: CardItemTypes;
 }
 
-const CardItem: FC<CardItemProps> = ({ item }) => {
+const CardContent: FC<CardItemProps> = ({ item }) => {
   const { image, title, id, category, description, price } = item;
 
   const addToCart = useAddToCart();
@@ -20,17 +20,17 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   const { cartTotalItems } = useTotalCart();
 
   const [isActive, setIsActive] = useState(false);
-  const handleToggle = useCallback(() => setIsActive(!isActive), [isActive]);
 
+  const handleToggle = useCallback(() => setIsActive(!isActive), [isActive]);
   const handleAddToCart = useCallback(() => addToCart(item), [addToCart, item]);
 
   const cardImage = useMemo(
     () => (
-      <div className='image overflow-hidden'>
+      <div className='overflow-hidden'>
         <img
           src={image}
           alt={title}
-          className='h-36 w-full object-cover transition duration-300 transform-gpu hover:scale-125 filter contrast-75 hover:contrast-100'
+          className='h-36 w-full object-cover transition duration-300 transform-gpu filter contrast-75 md:hover:contrast-100 md:hover:scale-125'
         />
       </div>
     ),
@@ -38,43 +38,60 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   );
   const addToCartSection = useMemo(
     () => (
-      <div className='flex flex-wrap px-3'>
-        <HeaderThree text={title} className='w-full py-2 capitalize' />
-        <div className='flex justify-between items-center w-full'>
+      <div className='px-3'>
+        <HeaderThree className='w-full py-2 capitalize'>{title}</HeaderThree>
+        <div className='flex justify-between items-center select-none'>
           <span className='font-bold text-lg md:text-xl'>{`$${price}`}</span>
-          <span
+          <OrderButton
             onClick={handleAddToCart}
             className={
               cart && cartTotalItems >= 20
-                ? 'opacity-50 pointer-events-none select-none'
-                : 'opacity-100 pointer-events-auto select-auto'
+                ? 'opacity-50 pointer-events-none'
+                : 'opacity-100 pointer-events-auto'
             }
           >
-            <OrderButton>Add to cart</OrderButton>
-          </span>
+            Add to cart
+          </OrderButton>
         </div>
       </div>
     ),
     [cart, handleAddToCart, price, cartTotalItems, title]
   );
 
-  const seeMoreClassName = useMemo(
-    () =>
-      `bg-white transition-height max-h-0 overflow-hidden opacity-0 duration-300 ${
-        isActive ? 'max-h-screen overflow-visible opacity-100 duration-700' : ''
-      }`,
-    [isActive]
+  const descriptionCutted = useMemo(() => {
+    const descriptionWords = description.split(' ');
+    if (descriptionWords.length > 10) {
+      descriptionWords.length = 10;
+    }
+    return `${descriptionWords.join(' ')}...`;
+  }, [description]);
+
+  const seeMoreDescription = useMemo(
+    () => (
+      <div
+        className={`bg-white transition-height max-h-0 overflow-hidden opacity-0 duration-300 ${
+          isActive
+            ? 'max-h-screen overflow-visible opacity-100 duration-700'
+            : ''
+        }`}
+      >
+        <p className='pb-3 px-3'>
+          {descriptionCutted}
+          <Link to={`/${category}/${id}`}>
+            <SeeMoreButton children='See more' />
+          </Link>
+        </p>
+      </div>
+    ),
+    [category, descriptionCutted, id, isActive]
   );
 
   const seeMoreSection = useMemo(
     () => (
-      <div className='pt-6'>
-        <div
-          className='relative flex justify-center items-center w-100 text-left pb-4 font-semibold outline-none select-none transition hover:text-red-700'
+      <>
+        <button
+          className='flex justify-center items-center py-4'
           onClick={handleToggle}
-          role='button'
-          tabIndex={0}
-          aria-hidden='true'
         >
           <span
             className={`inline-block transform transition-transform w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800 ${
@@ -83,22 +100,15 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
                 : 'transform -rotate-45 -translate-y-1'
             }`}
           />
-        </div>
-        <div className={seeMoreClassName}>
-          <p className='pb-3 px-3'>
-            {description}{' '}
-            <Link to={`/${category}/${id}`}>
-              <SeeMoreButton children='See more' />
-            </Link>
-          </p>
-        </div>
-      </div>
+        </button>
+        {seeMoreDescription}
+      </>
     ),
-    [handleToggle, category, description, id, isActive, seeMoreClassName]
+    [handleToggle, isActive, seeMoreDescription]
   );
 
   return (
-    <div className='card flex flex-col shadow-md rounded transition sm:hover:shadow-lg overflow-hidden'>
+    <div className='card_content flex flex-col rounded overflow-hidden transition shadow-md md:hover:shadow-lg'>
       {cardImage}
       {addToCartSection}
       {seeMoreSection}
@@ -106,4 +116,4 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   );
 };
 
-export default CardItem;
+export default CardContent;

@@ -1,10 +1,11 @@
 import { FC, useContext, useEffect, useMemo } from 'react';
-import HeaderTwo from '../elements/Headings/HeaderTwo';
 import Cookies from 'js-cookie';
-import Section from './Section';
+import Section from '../modules/Section';
 import userContext from '../../contexts/userContext';
 import Swal from 'sweetalert2';
 import { getUserInfos } from '../../API/userApi';
+import SubmitButton from '../elements/Buttons/SubmitButton';
+import HeaderOne from '../elements/Headings/HeaderOne';
 
 const User: FC = () => {
   const {
@@ -65,8 +66,8 @@ const User: FC = () => {
 
   return (
     <Section>
-      <HeaderTwo text='My informations' />
-      <div className='my-5'>
+      <HeaderOne>My informations</HeaderOne>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 my-5 text-lg'>
         <div className='mb-2'>
           <span className='font-bold mr-1'>Last name :</span>
           <span>{lastName}</span>
@@ -87,15 +88,14 @@ const User: FC = () => {
           <span className='font-bold mr-1'>Role :</span>
           <span>{roles}</span>
         </div>
-        <button
-          type='submit'
-          onClick={logOut}
-          value='submit'
-          className='py-2 px-8 my-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition hover:bg-gray-700'
-        >
-          Sign out
-        </button>
       </div>
+      <SubmitButton
+        onClick={logOut}
+        value='submit'
+        className='py-2 px-8 my-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 md:w-1/3 md:mr-auto'
+      >
+        Sign out
+      </SubmitButton>
     </Section>
   );
 };

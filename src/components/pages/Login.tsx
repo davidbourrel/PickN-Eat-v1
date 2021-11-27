@@ -1,21 +1,21 @@
 import Cookies from 'js-cookie';
 import { FC, useContext, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { login } from '../../API/userApi';
-import userContext from '../../contexts/userContext/';
+import userContext from '../../contexts/userContext';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import logo from '../images/logo.png';
-import Section from './Section';
+import Section from '../modules/Section';
 
 const Login: FC = () => {
   const { register, handleSubmit, reset } = useForm();
   const { setIsConnected } = useContext(userContext);
   const [errorLogin, setErrorLogin] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -32,11 +32,11 @@ const Login: FC = () => {
       if (Cookies.get('id')) {
         setIsConnected(true);
         setErrorLogin(false);
+        navigate('/user');
         Toast.fire({
           icon: 'success',
           title: 'Successfully connected!',
         });
-        history.push('/user-page');
       } else {
         setIsConnected(false);
         setErrorLogin(true);
@@ -59,11 +59,7 @@ const Login: FC = () => {
         className='m-5 p-6 text-gray-700 border-2 rounded shadow-md max-w-lg mx-auto'
       >
         <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
-        <img
-          src={logo}
-          alt='Logo Breaking Cook'
-          className='max-h-32 mx-auto mb-5'
-        />
+        <img src={logo} alt='Logo PickNEat' className='max-h-32 mx-auto mb-5' />
         <label htmlFor='emailAddress' className='flex flex-col mb-5'>
           Email address:
           <input
@@ -88,11 +84,11 @@ const Login: FC = () => {
           />
         </label>
         {incorrectPassword}
-        <SubmitButton children='Sign in' />
+        <SubmitButton className='w-full'>Sign in</SubmitButton>
         <p className='mt-4 text-sm text-center'>
-          New to Breaking Cook ?{' '}
+          New to PickNEat ?{' '}
           <Link to='/sign-up'>
-            <span className='font-bold cursor-pointer transition hover:text-red-700'>
+            <span className='font-bold cursor-pointer transition md:hover:text-red-700'>
               Create an account
             </span>
           </Link>

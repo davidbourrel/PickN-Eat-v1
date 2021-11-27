@@ -4,7 +4,7 @@ import { ClassNameComponentProps } from '../../../_types/components';
 const PlusSvg: FC<ClassNameComponentProps> = ({ className }) => {
   const computedClassName = useMemo(
     () =>
-      `fill-current w-5 h-5 cursor-pointer transition hover:text-white ${className}`,
+      `fill-current w-5 h-5 cursor-pointer transition md:hover:text-white ${className}`,
     [className]
   );
 

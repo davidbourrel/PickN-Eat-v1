@@ -1,22 +1,20 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { FETCH_BURGERS_URL } from '../../_constants/dataUrls';
 import { BurgerType } from '../../_types/dataType';
-import HeaderThree from '../elements/Headings/HeaderThree';
+import HeaderOne from '../elements/Headings/HeaderOne';
 import HeaderTwo from '../elements/Headings/HeaderTwo';
 import Section from '../modules/Section';
 
-type MenuParams = {
-  id: string;
-};
-
-const SeeMore: FC = () => {
-  const { id } = useParams<MenuParams>();
+const ItemDetails: FC = () => {
+  const { id } = useParams<string>();
   const [burger, setBurger] = useState(null as unknown as BurgerType);
-  const history = useHistory();
+  const navigate = useNavigate();
+
+  console.log(useParams);
 
   useEffect(() => {
     axios
@@ -25,23 +23,18 @@ const SeeMore: FC = () => {
       .then((menuDTO) => setBurger(menuDTO));
   }, [id]);
 
-  const mainTitle = useMemo(
-    () => <HeaderTwo text={burger?.title} className='capitalize' />,
-    [burger]
-  );
-
   const descriptionSection = useMemo(
     () => (
       <div className='flex flex-col sm:grid sm:grid-cols-2 sm:gap-4'>
+        <div className='overflow-hidden bg-gray-800 text-gray-300 p-5 transition md:hover:text-white sm:rounded'>
+          {burger?.description}
+        </div>
         <div className='overflow-hidden sm:rounded'>
           <img
             src={burger?.image}
             alt={burger?.title}
-            className='max-h-60 h-60 w-full object-cover transition filter duration-300 transform-gpu scale-105 hover:scale-125 contrast-75 hover:contrast-100 '
+            className='max-h-60 h-60 w-full object-cover transition filter duration-300 transform-gpu scale-105 contrast-75 md:hover:contrast-100 md:hover:scale-125'
           />
-        </div>
-        <div className='overflow-hidden bg-gray-800 text-gray-300 p-5 transition hover:text-white sm:rounded'>
-          {burger?.description}
         </div>
       </div>
     ),
@@ -50,7 +43,7 @@ const SeeMore: FC = () => {
 
   const detailsSection = useMemo(
     () => (
-      <div className='bg-red-900 text-gray-300 max-w-2xl transition hover:text-white sm:rounded'>
+      <div className='bg-red-900 text-gray-300 max-w-2xl transition md:hover:text-white sm:rounded'>
         <ul className='p-5'>
           <li>
             <span className='font-semibold mr-1'>Burger:</span>
@@ -60,6 +53,14 @@ const SeeMore: FC = () => {
             <span className='font-semibold mr-1'>Price:</span>
             <span className='font-bold'>{burger?.price}$</span>
           </li>
+          {/* <li>
+            <span className='font-semibold mr-1'>Category:</span>
+            <span className='font-bold'>{burger?.category}$</span>
+          </li>
+          <li>
+            <span className='font-semibold mr-1'>Allergens:</span>
+            <span className='font-bold'>{burger?.allergens}$</span>
+          </li> */}
         </ul>
       </div>
     ),
@@ -81,11 +82,11 @@ const SeeMore: FC = () => {
           setTimeout(() => {
             axios.delete(`${FETCH_BURGERS_URL}/${id}`);
             Swal.fire('Deleted!', 'Your burger has been deleted.', 'success');
-            history.push('/');
+            navigate('/');
           }, 400);
         }
       }),
-    [history, id]
+    [id, navigate]
   );
 
   const adminSection = useMemo(
@@ -93,7 +94,7 @@ const SeeMore: FC = () => {
       !!Cookies.get('id') &&
       Cookies.get('role') === '1' && (
         <div>
-          <HeaderTwo text='Admin section' className='mt-6 mb-3 font-bold' />
+          <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
           <button
             type='button'
             onClick={handleMenuDelete}
@@ -108,17 +109,16 @@ const SeeMore: FC = () => {
 
   return (
     <Section>
-      {mainTitle}
-      <HeaderThree
-        text='Description'
-        className='font-bold mt-6 mb-3 md:text-2xl'
-      />
+      <HeaderOne className='capitalize'>{burger?.title}</HeaderOne>
+      <HeaderTwo className='font-bold mt-6 mb-3 md:text-2xl'>
+        Description
+      </HeaderTwo>
       {descriptionSection}
-      <HeaderThree text='Détails' className='font-bold mt-6 mb-3 md:text-2xl' />
+      <HeaderTwo className='font-bold mt-6 mb-3 md:text-2xl'>Details</HeaderTwo>
       {detailsSection}
       {adminSection}
     </Section>
   );
 };
 
-export default SeeMore;
+export default ItemDetails;

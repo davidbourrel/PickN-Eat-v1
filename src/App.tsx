@@ -1,16 +1,18 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/modules/Header';
 import Footer from './components/modules/Footer';
-import Home from './components/pages';
-import NotFound from './components/pages/404';
+import Homepage from './components/pages/Homepage';
 import Restaurant from './components/pages/Restaurant';
 import Delivery from './components/pages/Delivery';
-import UserPage from './components/pages/UserPage';
-import Admin from './components/pages/Admin';
 import LateralNavbar from './components/modules/Navigation/LateralNavbar';
-import SeeMore from './components/pages/SeeMore';
 import Cart from './components/pages/Cart';
+import Login from './components/pages/Login';
+import User from './components/pages/User';
+import Admin from './components/pages/Admin';
+import RequireAuth from './components/pages/RequireAuth';
+import ItemDetails from './components/pages/ItemDetails';
+import NotFound from './components/pages/NotFound';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,24 +47,39 @@ const App: FC = () => {
           handleToggleMenu={handleToggleMenu}
         />
         <div className='flex flex-col flex-1 relative'>
-          <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/restaurant' exact component={Restaurant} />
-            <Route path='/delivery' exact component={Delivery} />
-            <Route path='/cart' exact component={Cart} />
-            <Route path='/user-page' exact component={UserPage} />
-            <Route path='/burgers/:id' exact component={SeeMore} />
-            <Route path='/desserts/:id' exact component={SeeMore} />
-            <Route path='/salads/:id' exact component={SeeMore} />
-            <Route path='/drinks/:id' exact component={SeeMore} />
-            <Route path='/sides/:id' exact component={SeeMore} />
-            <Route path='/admin' exact component={Admin} />
-            <Route component={NotFound} />
-          </Switch>
-          {filterContent}
+          <Routes>
+            <Route path='/' element={<Homepage />} />
+            <Route path='/restaurant' element={<Restaurant />} />
+            <Route path='/delivery' element={<Delivery />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/login' element={<Login />} />
+            <Route
+              path='user'
+              element={
+                <RequireAuth>
+                  <User />
+                </RequireAuth>
+              }
+            />
+            <Route path='/burgers/:id' element={<ItemDetails />} />
+            <Route path='/desserts/:id' element={<ItemDetails />} />
+            <Route path='/salads/:id' element={<ItemDetails />} />
+            <Route path='/drinks/:id' element={<ItemDetails />} />
+            <Route path='/sides/:id' element={<ItemDetails />} />
+            <Route
+              path='admin'
+              element={
+                <RequireAuth>
+                  <Admin />
+                </RequireAuth>
+              }
+            />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
         </div>
       </main>
       <Footer />
+      {filterContent}
     </div>
   );
 };

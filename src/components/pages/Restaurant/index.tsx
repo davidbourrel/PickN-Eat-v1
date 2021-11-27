@@ -4,7 +4,7 @@ import GoogleMapMarker from '../../elements/GoogleMap/GoogleMapMarker';
 import { GOOGLE_MAP_API_KEY } from '../../../_constants/googleMapApiKey';
 import Section from '../../modules/Section';
 import RestaurantTable from './RestaurantTable';
-import HeaderTwo from '../../elements/Headings/HeaderTwo';
+import HeaderOne from '../../elements/Headings/HeaderOne';
 
 const Restaurant: FC = () => {
   const [defaultView] = useState({
@@ -14,7 +14,7 @@ const Restaurant: FC = () => {
 
   return (
     <Section className='flex-1'>
-      <HeaderTwo text='Plan' />
+      <HeaderOne>Plan</HeaderOne>
       <div className='my-6 grid grid-cols-1 gap-4 lg:grid-cols-2'>
         <div className='h-80'>
           <GoogleMapReact

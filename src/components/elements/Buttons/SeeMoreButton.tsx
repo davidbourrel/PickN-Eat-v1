@@ -1,14 +1,18 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
+import { ClassNameComponentProps } from '../../../_types/components';
 
-type SeeMoreButtonProps = {
-  children?: ReactNode;
-};
+interface SeeMoreButtonProps
+  extends ClassNameComponentProps,
+    React.HTMLProps<HTMLButtonElement> {}
 
-const SeeMoreButton: FC<SeeMoreButtonProps> = ({ children }) => {
+const SeeMoreButton: FC<PropsWithChildren<SeeMoreButtonProps>> = ({
+  children,
+  onClick,
+}) => {
   return (
     <button
-      type='button'
-      className='inline text-center py-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 via-red-600 to-yellow-500 text-lg'
+      onClick={onClick}
+      className='inline text-center font-semibold pl-1 transition text-red-800 md:hover:text-red-600'
     >
       {children}
     </button>
