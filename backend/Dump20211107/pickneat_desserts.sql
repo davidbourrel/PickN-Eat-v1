@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: backchallenge
+-- Host: 127.0.0.1    Database: pickneat
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -16,34 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sides`
+-- Table structure for table `desserts`
 --
 
-DROP TABLE IF EXISTS `sides`;
+DROP TABLE IF EXISTS `desserts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sides` (
+CREATE TABLE `desserts` (
   `id` varchar(50) NOT NULL,
   `title` varchar(100) NOT NULL,
   `price` int NOT NULL,
   `description` varchar(300) NOT NULL,
   `image` varchar(300) NOT NULL,
   `allergens` varchar(300) NOT NULL,
-  `pieces` int NOT NULL,
   `category` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idsides_UNIQUE` (`id`)
+  UNIQUE KEY `iddesserts_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sides`
+-- Dumping data for table `desserts`
 --
 
-LOCK TABLES `sides` WRITE;
-/*!40000 ALTER TABLE `sides` DISABLE KEYS */;
-INSERT INTO `sides` VALUES ('EEEamkrmkrmhr','french fries',2,'How can you resist? Golden, crispy and above all generous... our fries are perfect!','https://images.unsplash.com/photo-1606755456206-b25206cde27e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80','This product does not contain any reportable allergens.',1,'sides'),('EEEbgmokgrkmgrk','crousty',3,'Tasty crispy bites made with goat cheese! ','https://images.unsplash.com/photo-1625940951329-4e8d09f87692?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1631&q=80','gluten, milk',6,'sides'),('EEEchmorhkmrhkr','chicken wings',4,'Golden, tender and delicately spiced chicken wings, the CHICKEN WINGS are back!','https://images.unsplash.com/photo-1562967915-92ae0c320a01?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1173&q=80','gluten',4,'sides'),('EEEdhrkhmrkhmre','nuggets',3,'Discover our new King Nuggets®! An ultra-crispy breading and a chicken 100% made from fillets of French origin, raised in our farmers\' henhouses. They contain no artificial coloring or flavoring!','https://images.unsplash.com/photo-1627662168223-7df99068099a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','gluten, eggs',6,'sides');
-/*!40000 ALTER TABLE `sides` ENABLE KEYS */;
+LOCK TABLES `desserts` WRITE;
+/*!40000 ALTER TABLE `desserts` DISABLE KEYS */;
+INSERT INTO `desserts` VALUES ('AAAarmohmhjtmh','Ultimate Choco Brownie',4,'The generous meeting of a creamy vanilla, an authentic brownie, under a chocolate-hazelnut topping and a greedy layer of whipped cream','https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80','gluten, milk','desserts'),('AAAbmgkrmokrmhr','Sweet Vanilla',5,'Vanilla ice cream with chocolate-hazelnut topping','https://images.unsplash.com/photo-1543255006-d6395b6f1171?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80','gluten, milk','desserts'),('AAAcorhmejhmre','Fabulous crepe',3,'A delicious chocolate flavored crepewith crunchy hazelnut chips','https://images.unsplash.com/photo-1587314168485-3236d6710814?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=670&q=80','gluten, milk','desserts'),('AAAdhmorhmejrmh','Chocolate cake',4,'The best chocolate cake we ever made! We love it !','https://images.unsplash.com/photo-1541780171255-b162a3a147e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80','gluten, milk','desserts');
+/*!40000 ALTER TABLE `desserts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
