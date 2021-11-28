@@ -1,19 +1,22 @@
 import Cookies from 'js-cookie';
-import { FC, useContext, useMemo, useState } from 'react';
+import { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { login } from '../../API/userApi';
-import userContext from '../../contexts/userContext';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import logo from '../images/logo.png';
 import Section from '../modules/Section';
+import { ERROR_CLASS_NAME } from './const';
 
 const Login: FC = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const { setIsConnected } = useContext(userContext);
-  const [errorLogin, setErrorLogin] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
 
@@ -25,65 +28,63 @@ const Login: FC = () => {
     timerProgressBar: true,
   });
 
-  const onSubmit = (values: userLoginInterface) => {
-    login(values);
-    reset();
-    setTimeout(() => {
-      if (Cookies.get('id')) {
-        setIsConnected(true);
-        setErrorLogin(false);
-        navigate('/user');
-        Toast.fire({
-          icon: 'success',
-          title: 'Successfully connected!',
-        });
-      } else {
-        setIsConnected(false);
-        setErrorLogin(true);
-      }
-    }, 500);
-  };
-
-  const incorrectPassword = useMemo(
-    () =>
-      errorLogin && (
-        <p className='mb-6 text-sm text-red-500'>Your password is incorrect.</p>
-      ),
-    [errorLogin]
+  const onSubmitHandler = useCallback(
+    (values: userLoginInterface) => {
+      login(values);
+      setTimeout(() => {
+        if (Cookies.get('id')) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Successfully connected!',
+          });
+          navigate('/user');
+        }
+        reset();
+      }, 500);
+    },
+    [Toast, navigate, reset]
   );
 
   return (
     <Section>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmitHandler)}
         className='m-5 p-6 text-gray-700 border-2 rounded shadow-md max-w-lg mx-auto'
       >
         <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
         <img src={logo} alt='Logo PickNEat' className='max-h-32 mx-auto mb-5' />
-        <label htmlFor='emailAddress' className='flex flex-col mb-5'>
+        <label htmlFor='email' className='flex flex-col mb-5'>
           Email address:
           <input
-            id='emailAddress'
+            id='email'
             className='border shadow-inner rounded p-1 my-2 w-full appearance-none'
             type='email'
-            maxLength={100}
-            required
-            {...register('email')}
+            {...register('email', {
+              required: true,
+              maxLength: 100,
+            })}
           />
+          {errors.email && (
+            <span className={ERROR_CLASS_NAME}>Your email is incorrect.</span>
+          )}
         </label>
-        <label
-          htmlFor='password'
-          className={`flex flex-col ${errorLogin ? 'mb-1' : 'mb-4'}`}
-        >
+        <label htmlFor='password' className='flex flex-col mb-4'>
           Password:
           <input
             id='password'
             type='password'
             className='border shadow-inner rounded p-1 my-2 w-full appearance-none'
-            {...register('password')}
+            {...register('password', {
+              required: true,
+              maxLength: 255,
+            })}
           />
+          {errors.password && (
+            <span className={ERROR_CLASS_NAME}>
+              Your password is incorrect.
+            </span>
+          )}
         </label>
-        {incorrectPassword}
         <SubmitButton className='w-full'>Sign in</SubmitButton>
         <p className='mt-4 text-sm text-center'>
           New to PickNEat ?{' '}

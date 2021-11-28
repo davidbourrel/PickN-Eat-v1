@@ -27,7 +27,7 @@ const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
 
   return (
     <header className='w-full shadow-md bg-gray-50'>
-      <div className='tracking-wider font-bold xl:mx-auto xl:max-w-7xl'>
+      <div className='tracking-wider font-bold xl:mx-auto xl:max-w-6xl'>
         <div className='flex items-center justify-between py-3 px-4 sm:px-8'>
           <BurgerToggleButton
             isOpen={isOpen}

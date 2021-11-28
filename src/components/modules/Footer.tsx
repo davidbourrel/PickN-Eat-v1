@@ -8,7 +8,7 @@ const ITEM_CLASS_NAME = 'text-sm mb-2 md:hover:underline cursor-pointer';
 const Footer: FC = () => {
   return (
     <footer className='w-full pb-10 shadow-sm bg-gray-800 text-white'>
-      <div className='py-2 flex flex-col flex-wrap xs:flex-row xs:justify-center xs:text-center xl:mx-auto xl:max-w-7xl'>
+      <div className='py-2 flex flex-col flex-wrap xs:flex-row xs:justify-center xs:text-center xl:mx-auto xl:max-w-6xl'>
         <div className={COL_CLASS_NAME}>
           <h3 className={HEADER_CLASS_NAME}>About Us</h3>
           <ul>

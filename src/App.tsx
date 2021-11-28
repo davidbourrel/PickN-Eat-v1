@@ -13,6 +13,7 @@ import Admin from './components/pages/Admin';
 import RequireAuth from './components/pages/RequireAuth';
 import ItemDetails from './components/pages/ItemDetails';
 import NotFound from './components/pages/NotFound';
+import SignUp from './components/pages/SignUp';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +54,7 @@ const App: FC = () => {
             <Route path='/delivery' element={<Delivery />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/sign-up' element={<SignUp />} />
             <Route
               path='user'
               element={

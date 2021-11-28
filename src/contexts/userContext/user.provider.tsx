@@ -1,16 +1,20 @@
-import { FC, createContext, useState } from 'react';
+import Cookies from 'js-cookie';
+import {
+  FC,
+  createContext,
+  useState,
+  SetStateAction,
+  useEffect,
+  Dispatch,
+} from 'react';
+import { getUserInfos } from '../../API/userApi';
+import { userInformationInterface } from '../../_types/user';
 
 export interface UserContextInterface {
   isConnected: boolean;
   setIsConnected: (isConnected: boolean) => void;
-  lastName: string;
-  setLastName: (lastName: string) => void;
-  firstName: string;
-  setFirstName: (firstName: string) => void;
-  age: number;
-  setAge: (age: number) => void;
-  email: string;
-  setEmail: (email: string) => void;
+  user: userInformationInterface[];
+  setUser: Dispatch<SetStateAction<userInformationInterface[]>>;
   userRole: number;
   setUserRole: (email: number) => void;
 }
@@ -19,14 +23,8 @@ export interface UserContextInterface {
 const initialProviderValue: UserContextInterface = {
   isConnected: false as unknown as UserContextInterface['isConnected'],
   setIsConnected: null as unknown as UserContextInterface['setIsConnected'],
-  lastName: null as unknown as UserContextInterface['lastName'],
-  setLastName: null as unknown as UserContextInterface['setLastName'],
-  firstName: null as unknown as UserContextInterface['firstName'],
-  setFirstName: null as unknown as UserContextInterface['setFirstName'],
-  age: null as unknown as UserContextInterface['age'],
-  setAge: null as unknown as UserContextInterface['setAge'],
-  email: null as unknown as UserContextInterface['email'],
-  setEmail: null as unknown as UserContextInterface['setEmail'],
+  user: null as unknown as UserContextInterface['user'],
+  setUser: null as unknown as UserContextInterface['setUser'],
   userRole: null as unknown as UserContextInterface['userRole'],
   setUserRole: null as unknown as UserContextInterface['setUserRole'],
 };
@@ -36,25 +34,30 @@ const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
   const [isConnected, setIsConnected] = useState(null as unknown as boolean);
-  const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [age, setAge] = useState(null as unknown as number);
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState([] as unknown as userInformationInterface[]);
   const [userRole, setUserRole] = useState(null as unknown as number);
+
+  useEffect(() => {
+    Cookies.get('id') &&
+      getUserInfos().then((data) => {
+        if (data && data.length > 0) {
+          setUser(data);
+          setUserRole(data[0].roles_id);
+        }
+      });
+  }, [setIsConnected]);
+
+  useEffect(() => {
+    Cookies.get('id') ? setIsConnected(true) : setIsConnected(false);
+  }, [setIsConnected]);
 
   return (
     <Provider
       value={{
         isConnected,
         setIsConnected,
-        lastName,
-        setLastName,
-        firstName,
-        setFirstName,
-        age,
-        setAge,
-        email,
-        setEmail,
+        user,
+        setUser,
         userRole,
         setUserRole,
       }}

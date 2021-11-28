@@ -68,7 +68,7 @@ const Admin = () => {
 
   return (
     <Section>
-      <div className='mx-auto xl:max-w-7xl'>
+      <div className='mx-auto xl:max-w-6xl'>
         <HeaderTwo>Add your new burger</HeaderTwo>
         <form className='mx-5 my-6' onSubmit={handleSubmit}>
           <div className='mb-5 grid gap-4 grid-flow-col grid-cols-1 grid-rows-6 sm:grid-cols-2 sm:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2'>
@@ -83,7 +83,7 @@ const Admin = () => {
                 id='burgerName'
                 type='text'
                 placeholder='Burger...'
-                className='border-2 rounded p-1 shadow-inner focus:border-red-700'
+                className='border-2 rounded p-1 shadow-inner'
               />
             </div>
             <div className='flex flex-col'>
@@ -97,7 +97,7 @@ const Admin = () => {
                 id='urlImage'
                 type='text'
                 placeholder='Url...'
-                className='border-2 rounded p-1 shadow-inner focus:border-red-700'
+                className='border-2 rounded p-1 shadow-inner'
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ const Admin = () => {
               id='description'
               maxLength={maxLength}
               placeholder='Description...'
-              className='border-2 rounded p-1 shadow-inner max-w-lg max-h-72 focus:border-red-700'
+              className='border-2 rounded p-1 shadow-inner max-w-lg max-h-72'
             />
           </div>
           <div className='flex flex-col'>
@@ -126,7 +126,7 @@ const Admin = () => {
               id='burgerName'
               type='text'
               placeholder='Burger...'
-              className='border-2 rounded p-1 shadow-inner focus:border-red-700'
+              className='border-2 rounded p-1 shadow-inner'
             />
           </div>
           <div className='flex flex-col '>
@@ -141,7 +141,7 @@ const Admin = () => {
               onChange={handlePriceChange}
               id='price'
               placeholder='Price...'
-              className='border-2 rounded p-1 shadow-inner focus:border-red-700'
+              className='border-2 rounded p-1 shadow-inner'
               required
             />
           </div>
