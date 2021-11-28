@@ -49,11 +49,11 @@ const Login: FC = () => {
     <Section>
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
-        className='m-5 p-6 text-gray-700 border-2 rounded shadow-md max-w-lg mx-auto'
+        className='m-5 p-6 text-gray-700 border-2 rounded shadow-md w-full max-w-sm mx-auto'
       >
         <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
         <img src={logo} alt='Logo PickNEat' className='max-h-32 mx-auto mb-5' />
-        <label htmlFor='email' className='flex flex-col mb-5'>
+        <label htmlFor='email' className='flex flex-col mb-5 font-bold'>
           Email address:
           <input
             id='email'
@@ -68,7 +68,7 @@ const Login: FC = () => {
             <span className={ERROR_CLASS_NAME}>Your email is incorrect.</span>
           )}
         </label>
-        <label htmlFor='password' className='flex flex-col mb-4'>
+        <label htmlFor='password' className='flex flex-col mb-4 font-bold'>
           Password:
           <input
             id='password'

@@ -1,23 +1,25 @@
 const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const port = process.env.PORT || 3001;
 const app = express();
+const cors = require('cors');
+const verifyJWT = require('./services/jwt');
+const cookieParser = require('cookie-parser');
+const PORT = process.env.PORT || 3001;
 
 // pre-route middlewares
 app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 
 // routes
 require('./routes')(app);
 
-const server = app.listen(port, (error) => {
+app.use(verifyJWT);
+
+app.listen(PORT, (error) => {
   if (error) {
     console.log(error);
   } else {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Server running on port ${PORT}`);
   }
 });
-
-module.exports = server;
