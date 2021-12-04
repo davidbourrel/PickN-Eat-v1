@@ -1,1 +1,1 @@
-export const GOOGLE_MAP_API_KEY = 'AIzaSyBmzwW9ywoIiATeOPor5wnJZaCwLzIB8rs';
+export const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP;

@@ -3,10 +3,10 @@ import { Navigate, useLocation } from 'react-router';
 import userContext from '../../contexts/userContext';
 
 const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const { isConnected } = useContext(userContext);
+  const { isAuth } = useContext(userContext);
   let location = useLocation();
 
-  if (!isConnected) {
+  if (!isAuth) {
     return <Navigate to='/login' state={{ from: location }} />;
   }
 

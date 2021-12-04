@@ -1,6 +1,5 @@
-import { FC, useCallback, useMemo, useRef } from 'react';
+import { FC, useCallback, useContext, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import MenuSvg from '../../images/icons/MenuSvg';
 import RestaurantsSvg from '../../images/icons/RestaurantsSvg';
 import DeliverySvg from '../../images/icons/DeliverySvg';
@@ -9,6 +8,7 @@ import BCLogo from '../../images/BCLogo';
 import BurgerToggleButton from '../../elements/Buttons/BurgerToggleButton';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { OPENED_ITEM_CLASS_NAME, LINK_CLASS_NAME } from './const';
+import userContext from '../../../contexts/userContext';
 
 interface FLateralNavbarProps {
   closeMenu: () => void;
@@ -21,6 +21,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
   isOpen,
   handleToggleMenu,
 }) => {
+  const { isAuth } = useContext(userContext);
   const navClassName = useMemo(
     () => `h-full fixed top-0 left-0 z-10 bg-gray-800 overflow-x-hidden overflow-y-auto transition-width duration-500 pt-7 shadow-2xl md:w-0
       ${isOpen ? 'w-full xs:w-3/4 sm:w-1/2' : 'w-0'}`,
@@ -71,7 +72,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
             <DeliverySvg />
           </Link>
         </li>
-        {!!Cookies.get('id') && Cookies.get('role') === '1' ? (
+        {isAuth ? (
           <li className='mr-2 px-4 rounded transition mb-7 text-red-600 bg-gray-100'>
             <Link to='/admin' onClick={closeMenu} className={LINK_CLASS_NAME}>
               ADMIN

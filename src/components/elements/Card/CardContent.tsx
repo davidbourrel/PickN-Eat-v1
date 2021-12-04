@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HeaderThree from '../Headings/HeaderThree';
 import OrderButton from '../Buttons/OrderButton';
 import SeeMoreButton from '../Buttons/SeeMoreButton';
-import { CardItemTypes } from '../../../_types/dataType';
+import { CardItemTypes } from '../../../_types/datas';
 import useCart from '../../../contexts/cartContext/useCart';
 import useAddToCart from '../../../contexts/cartContext/useAddToCart ';
 import useTotalCart from '../../../contexts/cartContext/useCartTotal';

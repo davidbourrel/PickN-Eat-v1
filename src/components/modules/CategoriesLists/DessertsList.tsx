@@ -1,20 +1,19 @@
 import { FC, useMemo } from 'react';
-import useFetchingData, {
-  FUseFetchingDataArgs,
-} from '../../../hooks/useFetchingData';
-import Loading from '../../images/icons/Loader';
+import Loader from '../../images/icons/Loader';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../Section';
 import { FETCH_DESSERTS_URL } from '../../../_constants/dataUrls';
-import { DessertType } from '../../../_types/dataType';
+import { DessertType } from '../../../_types/datas';
 import CardContent from '../../elements/Card/CardContent';
+import useFetchingDatas from '../../../hooks/useFetchingDatas';
+import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 
 const DessertsList: FC = () => {
   const {
     data: dessertsList,
     loading,
     error,
-  } = useFetchingData(FETCH_DESSERTS_URL as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(FETCH_DESSERTS_URL as unknown as FUseFetchingDataArgs);
 
   const dessertsTitle = 'Desserts';
 
@@ -39,7 +38,7 @@ const DessertsList: FC = () => {
   if (loading)
     return (
       <Section className='items-center flex-1'>
-        <Loading />
+        <Loader />
       </Section>
     );
 

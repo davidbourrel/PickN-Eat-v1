@@ -10,13 +10,7 @@ const RemoveButton: FC<PropsWithChildren<RemoveButtonProps>> = ({
   children,
   onClick,
 }) => {
-  const computedClassName = useMemo(
-    () =>
-      `w-full text-red-600 font-semibold rounded cursor-pointer transition md:hover:text-red-700 ${
-        className ?? ''
-      }`,
-    [className]
-  );
+  const computedClassName = useMemo(() => `${className ?? ''}`, [className]);
 
   return (
     <button onClick={onClick} className={computedClassName}>

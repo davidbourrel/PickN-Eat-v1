@@ -1,37 +1,68 @@
 const User = require('../models/users');
-const { createToken } = require('../services/jwt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-const autentificationCheck = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    User.findEmail(email).then((user) => {
-      if (!user) res.status(401).send('Invalid credentials');
-      else {
-        const { id, roles_id } = user[0];
-        if (user.length <= 0) res.status(401).send('Invalid credentials');
-        else {
-          User.verifyPassword(password, user[0].hashedPassword).then(
-            (passwordIsCorrect) => {
-              if (passwordIsCorrect) {
-                const token = createToken(id, roles_id);
-                res.cookie('token', token, {
-                  httpOnly: true,
-                });
-                res.status(200).json({
-                  id,
-                  roles_id,
-                  token,
-                });
-              } else res.status(401).send('Invalid credentials');
-            }
-          );
-        }
-      }
+const handleLogin = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password)
+    return res
+      .status(400)
+      .json({ message: 'Username and password are required.' });
+  const foundUser = await User.getAll();
+  const filteredUser = foundUser[0].find((person) => person.email === email);
+
+  if (!filteredUser) return res.sendStatus(401); //Unauthorized
+  // evaluate password
+
+  const match = await User.verifyPassword(
+    password,
+    filteredUser.hashedPassword
+  );
+  if (match) {
+    // create JWTs
+    const accessToken = jwt.sign(
+      { email: filteredUser.email, roles_id: filteredUser.roles_id },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '30s' }
+    );
+    const refreshToken = jwt.sign(
+      { email: filteredUser.email, roles_id: filteredUser.roles_id },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: '1d' }
+    );
+    res.cookie('jwt', refreshToken, {
+      httpOnly: true,
+      sameSite: 'None',
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
     });
-  } catch (error) {
-    console.log('auth ', error);
-    res.status(500).send('An error occured while retrieving authentification');
+    res.json({ accessToken });
+  } else {
+    res.sendStatus(401);
   }
 };
 
-module.exports = { autentificationCheck };
+const handleRefreshToken = async (req, res) => {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(401);
+  const refreshToken = cookies.jwt;
+
+  const foundUser = await User.getAll();
+  const filteredUser = foundUser[0].find(
+    (person) => person.refreshToken === refreshToken
+  );
+
+  if (!filteredUser) return res.sendStatus(403); //Forbidden
+  // evaluate jwt
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || filteredUser.email !== decoded.email) return res.sendStatus(403);
+    const accessToken = jwt.sign(
+      { email: decoded.email, roles_id: filteredUser.roles_id },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '30s' }
+    );
+    res.json({ accessToken });
+  });
+};
+
+module.exports = { handleLogin, handleRefreshToken };

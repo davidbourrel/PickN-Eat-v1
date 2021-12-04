@@ -1,65 +1,90 @@
-import Cookies from 'js-cookie';
 import {
   FC,
   createContext,
   useState,
   SetStateAction,
-  useEffect,
   Dispatch,
+  useCallback,
 } from 'react';
-import { getUserInfos } from '../../API/userApi';
-import { userInformationInterface } from '../../_types/user';
+import axios from 'axios';
+import {
+  userInformationInterface,
+  userLoginInterface,
+} from '../../_types/user';
+import { BASE_URL } from '../../_constants/dataUrls';
+
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 export interface UserContextInterface {
-  isConnected: boolean;
-  setIsConnected: (isConnected: boolean) => void;
+  isAuth: boolean;
+  setIsAuth: Dispatch<SetStateAction<boolean>>;
   user: userInformationInterface[];
   setUser: Dispatch<SetStateAction<userInformationInterface[]>>;
   userRole: number;
-  setUserRole: (email: number) => void;
+  setUserRole: Dispatch<SetStateAction<number>>;
+  handleLogin: (values: userLoginInterface) => void;
+  // fetchUser: () => void;
 }
 
 // Create an initial provider value.
 const initialProviderValue: UserContextInterface = {
-  isConnected: false as unknown as UserContextInterface['isConnected'],
-  setIsConnected: null as unknown as UserContextInterface['setIsConnected'],
+  isAuth: false,
+  setIsAuth: null as unknown as UserContextInterface['setIsAuth'],
   user: null as unknown as UserContextInterface['user'],
   setUser: null as unknown as UserContextInterface['setUser'],
   userRole: null as unknown as UserContextInterface['userRole'],
   setUserRole: null as unknown as UserContextInterface['setUserRole'],
+  handleLogin: null as unknown as UserContextInterface['handleLogin'],
+  // fetchUser: null as unknown as UserContextInterface['fetchUser'],
 };
 // Create the store or 'context'.
 export const userContext = createContext(initialProviderValue);
 const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
-  const [isConnected, setIsConnected] = useState(null as unknown as boolean);
+  const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState([] as unknown as userInformationInterface[]);
   const [userRole, setUserRole] = useState(null as unknown as number);
+  const [accessToken, setAccessToken] = useState(null as unknown as string);
 
-  useEffect(() => {
-    Cookies.get('id') &&
-      getUserInfos().then((data) => {
-        if (data && data.length > 0) {
-          setUser(data);
-          setUserRole(data[0].roles_id);
+  const authAxios = axios.create({
+    baseURL: BASE_URL,
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  const fetchUser = useCallback(() => {
+    authAxios.get('users').then((res) => {
+      console.log('coucou fetchUser', res.data);
+      setUser(res.data);
+    });
+  }, [authAxios]);
+
+  const handleLogin = useCallback(
+    (values: userLoginInterface) => {
+      axios.post('/auth', values).then((res) => {
+        if (res.data.accessToken.length > 10) {
+          setAccessToken(res.data.accessToken);
+          setIsAuth(true);
+          fetchUser();
+        } else {
+          setIsAuth(false);
         }
       });
-  }, [setIsConnected]);
-
-  useEffect(() => {
-    Cookies.get('id') ? setIsConnected(true) : setIsConnected(false);
-  }, [setIsConnected]);
+    },
+    [fetchUser]
+  );
 
   return (
     <Provider
       value={{
-        isConnected,
-        setIsConnected,
+        isAuth,
+        setIsAuth,
         user,
         setUser,
         userRole,
         setUserRole,
+        handleLogin,
+        // fetchUser,
       }}
     >
       {children}

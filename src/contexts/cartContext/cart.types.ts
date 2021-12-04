@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { CardItemTypes } from '../../_types/dataType';
+import { CardItemTypes } from '../../_types/datas';
 
 export interface CartContextInterface {
   cart: CardItemTypes[];

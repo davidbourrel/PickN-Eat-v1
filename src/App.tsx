@@ -63,11 +63,7 @@ const App: FC = () => {
                 </RequireAuth>
               }
             />
-            <Route path='/burgers/:id' element={<ItemDetails />} />
-            <Route path='/desserts/:id' element={<ItemDetails />} />
-            <Route path='/salads/:id' element={<ItemDetails />} />
-            <Route path='/drinks/:id' element={<ItemDetails />} />
-            <Route path='/sides/:id' element={<ItemDetails />} />
+            <Route path='/:category/:id' element={<ItemDetails />} />
             <Route
               path='admin'
               element={

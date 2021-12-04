@@ -1,22 +1,16 @@
 import { useState, useEffect } from 'react';
+import {
+  FUseFetchingDataArgs,
+  FUseFetchingDatasResult,
+} from '../_types/fetchData';
 
-export interface FUseFetchingDataArgs {
-  url: string;
-}
-
-interface FUseFetchingDataResult {
-  loading: boolean;
-  error: string;
-  data: any[];
-}
-
-type FUseFetchingDataHook = (
+type FUseFetchingDatasHook = (
   arg: FUseFetchingDataArgs
-) => FUseFetchingDataResult;
+) => FUseFetchingDatasResult;
 
-const useFetchingData: FUseFetchingDataHook = (url) => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState('');
+const useFetchingDatas: FUseFetchingDatasHook = (url) => {
+  const [data, setData] = useState(null as unknown as []);
+  const [error, setError] = useState(null as unknown as string);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -45,4 +39,4 @@ const useFetchingData: FUseFetchingDataHook = (url) => {
   return { loading, error, data };
 };
 
-export default useFetchingData;
+export default useFetchingDatas;

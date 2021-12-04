@@ -19,7 +19,7 @@ const Restaurant: FC = () => {
         <div className='h-80'>
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: GOOGLE_MAP_API_KEY,
+              key: `${GOOGLE_MAP_API_KEY}`,
             }}
             defaultCenter={defaultView.center}
             defaultZoom={defaultView.zoom}

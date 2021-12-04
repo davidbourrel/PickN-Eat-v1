@@ -1,20 +1,19 @@
 import { FC, useMemo } from 'react';
-import useFetchingData, {
-  FUseFetchingDataArgs,
-} from '../../../hooks/useFetchingData';
-import Loading from '../../images/icons/Loader';
+import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { FETCH_SIDES_URL } from '../../../_constants/dataUrls';
-import { SideType } from '../../../_types/dataType';
+import { SideType } from '../../../_types/datas';
 import CardContent from '../../elements/Card/CardContent';
+import useFetchingDatas from '../../../hooks/useFetchingDatas';
+import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 
 const SidesList: FC = () => {
   const {
     data: sidesList,
     loading,
     error,
-  } = useFetchingData(FETCH_SIDES_URL as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(FETCH_SIDES_URL as unknown as FUseFetchingDataArgs);
 
   const sidesTitle = 'Sides';
 
@@ -39,7 +38,7 @@ const SidesList: FC = () => {
   if (loading)
     return (
       <Section className='items-center flex-1'>
-        <Loading />
+        <Loader />
       </Section>
     );
 

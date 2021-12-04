@@ -2,7 +2,6 @@ import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-import { postNewUser } from '../../API/userApi';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import Section from '../modules/Section';
@@ -35,7 +34,6 @@ const SignUp: FC = () => {
   const onSubmitHandler = useCallback(
     async (data) => {
       if (data.hashedPassword === data.secondPassword) {
-        postNewUser(data);
         reset();
         Toast.fire({
           icon: 'success',

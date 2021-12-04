@@ -1,20 +1,19 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { userInformationInterface, userLoginInterface } from '../_types/user';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const login = async (values: userLoginInterface) => {
-  console.log('userApi login', values);
+  console.log('userApi login envoyé : ', values);
   await axios.post('/login', values).then((res) => {
-    Cookies.set('id', res.data.id, { expires: 0.2 });
-    Cookies.set('role', res.data.roles_id, { expires: 0.2 });
-    Cookies.set('token', res.data.token, { expires: 0.2 });
+    console.log('userApi login recu : ', res.data.accessToken);
+    // Cookies.set('id', res.data.id, { expires: 0.2 });
+    // Cookies.set('role', res.data.roles_id, { expires: 0.2 });
+    // Cookies.set('token', res.data.token, { expires: 0.2 });
   });
 };
 
-const getUserInfos = async () => {
-  const id = Cookies.get('id');
+const getUserInfos = async (id: number) => {
   const data: userInformationInterface[] = [];
   await axios.get(`/users/${id}`).then((res) => data.push(res.data));
   return data;
@@ -27,8 +26,7 @@ const postNewUser = async (values: userInformationInterface) => {
 };
 
 const updateUser = async (value: userInformationInterface) => {
-  const id = Cookies.get('id');
-  await axios.put(`/users/${id}`, value).then((res) => res.data);
+  await axios.put(`/users/${value.id}`, value).then((res) => res.data);
 };
 
 export { login, getUserInfos, postNewUser, updateUser };

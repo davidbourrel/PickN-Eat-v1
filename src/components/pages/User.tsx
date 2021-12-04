@@ -1,5 +1,4 @@
 import { FC, useContext } from 'react';
-import Cookies from 'js-cookie';
 import Section from '../modules/Section';
 import userContext from '../../contexts/userContext';
 import Swal from 'sweetalert2';
@@ -8,7 +7,7 @@ import HeaderOne from '../elements/Headings/HeaderOne';
 import { userInformationInterface } from '../../_types/user';
 
 const User: FC = () => {
-  const { setIsConnected, user, setUser } = useContext(userContext);
+  const { setIsAuth, user, setUser } = useContext(userContext);
 
   const { first_name, last_name, age, email } = user[0];
 
@@ -21,11 +20,8 @@ const User: FC = () => {
   });
 
   const logOut = () => {
-    Cookies.remove('id');
-    Cookies.remove('role');
-    Cookies.remove('token');
     setUser([] as unknown as userInformationInterface[]);
-    setIsConnected(false);
+    setIsAuth(false);
     Toast.fire({
       icon: 'success',
       title: 'Successfully deconnected!',

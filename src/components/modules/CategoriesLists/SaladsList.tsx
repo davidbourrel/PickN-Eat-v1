@@ -1,20 +1,19 @@
 import { FC, useMemo } from 'react';
-import useFetchingData, {
-  FUseFetchingDataArgs,
-} from '../../../hooks/useFetchingData';
-import Loading from '../../images/icons/Loader';
+import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { FETCH_SALADS_URL } from '../../../_constants/dataUrls';
-import { SaladType } from '../../../_types/dataType';
+import { SaladType } from '../../../_types/datas';
 import CardContent from '../../elements/Card/CardContent';
+import useFetchingDatas from '../../../hooks/useFetchingDatas';
+import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 
 const SaladsList: FC = () => {
   const {
     data: saladsList,
     loading,
     error,
-  } = useFetchingData(FETCH_SALADS_URL as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(FETCH_SALADS_URL as unknown as FUseFetchingDataArgs);
 
   const saladsTitle = 'Salads';
 
@@ -39,7 +38,7 @@ const SaladsList: FC = () => {
   if (loading)
     return (
       <Section className='items-center flex-1'>
-        <Loading />
+        <Loader />
       </Section>
     );
 

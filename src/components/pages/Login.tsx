@@ -1,9 +1,8 @@
-import Cookies from 'js-cookie';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { login } from '../../API/userApi';
+import userContext from '../../contexts/userContext';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import logo from '../images/logo.png';
@@ -11,6 +10,7 @@ import Section from '../modules/Section';
 import { ERROR_CLASS_NAME } from './const';
 
 const Login: FC = () => {
+  const { isAuth, handleLogin } = useContext(userContext);
   const {
     register,
     handleSubmit,
@@ -30,19 +30,17 @@ const Login: FC = () => {
 
   const onSubmitHandler = useCallback(
     (values: userLoginInterface) => {
-      login(values);
-      setTimeout(() => {
-        if (Cookies.get('id')) {
-          Toast.fire({
-            icon: 'success',
-            title: 'Successfully connected!',
-          });
-          navigate('/user');
-        }
-        reset();
-      }, 500);
+      handleLogin(values);
+      if (isAuth) {
+        Toast.fire({
+          icon: 'success',
+          title: 'Successfully connected!',
+        });
+        navigate('/user');
+      }
+      reset();
     },
-    [Toast, navigate, reset]
+    [Toast, navigate, reset, isAuth, handleLogin]
   );
 
   return (

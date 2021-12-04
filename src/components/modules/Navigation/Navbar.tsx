@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import { FC, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import userContext from '../../../contexts/userContext';
@@ -9,18 +8,18 @@ interface FNavbarProps {
 }
 
 const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
-  const { isConnected } = useContext(userContext);
+  const { isAuth } = useContext(userContext);
 
   const isAdmin = useMemo(
     () =>
-      !!Cookies.get('id') && Cookies.get('role') === '1' && isConnected ? (
+      isAuth ? (
         <li className='mr-3 transition text-red-600 md:hover:text-red-700'>
           <Link to='/admin' onClick={closeMenu} className={LINK_CLASS_NAME}>
             ADMIN
           </Link>
         </li>
       ) : null,
-    [closeMenu, isConnected]
+    [closeMenu, isAuth]
   );
 
   return (

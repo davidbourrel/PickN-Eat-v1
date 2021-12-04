@@ -1,5 +1,5 @@
 import { FC, useState, useCallback, useMemo } from 'react';
-import { CardItemTypes } from '../../_types/dataType';
+import { CardItemTypes } from '../../_types/datas';
 import cartContext from './cart.context';
 
 const { Provider } = cartContext;
