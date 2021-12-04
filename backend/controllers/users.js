@@ -48,7 +48,7 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    await User.update(id, body);
+    await User.updateOne(id, body);
     res.sendStatus(204);
   } catch (error) {
     console.log('users ', error);

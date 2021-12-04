@@ -52,7 +52,7 @@ const createOne = ({
   );
 };
 
-const update = (id, data) => {
+const updateOne = (id, data) => {
   return connection.query('UPDATE users SET ? WHERE id=?', [data, id]);
 };
 
@@ -79,7 +79,7 @@ module.exports = {
   getAll,
   getOne,
   createOne,
-  update,
+  updateOne,
   deleteOne,
   findEmail,
 };

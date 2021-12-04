@@ -23,17 +23,23 @@ const handleLogin = async (req, res) => {
     const accessToken = jwt.sign(
       { email: filteredUser.email, roles_id: filteredUser.roles_id },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '30s' }
+      { expiresIn: '300s' }
     );
     const refreshToken = jwt.sign(
       { email: filteredUser.email, roles_id: filteredUser.roles_id },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: '1d' }
     );
+    // Saving refreshToken with current user
+    await User.updateOne(filteredUser.id, {
+      ...filteredUser,
+      refreshToken: refreshToken,
+    });
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
       sameSite: 'None',
       secure: true,
+      // maxAge = 1 day
       maxAge: 24 * 60 * 60 * 1000,
     });
     res.json({ accessToken });
