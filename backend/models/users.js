@@ -37,17 +37,17 @@ const getOne = (id) => {
 };
 
 const createOne = ({
-  email,
-  last_name,
   first_name,
+  last_name,
+  email,
   age,
   password,
   roles_id,
 }) => {
   return hashPassword(password).then((hashedPassword) =>
     connection.query(
-      'INSERT INTO users (email, last_name, first_name, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?)',
-      [email, last_name, first_name, age, hashedPassword, roles_id]
+      'INSERT INTO users (first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?)',
+      [first_name, last_name, email, age, hashedPassword, roles_id]
     )
   );
 };
@@ -60,19 +60,6 @@ const deleteOne = (id) => {
   return connection.query('DELETE FROM users WHERE id=?', [id]);
 };
 
-const findEmail = (email) => {
-  return connection
-    .query(
-      `SELECT u.*,  r.name as roles 
-         FROM users as u 
-       join roles as r 
-         on u.roles_id = r.id 
-       WHERE email = ?`,
-      [email]
-    )
-    .then(([results]) => results);
-};
-
 module.exports = {
   validate,
   verifyPassword,
@@ -81,5 +68,4 @@ module.exports = {
   createOne,
   updateOne,
   deleteOne,
-  findEmail,
 };

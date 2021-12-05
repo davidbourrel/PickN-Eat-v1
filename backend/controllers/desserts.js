@@ -35,7 +35,7 @@ const deleteDessert = async (req, res) => {
 const createDessert = async (req, res) => {
   try {
     const { body } = req;
-    const { insertId } = await Dessert.create(body);
+    const { insertId } = await Dessert.createOne(body);
     res.status(201).json({
       id: insertId,
       ...body,
@@ -50,7 +50,7 @@ const updateDessert = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    await Dessert.update(id, body);
+    await Dessert.updateOne(id, body);
     res.sendStatus(204);
   } catch (error) {
     console.log(error);

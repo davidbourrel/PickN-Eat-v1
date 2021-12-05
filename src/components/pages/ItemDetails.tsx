@@ -10,9 +10,10 @@ import HeaderOne from '../elements/Headings/HeaderOne';
 import HeaderTwo from '../elements/Headings/HeaderTwo';
 import Section from '../modules/Section';
 import Loader from '../images/icons/Loader';
+import { userRoleEnum } from '../../_types/user';
 
 const ItemDetails: FC = () => {
-  const { isAuth } = useContext(userContext);
+  const { isAuth, userRole } = useContext(userContext);
   const { category, id } = useParams<string>();
   const navigate = useNavigate();
 
@@ -88,7 +89,8 @@ const ItemDetails: FC = () => {
 
   const adminSection = useMemo(
     () =>
-      isAuth && (
+      isAuth &&
+      userRoleEnum.admin === userRole && (
         <div>
           <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
           <button
@@ -100,7 +102,7 @@ const ItemDetails: FC = () => {
           </button>
         </div>
       ),
-    [handleMenuDelete, isAuth]
+    [handleMenuDelete, isAuth, userRole]
   );
 
   if (error)

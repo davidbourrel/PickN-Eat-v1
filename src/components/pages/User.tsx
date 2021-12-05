@@ -4,12 +4,12 @@ import userContext from '../../contexts/userContext';
 import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
-import { userInformationInterface } from '../../_types/user';
+import { userInformationInterface, userRoleEnum } from '../../_types/user';
+import axios from 'axios';
 
 const User: FC = () => {
-  const { setIsAuth, user, setUser } = useContext(userContext);
-
-  const { first_name, last_name, age, email } = user[0];
+  const { setIsAuth, user, setUser, setToken, setUserRole } =
+    useContext(userContext);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -19,12 +19,21 @@ const User: FC = () => {
     timerProgressBar: true,
   });
 
-  const logOut = () => {
-    setUser([] as unknown as userInformationInterface[]);
+  const handleLogOut = () => {
+    setToken(null as unknown as string);
+    setUser(null as unknown as userInformationInterface);
+    setUserRole(null as unknown as number);
     setIsAuth(false);
+    axios.post('/logout', { withCredentials: true });
     Toast.fire({
       icon: 'success',
       title: 'Successfully deconnected!',
+    });
+  };
+
+  const handleRefreshToken = () => {
+    axios.post('/refresh', { withCredentials: true }).then((res) => {
+      console.log('resfresh Token', res.data);
     });
   };
 
@@ -34,31 +43,40 @@ const User: FC = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-2 my-5 text-lg'>
         <div className='mb-2'>
           <span className='font-bold mr-1'>First name :</span>
-          <span>{first_name}</span>
+          <span>{user?.first_name}</span>
         </div>
         <div className='mb-2'>
           <span className='font-bold mr-1'>Last name :</span>
-          <span>{last_name}</span>
+          <span>{user?.last_name}</span>
         </div>
         <div className='mb-2'>
           <span className='font-bold mr-1'>Age :</span>
-          <span>{age}</span>
+          <span>{user?.age}</span>
         </div>
         <div className='mb-2'>
           <span className='font-bold mr-1'>Email address :</span>
-          <span>{email}</span>
+          <span>{user?.email}</span>
         </div>
-        {/* <div className='mb-2'>
+        <div className='mb-2'>
           <span className='font-bold mr-1'>Role :</span>
-          <span>{roles}</span>
-        </div> */}
+          <span>
+            {userRoleEnum.admin === user?.roles_id ? 'Admin !' : 'User'}
+          </span>
+        </div>
       </div>
       <SubmitButton
-        onClick={logOut}
+        onClick={handleLogOut}
         value='submit'
         className='py-2 px-8 my-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 md:w-1/3 md:mr-auto'
       >
         Sign out
+      </SubmitButton>
+      <SubmitButton
+        onClick={handleRefreshToken}
+        value='submit'
+        className='py-2 px-8 my-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 md:w-1/3 md:mr-auto'
+      >
+        Refresh Token
       </SubmitButton>
     </Section>
   );

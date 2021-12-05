@@ -1,6 +1,7 @@
 import { FC, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import userContext from '../../../contexts/userContext';
+import { userRoleEnum } from '../../../_types/user';
 import { LINK_CLASS_NAME, NAV_ITEM_CLASS_NAME } from './const';
 
 interface FNavbarProps {
@@ -8,18 +9,18 @@ interface FNavbarProps {
 }
 
 const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
-  const { isAuth } = useContext(userContext);
+  const { isAuth, userRole } = useContext(userContext);
 
   const isAdmin = useMemo(
     () =>
-      isAuth ? (
+      isAuth && userRoleEnum.admin === userRole ? (
         <li className='mr-3 transition text-red-600 md:hover:text-red-700'>
           <Link to='/admin' onClick={closeMenu} className={LINK_CLASS_NAME}>
             ADMIN
           </Link>
         </li>
       ) : null,
-    [closeMenu, isAuth]
+    [closeMenu, isAuth, userRole]
   );
 
   return (

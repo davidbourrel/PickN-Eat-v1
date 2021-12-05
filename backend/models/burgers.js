@@ -8,11 +8,11 @@ const getOne = (id) => {
   return connection.query('SELECT * FROM burgers WHERE id=?', [id]);
 };
 
-const create = (data) => {
+const createOne = (data) => {
   return connection.query('INSERT INTO burgers SET ?', [data]);
 };
 
-const update = (id, data) => {
+const updateOne = (id, data) => {
   return connection.query('UPDATE burgers SET ? WHERE id=?', [data, id]);
 };
 
@@ -23,7 +23,7 @@ const deleteOne = (id) => {
 module.exports = {
   getAll,
   getOne,
-  create,
-  update,
+  createOne,
+  updateOne,
   deleteOne,
 };

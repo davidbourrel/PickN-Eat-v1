@@ -4,26 +4,23 @@ import {
   useState,
   SetStateAction,
   Dispatch,
-  useCallback,
+  useEffect,
 } from 'react';
 import axios from 'axios';
-import {
-  userInformationInterface,
-  userLoginInterface,
-} from '../../_types/user';
+import { userInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
+import useParseJWT from '../../hooks/useParseJWT';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 export interface UserContextInterface {
   isAuth: boolean;
   setIsAuth: Dispatch<SetStateAction<boolean>>;
-  user: userInformationInterface[];
-  setUser: Dispatch<SetStateAction<userInformationInterface[]>>;
+  user: userInformationInterface;
+  setUser: Dispatch<SetStateAction<userInformationInterface>>;
   userRole: number;
   setUserRole: Dispatch<SetStateAction<number>>;
-  handleLogin: (values: userLoginInterface) => void;
-  // fetchUser: () => void;
+  setToken: Dispatch<SetStateAction<string>>;
 }
 
 // Create an initial provider value.
@@ -34,8 +31,7 @@ const initialProviderValue: UserContextInterface = {
   setUser: null as unknown as UserContextInterface['setUser'],
   userRole: null as unknown as UserContextInterface['userRole'],
   setUserRole: null as unknown as UserContextInterface['setUserRole'],
-  handleLogin: null as unknown as UserContextInterface['handleLogin'],
-  // fetchUser: null as unknown as UserContextInterface['fetchUser'],
+  setToken: null as unknown as UserContextInterface['setToken'],
 };
 // Create the store or 'context'.
 export const userContext = createContext(initialProviderValue);
@@ -43,36 +39,27 @@ const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [user, setUser] = useState([] as unknown as userInformationInterface[]);
+  const [user, setUser] = useState(null as unknown as userInformationInterface);
   const [userRole, setUserRole] = useState(null as unknown as number);
-  const [accessToken, setAccessToken] = useState(null as unknown as string);
+  const [token, setToken] = useState(null as unknown as string);
 
-  const authAxios = axios.create({
-    baseURL: BASE_URL,
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
+  const tokenParsed = useParseJWT(token);
 
-  const fetchUser = useCallback(() => {
-    authAxios.get('users').then((res) => {
-      console.log('coucou fetchUser', res.data);
-      setUser(res.data);
+  useEffect(() => {
+    const authAxios = axios.create({
+      baseURL: BASE_URL,
+      headers: { Authorization: `Bearer ${token}` },
     });
-  }, [authAxios]);
 
-  const handleLogin = useCallback(
-    (values: userLoginInterface) => {
-      axios.post('/auth', values).then((res) => {
-        if (res.data.accessToken.length > 10) {
-          setAccessToken(res.data.accessToken);
-          setIsAuth(true);
-          fetchUser();
-        } else {
-          setIsAuth(false);
-        }
-      });
-    },
-    [fetchUser]
-  );
+    if (!!token && token.length > 0 && isAuth) {
+      authAxios
+        .get(`users/${tokenParsed.id}`, { withCredentials: true })
+        .then((res) => {
+          setUser(res.data);
+          setUserRole(res.data.roles_id);
+        });
+    }
+  }, [token, isAuth, tokenParsed]);
 
   return (
     <Provider
@@ -83,8 +70,7 @@ const UserProvider: FC = ({ children }) => {
         setUser,
         userRole,
         setUserRole,
-        handleLogin,
-        // fetchUser,
+        setToken,
       }}
     >
       {children}

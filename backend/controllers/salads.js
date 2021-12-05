@@ -35,7 +35,7 @@ const deleteSalad = async (req, res) => {
 const createSalad = async (req, res) => {
   try {
     const { body } = req;
-    const { insertId } = await Salad.create(body);
+    const { insertId } = await Salad.createOne(body);
     res.status(201).json({
       id: insertId,
       ...body,
@@ -50,7 +50,7 @@ const updateSalad = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    await Salad.update(id, body);
+    await Salad.updateOne(id, body);
     res.sendStatus(204);
   } catch (error) {
     console.log(error);

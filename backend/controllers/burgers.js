@@ -35,7 +35,7 @@ const deleteBurger = async (req, res) => {
 const createBurger = async (req, res) => {
   try {
     const { body } = req;
-    const { insertId } = await Burger.create(body);
+    const { insertId } = await Burger.createOne(body);
     res.status(201).json({
       id: insertId,
       ...body,
@@ -50,7 +50,7 @@ const updateBurger = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    await Burger.update(id, body);
+    await Burger.updateOne(id, body);
     res.sendStatus(204);
   } catch (error) {
     console.log(error);

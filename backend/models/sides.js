@@ -8,12 +8,12 @@ const getOne = (id) => {
   return connection.query('SELECT * FROM sides WHERE id=?', [id]);
 };
 
-const create = (data) => {
+const createOne = (data) => {
   return connection.query('INSERT INTO sides SET ?', [data]);
 };
 
-const update = (id, data) => {
-  return connection.query('UPDATE sides SET ? WHERE id=?', [data, id]);
+const updateOne = (id, data) => {
+  return connection.query('One sides SET ? WHERE id=?', [data, id]);
 };
 
 const deleteOne = (id) => {
@@ -23,7 +23,7 @@ const deleteOne = (id) => {
 module.exports = {
   getAll,
   getOne,
-  create,
-  update,
+  createOne,
+  updateOne,
   deleteOne,
 };

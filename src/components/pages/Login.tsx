@@ -1,4 +1,5 @@
-import { FC, useCallback, useContext } from 'react';
+import axios from 'axios';
+import { FC, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -10,7 +11,7 @@ import Section from '../modules/Section';
 import { ERROR_CLASS_NAME } from './const';
 
 const Login: FC = () => {
-  const { isAuth, handleLogin } = useContext(userContext);
+  const { setToken, setIsAuth } = useContext(userContext);
   const {
     register,
     handleSubmit,
@@ -28,20 +29,23 @@ const Login: FC = () => {
     timerProgressBar: true,
   });
 
-  const onSubmitHandler = useCallback(
-    (values: userLoginInterface) => {
-      handleLogin(values);
-      if (isAuth) {
+  const onSubmitHandler = async (values: userLoginInterface) => {
+    axios.post('/auth', values, { withCredentials: true }).then((res) => {
+      if (!!res.data.token && res.data.token.length > 0) {
+        setToken(res.data.token);
+        setIsAuth(true);
+
         Toast.fire({
           icon: 'success',
           title: 'Successfully connected!',
         });
         navigate('/user');
+      } else {
+        setIsAuth(false);
       }
       reset();
-    },
-    [Toast, navigate, reset, isAuth, handleLogin]
-  );
+    });
+  };
 
   return (
     <Section>
@@ -51,6 +55,7 @@ const Login: FC = () => {
       >
         <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
         <img src={logo} alt='Logo PickNEat' className='max-h-32 mx-auto mb-5' />
+
         <label htmlFor='email' className='flex flex-col mb-5 font-bold'>
           Email address:
           <input

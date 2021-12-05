@@ -5,7 +5,7 @@ import {
 } from '../_types/fetchData';
 
 type FUseFetchingDatasHook = (
-  arg: FUseFetchingDataArgs
+  url: FUseFetchingDataArgs
 ) => FUseFetchingDatasResult;
 
 const useFetchingDatas: FUseFetchingDatasHook = (url) => {
