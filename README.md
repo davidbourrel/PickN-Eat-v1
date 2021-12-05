@@ -1,12 +1,12 @@
 # DOSSIER FRONT-END
 
-- Mettre le .env à jour. Pour "REACT_APP_GOOGLE_MAP=" je vous passe la clé uniquement par MP
+- Mettre le .env à jour. Pour "REACT_APP_GOOGLE_MAP=" je vous passe la clé uniquement par MP.
 - npm i
 - Après il faut faire un **npm start**
 
 # DOSSIER BACK-END
 
-- Mettre le .env à jour. Si vous avez des problèmes, revenez vers moi
+- Mettre le .env à jour. Pour LES tokens, il faut lancer node dans le terminal et faire **require('crypto').randomBytes(64).toString('hex')**. Si vous avez des problèmes, revenez vers moi.
 - npm i
 - Après il faut faire un **npm start**
 
