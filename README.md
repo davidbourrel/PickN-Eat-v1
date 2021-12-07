@@ -20,6 +20,7 @@ Tout ce trouve dans le dossier back-end / routes. Il y a rien de particulier, il
 
 Pour le stockage des infos utilisateurs côté front, ça se trouve dans le context/user.
 
+Pour tester la connexion utilisateur, il faut tester l'email admin et le mot de passe : **admin**
+
 Si vous avez le moindre souci, revenez vers moi ! :D 
 
-Enjoy (du moins j'espère xD)
