@@ -29,7 +29,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `age` int NOT NULL,
   `hashedPassword` varchar(255) NOT NULL,
-  `refreshToken` varchar(255) NOT NULL,
+  `refreshToken` varchar(255) DEFAULT NULL,
   `roles_id` int NOT NULL,
   PRIMARY KEY (`id`,`roles_id`),
   UNIQUE KEY `idusers_UNIQUE` (`id`),
@@ -44,7 +44,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin','admin@admin.com',100,'$argon2id$v=19$m=65536,t=5,p=1$CrT7X2uA56/O12YdnZ0Qmg$TGxVCaJ4J87UlSxkzaKeJjYdQfSujncQ3JWaVlaFF8M','hrthtrjtrjtrjrjrfdj',1),(2,'david','dupont','user@user.com',18,'$argon2id$v=19$m=65536,t=5,p=1$wuSqkfP56RMses4b9lB/bQ$jxUrBf3afDiOyd5ZmaRJCZHEtMyCl90Wh3VH44Hk1fw','liluidsgrjykuyt',2),(3,'marion','garcia','marion@user.com',22,'$argon2id$v=19$m=65536,t=5,p=1$g/bGMwg94YqLEDrEn4KfpA$nyVawKocGf9OZSux0AAY/mN4DqrsURohsRh97FJo3Ss','dhtrkyuljfgjthtkutk',2);
+INSERT INTO `users` VALUES (1,'admin','admin','admin@pickandeat.com',100,'$argon2id$v=19$m=65536,t=5,p=1$CrT7X2uA56/O12YdnZ0Qmg$TGxVCaJ4J87UlSxkzaKeJjYdQfSujncQ3JWaVlaFF8M','',1),(2,'david','dupont','user@user.com',18,'$argon2id$v=19$m=65536,t=5,p=1$wuSqkfP56RMses4b9lB/bQ$jxUrBf3afDiOyd5ZmaRJCZHEtMyCl90Wh3VH44Hk1fw','',2),(3,'marion','garcia','marion@user.com',22,'$argon2id$v=19$m=65536,t=5,p=1$g/bGMwg94YqLEDrEn4KfpA$nyVawKocGf9OZSux0AAY/mN4DqrsURohsRh97FJo3Ss','',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-02 12:17:58
+-- Dump completed on 2021-12-09  8:59:04
