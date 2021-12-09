@@ -7,7 +7,7 @@ import AdminSvg from '../../images/icons/AdminSvg';
 import BCLogo from '../../images/BCLogo';
 import BurgerToggleButton from '../../elements/Buttons/BurgerToggleButton';
 import useOutsideClick from '../../../hooks/useOutsideClick';
-import { OPENED_ITEM_CLASS_NAME, LINK_CLASS_NAME } from './const';
+import { OPENED_ITEM_CLASSNAME, LINK_CLASSNAME } from './const';
 import userContext from '../../../contexts/userContext';
 import { userRoleEnum } from '../../../_types/user';
 
@@ -52,31 +52,27 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
         <li className='mb-8 text-center py-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-800 via-red-600 to-yellow-500 text-2xl xxs:text-3xl'>
           <h2 className='truncate'>PickNEat</h2>
         </li>
-        <li className={OPENED_ITEM_CLASS_NAME}>
-          <Link to='/' onClick={closeMenu} className={LINK_CLASS_NAME}>
+        <li className={OPENED_ITEM_CLASSNAME}>
+          <Link to='/' onClick={closeMenu} className={LINK_CLASSNAME}>
             MENU
             <MenuSvg />
           </Link>
         </li>
-        <li className={OPENED_ITEM_CLASS_NAME}>
-          <Link
-            to='/restaurant'
-            onClick={closeMenu}
-            className={LINK_CLASS_NAME}
-          >
+        <li className={OPENED_ITEM_CLASSNAME}>
+          <Link to='/restaurant' onClick={closeMenu} className={LINK_CLASSNAME}>
             RESTAURANTS
             <RestaurantsSvg />
           </Link>
         </li>
-        <li className={OPENED_ITEM_CLASS_NAME}>
-          <Link to='/delivery' onClick={closeMenu} className={LINK_CLASS_NAME}>
+        <li className={OPENED_ITEM_CLASSNAME}>
+          <Link to='/delivery' onClick={closeMenu} className={LINK_CLASSNAME}>
             DELIVERY
             <DeliverySvg />
           </Link>
         </li>
         {isAuth && userRoleEnum.admin === userRole ? (
           <li className='mr-2 px-4 rounded transition mb-7 text-red-600 bg-gray-100'>
-            <Link to='/admin' onClick={closeMenu} className={LINK_CLASS_NAME}>
+            <Link to='/admin' onClick={closeMenu} className={LINK_CLASSNAME}>
               ADMIN
               <AdminSvg />
             </Link>

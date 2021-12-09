@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import Section from '../modules/Section';
-import { ERROR_CLASS_NAME } from './const';
+import { ERROR_CLASSNAME } from './const';
 
 const SignUp: FC = () => {
   const {
@@ -67,7 +67,7 @@ const SignUp: FC = () => {
               })}
             />
             {errors.first_name && (
-              <span className={ERROR_CLASS_NAME}>
+              <span className={ERROR_CLASSNAME}>
                 Your first name is incorrect.
               </span>
             )}
@@ -87,7 +87,7 @@ const SignUp: FC = () => {
               })}
             />
             {errors.last_name && (
-              <span className={ERROR_CLASS_NAME}>
+              <span className={ERROR_CLASSNAME}>
                 Your last name is incorrect.
               </span>
             )}
@@ -107,7 +107,7 @@ const SignUp: FC = () => {
               })}
             />
             {errors.email && (
-              <span className={ERROR_CLASS_NAME}>Your email is incorrect.</span>
+              <span className={ERROR_CLASSNAME}>Your email is incorrect.</span>
             )}
           </div>
           <div className='flex flex-col'>
@@ -127,7 +127,7 @@ const SignUp: FC = () => {
               })}
             />
             {errors.age && (
-              <span className={ERROR_CLASS_NAME}>Your age is incorrect.</span>
+              <span className={ERROR_CLASSNAME}>Your age is incorrect.</span>
             )}
           </div>
           <div className='flex flex-col'>
@@ -145,11 +145,11 @@ const SignUp: FC = () => {
               })}
             />
             {errorPasswordCheck ? (
-              <span className={ERROR_CLASS_NAME}>
+              <span className={ERROR_CLASSNAME}>
                 Your passwords are not the same.
               </span>
             ) : errors.firstPassword ? (
-              <span className={ERROR_CLASS_NAME}>
+              <span className={ERROR_CLASSNAME}>
                 Your password is incorrect.
               </span>
             ) : null}
@@ -169,7 +169,7 @@ const SignUp: FC = () => {
               })}
             />
             {errors.secondPassword && (
-              <span className={ERROR_CLASS_NAME}>
+              <span className={ERROR_CLASSNAME}>
                 Your password is incorrect.
               </span>
             )}

@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-const BURGER_CLASS_NAME = `w-8 h-2 border-t-2 transition duration-300`;
+const BURGER_CLASSNAME = `w-8 h-2 border-t-2 transition duration-300`;
 
 interface BurgerToggleButtonProps {
   handleToggleMenu: () => void;
@@ -14,7 +14,7 @@ const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
   color,
 }) => {
   const computedClassName = useMemo(
-    () => `border-${color} ${BURGER_CLASS_NAME}`,
+    () => `border-${color} ${BURGER_CLASSNAME}`,
     [color]
   );
 

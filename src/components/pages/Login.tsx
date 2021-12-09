@@ -8,7 +8,7 @@ import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import logo from '../images/logo.png';
 import Section from '../modules/Section';
-import { ERROR_CLASS_NAME } from './const';
+import { ERROR_CLASSNAME } from './const';
 
 const Login: FC = () => {
   const { setToken, setIsAuth } = useContext(userContext);
@@ -68,7 +68,7 @@ const Login: FC = () => {
             })}
           />
           {errors.email && (
-            <span className={ERROR_CLASS_NAME}>Your email is incorrect.</span>
+            <span className={ERROR_CLASSNAME}>Your email is incorrect.</span>
           )}
         </label>
         <label htmlFor='password' className='flex flex-col mb-4 font-bold'>
@@ -83,9 +83,7 @@ const Login: FC = () => {
             })}
           />
           {errors.password && (
-            <span className={ERROR_CLASS_NAME}>
-              Your password is incorrect.
-            </span>
+            <span className={ERROR_CLASSNAME}>Your password is incorrect.</span>
           )}
         </label>
         <SubmitButton className='w-full'>Sign in</SubmitButton>
