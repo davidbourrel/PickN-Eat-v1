@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `sides`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sides` (
-  `id` varchar(50) NOT NULL,
+  `id` varchar(30) NOT NULL,
   `title` varchar(100) NOT NULL,
   `price` int NOT NULL,
   `description` varchar(300) NOT NULL,
   `image` varchar(300) NOT NULL,
-  `allergens` varchar(300) NOT NULL,
+  `allergens` varchar(300) DEFAULT NULL,
   `pieces` int NOT NULL,
   `category` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -42,7 +42,7 @@ CREATE TABLE `sides` (
 
 LOCK TABLES `sides` WRITE;
 /*!40000 ALTER TABLE `sides` DISABLE KEYS */;
-INSERT INTO `sides` VALUES ('EEEamkrmkrmhr','french fries',2,'How can you resist? Golden, crispy and above all generous... our fries are perfect!','https://images.unsplash.com/photo-1606755456206-b25206cde27e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80','This product does not contain any reportable allergens.',1,'sides'),('EEEbgmokgrkmgrk','crousty',3,'Tasty crispy bites made with goat cheese! ','https://images.unsplash.com/photo-1625940951329-4e8d09f87692?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1631&q=80','gluten, milk',6,'sides'),('EEEchmorhkmrhkr','chicken wings',4,'Golden, tender and delicately spiced chicken wings, the CHICKEN WINGS are back!','https://images.unsplash.com/photo-1562967915-92ae0c320a01?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1173&q=80','gluten',4,'sides'),('EEEdhrkhmrkhmre','nuggets',3,'Discover our new King Nuggets®! An ultra-crispy breading and a chicken 100% made from fillets of French origin, raised in our farmers\' henhouses. They contain no artificial coloring or flavoring!','https://images.unsplash.com/photo-1627662168223-7df99068099a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','gluten, eggs',6,'sides');
+INSERT INTO `sides` VALUES ('EEEamkrmkrmhr','french fries',2,'How can you resist? Golden, crispy and above all generous... our fries are perfect!','https://images.unsplash.com/photo-1606755456206-b25206cde27e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80',NULL,1,'sides'),('EEEbgmokgrkmgrk','crousty',3,'Tasty crispy bites made with goat cheese! ','https://images.unsplash.com/photo-1625940951329-4e8d09f87692?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1631&q=80','gluten, milk',6,'sides'),('EEEchmorhkmrhkr','chicken wings',4,'Golden, tender and delicately spiced chicken wings, the CHICKEN WINGS are back!','https://images.unsplash.com/photo-1562967915-92ae0c320a01?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1173&q=80','gluten',4,'sides'),('EEEdhrkhmrkhmre','nuggets',3,'Discover our new King Nuggets®! An ultra-crispy breading and a chicken 100% made from fillets of French origin, raised in our farmers\' henhouses. They contain no artificial coloring or flavoring!','https://images.unsplash.com/photo-1627662168223-7df99068099a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','gluten, eggs',6,'sides');
 /*!40000 ALTER TABLE `sides` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-09  8:59:04
+-- Dump completed on 2021-12-11 17:07:42

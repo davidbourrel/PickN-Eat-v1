@@ -1,6 +1,9 @@
-const Joi = require('joi');
 const argon2 = require('argon2');
 const connection = require('../db');
+const ROLE_USER = require('../_constants/roles');
+const crypto = require('crypto');
+
+const newId = crypto.randomBytes(15).toString('hex');
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -17,17 +20,6 @@ const verifyPassword = (plainPassword, hashedPassword) => {
   return argon2.verify(hashedPassword, plainPassword, hashingOptions);
 };
 
-const validate = (data, forCreation = true) => {
-  const presence = forCreation ? 'required' : 'optional';
-  return Joi.object({
-    email: Joi.string().email().max(100).presence(presence),
-    last_name: Joi.string().max(50).presence(presence),
-    first_name: Joi.string().max(50).presence(presence),
-    age: Joi.number().max(3).presence(presence),
-    password: Joi.string().max(255).presence(presence),
-  }).validate(data, { abortEarly: false }).error;
-};
-
 const getAll = () => {
   return connection.query('SELECT * FROM users');
 };
@@ -37,19 +29,24 @@ const getOne = (id) => {
 };
 
 const createOne = ({
+  id = newId,
   first_name,
   last_name,
   email,
   age,
   password,
-  roles_id = 2,
+  roles_id = ROLE_USER,
 }) => {
-  return hashPassword(password).then((hashedPassword) =>
-    connection.query(
-      'INSERT INTO users (first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?)',
-      [first_name, last_name, email, age, hashedPassword, roles_id]
+  return hashPassword(password)
+    .then((hashedPassword) =>
+      connection.query(
+        'INSERT INTO users (id, first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [id, first_name, last_name, email, age, hashedPassword, roles_id]
+      )
     )
-  );
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const updateOne = (id, data) => {
@@ -61,7 +58,6 @@ const deleteOne = (id) => {
 };
 
 module.exports = {
-  validate,
   verifyPassword,
   getAll,
   getOne,

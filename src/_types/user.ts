@@ -4,16 +4,16 @@ export interface userLoginInterface {
 }
 
 export enum userRoleEnum {
-  admin = 1,
-  user = 2,
+  admin = '1',
+  user = '2',
 }
 
 export interface userInformationInterface {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   age: number;
   email: string;
   hashedPassword: any;
-  roles_id: number;
+  roles_id: string;
 }

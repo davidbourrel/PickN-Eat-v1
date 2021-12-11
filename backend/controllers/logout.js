@@ -1,5 +1,5 @@
 const User = require('../models/users');
-const { MILLISECONDS_PER_DAY } = require('./const');
+const MILLISECONDS_PER_DAY = require('../_constants/time');
 
 const handleLogout = async (req, res) => {
   const cookies = req.cookies;

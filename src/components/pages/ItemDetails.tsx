@@ -57,7 +57,11 @@ const ItemDetails: FC = () => {
           </li>
           <li>
             <span className='font-bold mr-1'>Allergens:</span>
-            <span>{data?.allergens}</span>
+            <span>
+              {!!data?.allergens
+                ? data?.allergens
+                : 'This product does not contain any reportable allergens.'}
+            </span>
           </li>
         </ul>
       </div>

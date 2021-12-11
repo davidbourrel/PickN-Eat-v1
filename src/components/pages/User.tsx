@@ -22,7 +22,7 @@ const User: FC = () => {
   const handleLogOut = () => {
     setToken(null as unknown as string);
     setUser(null as unknown as userInformationInterface);
-    setUserRole(null as unknown as number);
+    setUserRole(null as unknown as string);
     setIsAuth(false);
     axios.post('/logout', { withCredentials: true });
     Toast.fire({

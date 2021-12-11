@@ -18,8 +18,8 @@ export interface UserContextInterface {
   setIsAuth: Dispatch<SetStateAction<boolean>>;
   user: userInformationInterface;
   setUser: Dispatch<SetStateAction<userInformationInterface>>;
-  userRole: number;
-  setUserRole: Dispatch<SetStateAction<number>>;
+  userRole: string;
+  setUserRole: Dispatch<SetStateAction<string>>;
   setToken: Dispatch<SetStateAction<string>>;
 }
 
@@ -40,7 +40,7 @@ const { Provider } = userContext;
 const UserProvider: FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null as unknown as userInformationInterface);
-  const [userRole, setUserRole] = useState(null as unknown as number);
+  const [userRole, setUserRole] = useState(null as unknown as string);
   const [token, setToken] = useState(null as unknown as string);
 
   const tokenParsed = useParseJWT(token);

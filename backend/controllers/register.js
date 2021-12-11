@@ -9,7 +9,8 @@ const handleNewUser = async (req, res) => {
   const retrieveUsers = await User.getAll();
   const duplicate = retrieveUsers[0].find((person) => person.email === email);
 
-  if (duplicate) return res.sendStatus(409); //Conflict
+  if (duplicate)
+    return res.status(409).json({ message: 'This email is already used.' });
 
   try {
     const createdUser = await User.createOne(req.body);

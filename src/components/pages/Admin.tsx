@@ -3,21 +3,27 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Section from '../modules/Section';
-import HeaderTwo from '../elements/Headings/HeaderTwo';
 import { FETCH_BURGERS_URL } from '../../_constants/dataUrls';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+import Loader from '../images/icons/Loader';
+import HeaderOne from '../elements/Headings/HeaderOne';
+import ErrorMessage from '../elements/ErrorMessage';
 
 const Admin = () => {
-  const [title, setTitle] = useState(null as unknown as string);
-  const [price, setPrice] = useState(null as unknown as number);
-  const [description, setDescription] = useState(null as unknown as string);
-  const [image, setImage] = useState(null as unknown as string);
-  const [allergens, setAllergens] = useState(null as unknown as string);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  const maxLength = 300;
+  const navigate = useNavigate();
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+  const [loading, setLoading] = useState(false);
+
+  const onSubmitHandler = useCallback(
+    (item) => {
       Swal.fire({
         title: 'Add this burger?',
         text: 'Are you sure that you want to add this burger?',
@@ -28,126 +34,122 @@ const Admin = () => {
         confirmButtonText: 'Yes, add it!',
       }).then((result) => {
         if (result.isConfirmed) {
-          axios
-            .post(FETCH_BURGERS_URL, {
-              title,
-              price,
-              description,
-              image,
-              allergens,
-            })
+          setLoading(true);
+          return axios
+            .post(FETCH_BURGERS_URL, item)
             .then(() => {
-              setTitle(null as unknown as string);
-              setPrice(null as unknown as number);
-              setDescription(null as unknown as string);
-              setImage(null as unknown as string);
-              setAllergens(null as unknown as string);
+              Swal.fire('Added!', 'Your burger has been added!', 'success');
+              setLoading(false);
+              reset();
+              navigate('/login');
+            })
+            .catch((err) => {
+              setLoading(false);
             });
-          Swal.fire('Added!', 'Your burger has been added!', 'success');
         }
       });
     },
-    [title, image, description, price, allergens]
+    [reset, navigate]
   );
 
-  const handleTitleChange = useCallback((e) => {
-    setTitle(e.target.value);
-  }, []);
-  const handleImageChange = useCallback((e) => {
-    setImage(e.target.value);
-  }, []);
-  const handleDescriptionChange = useCallback((e) => {
-    setDescription(e.target.value);
-  }, []);
-  const handlePriceChange = useCallback((e) => {
-    setPrice(e.target.value);
-  }, []);
-  const handleAllergensChange = useCallback((e) => {
-    setAllergens(e.target.value);
-  }, []);
+  if (loading)
+    return (
+      <Section className='items-center flex-1'>
+        <Loader />
+      </Section>
+    );
 
   return (
     <Section>
-      <div className='mx-auto xl:max-w-6xl'>
-        <HeaderTwo>Add your new burger</HeaderTwo>
-        <form className='mx-5 my-6' onSubmit={handleSubmit}>
-          <div className='mb-5 grid gap-4 grid-flow-col grid-cols-1 grid-rows-6 sm:grid-cols-2 sm:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2'>
-            <div className='flex flex-col'>
-              <label htmlFor='burgerName' className='font-semibold mb-2'>
-                Burger
-              </label>
-              <input
-                required
-                value={title}
-                onChange={handleTitleChange}
-                id='burgerName'
-                type='text'
-                placeholder='Burger...'
-                className='border-2 rounded p-1 shadow-inner'
-              />
-            </div>
-            <div className='flex flex-col'>
-              <label htmlFor='urlImage' className='font-semibold mb-2'>
-                Put your image
-              </label>
-              <input
-                required
-                value={image}
-                onChange={handleImageChange}
-                id='urlImage'
-                type='text'
-                placeholder='Url...'
-                className='border-2 rounded p-1 shadow-inner'
-              />
-            </div>
-          </div>
-          <div className='flex flex-col '>
-            <label htmlFor='description' className='font-semibold mb-2'>
-              Write a description
-            </label>
-            <textarea
-              required
-              value={description}
-              onChange={handleDescriptionChange}
-              id='description'
-              maxLength={maxLength}
-              placeholder='Description...'
-              className='border-2 rounded p-1 shadow-inner max-w-lg max-h-72'
-            />
-          </div>
+      <HeaderOne>Add your new burger</HeaderOne>
+      <form className='my-6' onSubmit={handleSubmit(onSubmitHandler)}>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 mb-5'>
           <div className='flex flex-col'>
-            <label htmlFor='burgerName' className='font-semibold mb-2'>
-              Allergens
+            <label htmlFor='title' className='font-bold mb-2'>
+              Burger
             </label>
             <input
-              required
-              value={allergens}
-              onChange={handleAllergensChange}
-              id='burgerName'
+              id='title'
               type='text'
               placeholder='Burger...'
+              required
+              maxLength={100}
               className='border-2 rounded p-1 shadow-inner'
+              {...register('title')}
             />
+            {errors.title && (
+              <ErrorMessage>The title is incorrect.</ErrorMessage>
+            )}
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor='image' className='font-bold mb-2'>
+              Your image
+            </label>
+            <input
+              id='image'
+              type='text'
+              placeholder='Url...'
+              required
+              maxLength={300}
+              className='border-2 rounded p-1 shadow-inner'
+              {...register('image')}
+            />
+            {errors.image && <ErrorMessage>The url is incorrect.</ErrorMessage>}
           </div>
           <div className='flex flex-col '>
-            <label htmlFor='price' className='font-semibold mb-2'>
+            <label htmlFor='price' className='font-bold mb-2'>
               Price
             </label>
             <input
-              type='number'
-              min='1'
-              max='100'
-              value={price}
-              onChange={handlePriceChange}
               id='price'
+              type='number'
               placeholder='Price...'
-              className='border-2 rounded p-1 shadow-inner'
               required
+              min={1}
+              max={100}
+              className='border-2 rounded p-1 shadow-inner'
+              {...register('price')}
             />
+            {errors.price && (
+              <ErrorMessage>The price is incorrect.</ErrorMessage>
+            )}
           </div>
-          <SubmitButton>Send !</SubmitButton>
-        </form>
-      </div>
+          <div className='flex flex-col'>
+            <label htmlFor='allergens' className='font-bold mb-2'>
+              Allergens
+            </label>
+            <input
+              id='allergens'
+              type='text'
+              placeholder='Allergens...'
+              required
+              maxLength={300}
+              className='border-2 rounded p-1 shadow-inner'
+              {...register('allergens')}
+            />
+            {errors.allergens && (
+              <ErrorMessage>Allergens are incorrect.</ErrorMessage>
+            )}
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor='description' className='font-bold mb-2'>
+              Write a short description
+            </label>
+            <textarea
+              id='description'
+              placeholder='Description...'
+              required
+              maxLength={300}
+              className='border-2 rounded p-1 shadow-inner h-32 resize-none '
+              {...register('description')}
+            />
+            {errors.description && (
+              <ErrorMessage>The description is incorrect.</ErrorMessage>
+            )}
+          </div>
+        </div>
+        <SubmitButton>Send !</SubmitButton>
+      </form>
     </Section>
   );
 };

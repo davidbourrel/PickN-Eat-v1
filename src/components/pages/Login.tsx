@@ -9,7 +9,7 @@ import SubmitButton from '../elements/Buttons/SubmitButton';
 import Loader from '../images/icons/Loader';
 import logo from '../images/logo.png';
 import Section from '../modules/Section';
-import { ERROR_CLASSNAME } from './const';
+import ErrorMessage from '../elements/ErrorMessage';
 
 const Login: FC = () => {
   const { setToken, setIsAuth } = useContext(userContext);
@@ -107,9 +107,7 @@ const Login: FC = () => {
           {errors.email ||
             errors.password ||
             (error && (
-              <span className={ERROR_CLASSNAME}>
-                The email or password is incorrect.
-              </span>
+              <ErrorMessage>The email or password is incorrect.</ErrorMessage>
             ))}
         </label>
         <SubmitButton className='w-full'>Sign in</SubmitButton>

@@ -32,36 +32,8 @@ const deleteDessert = async (req, res) => {
   }
 };
 
-const createDessert = async (req, res) => {
-  try {
-    const { body } = req;
-    const { insertId } = await Dessert.createOne(body);
-    res.status(201).json({
-      id: insertId,
-      ...body,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while creating dessert');
-  }
-};
-
-const updateDessert = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { body } = req;
-    await Dessert.updateOne(id, body);
-    res.sendStatus(204);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while updating dessert');
-  }
-};
-
 module.exports = {
   getAllDesserts,
   deleteDessert,
-  createDessert,
   getDessert,
-  updateDessert,
 };

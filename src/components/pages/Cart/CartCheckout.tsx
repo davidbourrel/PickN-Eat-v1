@@ -10,17 +10,16 @@ const CartCheckout: FC = () => {
   const { cartTotalPrice } = useTotalCart();
   const { removeAllFromCart } = useRemoveCart();
 
-  const checkoutDone = useCallback(
-    () =>
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Thank you!',
-        showConfirmButton: false,
-        timer: 1500,
-      }),
-    []
-  );
+  const checkoutDone = useCallback(() => {
+    removeAllFromCart();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Thank you!',
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  }, [removeAllFromCart]);
 
   return (
     <div className='flex flex-col sm:w-1/2 sm:ml-auto'>

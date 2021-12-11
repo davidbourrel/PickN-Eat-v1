@@ -10,7 +10,6 @@ router
 router
   .route('/:id')
   .get(burgersController.getBurger)
-  .put(burgersController.updateBurger)
   .delete(burgersController.deleteBurger);
 
 module.exports = router;

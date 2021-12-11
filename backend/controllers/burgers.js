@@ -1,4 +1,7 @@
 const Burger = require('../models/burgers');
+const crypto = require('crypto');
+
+const newId = crypto.randomBytes(15).toString('hex');
 
 const getAllBurgers = async (req, res) => {
   try {
@@ -35,9 +38,8 @@ const deleteBurger = async (req, res) => {
 const createBurger = async (req, res) => {
   try {
     const { body } = req;
-    const { insertId } = await Burger.createOne(body);
     res.status(201).json({
-      id: insertId,
+      id: newId,
       ...body,
     });
   } catch (error) {

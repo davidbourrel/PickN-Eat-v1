@@ -15,7 +15,7 @@ const Cart: FC = () => {
   const emptyCart = useMemo(
     () =>
       cartTotalItems === 0 ? (
-        <HeaderTwo className='font-bold border-none text-center'>
+        <HeaderTwo className='font-bold text-red-600 border-none text-center'>
           Your cart is empty
         </HeaderTwo>
       ) : null,

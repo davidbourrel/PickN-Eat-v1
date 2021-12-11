@@ -32,36 +32,8 @@ const deleteSalad = async (req, res) => {
   }
 };
 
-const createSalad = async (req, res) => {
-  try {
-    const { body } = req;
-    const { insertId } = await Salad.createOne(body);
-    res.status(201).json({
-      id: insertId,
-      ...body,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while creating salad');
-  }
-};
-
-const updateSalad = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { body } = req;
-    await Salad.updateOne(id, body);
-    res.sendStatus(204);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while updating salad');
-  }
-};
-
 module.exports = {
   getAllSalads,
   deleteSalad,
-  createSalad,
   getSalad,
-  updateSalad,
 };

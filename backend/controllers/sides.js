@@ -32,36 +32,8 @@ const deleteSide = async (req, res) => {
   }
 };
 
-const createSide = async (req, res) => {
-  try {
-    const { body } = req;
-    const { insertId } = await Side.createOne(body);
-    res.status(201).json({
-      id: insertId,
-      ...body,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while creating side');
-  }
-};
-
-const updateSide = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { body } = req;
-    await Side.updateOne(id, body);
-    res.sendStatus(204);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while updating side');
-  }
-};
-
 module.exports = {
   getAllSides,
   deleteSide,
-  createSide,
   getSide,
-  updateSide,
 };

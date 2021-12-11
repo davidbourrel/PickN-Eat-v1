@@ -30,7 +30,7 @@ const SaladsList: FC = () => {
     return (
       <Section className='items-center flex-1'>
         <p className='text-xl text-red-600 font-semibold'>
-          Error ! We cannot find the data. {error}
+          Error ! We cannot find salads. {error}
         </p>
       </Section>
     );
