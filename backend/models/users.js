@@ -25,7 +25,10 @@ const getAll = () => {
 };
 
 const getOne = (id) => {
-  return connection.query('SELECT * FROM users WHERE id=?', [id]);
+  return connection.query(
+    'SELECT * FROM users INNER JOIN roles ON roles.id=users.roles_id WHERE users.id=?',
+    [id]
+  );
 };
 
 const createOne = ({

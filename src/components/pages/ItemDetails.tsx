@@ -10,7 +10,7 @@ import HeaderOne from '../elements/Headings/HeaderOne';
 import HeaderTwo from '../elements/Headings/HeaderTwo';
 import Section from '../modules/Section';
 import Loader from '../images/icons/Loader';
-import { userRoleEnum } from '../../_types/user';
+import { userRolesEnum } from '../../_types/user';
 
 const ItemDetails: FC = () => {
   const { isAuth, userRole } = useContext(userContext);
@@ -45,7 +45,7 @@ const ItemDetails: FC = () => {
         <ul className='p-5'>
           <li>
             <span className='font-bold mr-1'>Burger:</span>
-            <span className='capitalize'>{data?.title}</span>
+            <span>{data?.title}</span>
           </li>
           <li>
             <span className='font-bold mr-1'>Price:</span>
@@ -53,7 +53,7 @@ const ItemDetails: FC = () => {
           </li>
           <li>
             <span className='font-bold mr-1'>Category:</span>
-            <span>{data?.category}</span>
+            <span>{category}</span>
           </li>
           <li>
             <span className='font-bold mr-1'>Allergens:</span>
@@ -66,7 +66,7 @@ const ItemDetails: FC = () => {
         </ul>
       </div>
     ),
-    [data]
+    [data, category]
   );
 
   const handleMenuDelete = useCallback(
@@ -94,7 +94,7 @@ const ItemDetails: FC = () => {
   const adminSection = useMemo(
     () =>
       isAuth &&
-      userRoleEnum.admin === userRole && (
+      userRolesEnum.admin === userRole && (
         <div>
           <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
           <button

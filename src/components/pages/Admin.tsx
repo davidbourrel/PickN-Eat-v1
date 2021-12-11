@@ -23,7 +23,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = useCallback(
-    (item) => {
+    (items) => {
       Swal.fire({
         title: 'Add this burger?',
         text: 'Are you sure that you want to add this burger?',
@@ -35,8 +35,10 @@ const Admin = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           setLoading(true);
+          console.log('création burger', items);
+
           return axios
-            .post(FETCH_BURGERS_URL, item)
+            .post(FETCH_BURGERS_URL, items)
             .then(() => {
               Swal.fire('Added!', 'Your burger has been added!', 'success');
               setLoading(false);
@@ -122,7 +124,6 @@ const Admin = () => {
               id='allergens'
               type='text'
               placeholder='Allergens...'
-              required
               maxLength={300}
               className='border-2 rounded p-1 shadow-inner'
               {...register('allergens')}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HeaderThree from '../Headings/HeaderThree';
 import OrderButton from '../Buttons/OrderButton';
 import SeeMoreButton from '../Buttons/SeeMoreButton';
-import { CardItemTypes } from '../../../_types/datas';
+import { CardItemTypes, categoryFoodsEnum } from '../../../_types/datas';
 import useCart from '../../../contexts/cartContext/useCart';
 import useAddToCart from '../../../contexts/cartContext/useAddToCart ';
 import useTotalCart from '../../../contexts/cartContext/useCartTotal';
@@ -13,7 +13,7 @@ interface CardItemProps {
 }
 
 const CardContent: FC<CardItemProps> = ({ item }) => {
-  const { image, title, id, category, description, price } = item;
+  const { image, title, id, categories_id, description, price } = item;
 
   const addToCart = useAddToCart();
   const { cart } = useCart();
@@ -77,13 +77,13 @@ const CardContent: FC<CardItemProps> = ({ item }) => {
       >
         <p className='pb-3 px-3'>
           {descriptionCutted}
-          <Link to={`/${category}/${id}`}>
+          <Link to={`/${categoryFoodsEnum[categories_id]}/${id}`}>
             <SeeMoreButton children='See more' />
           </Link>
         </p>
       </div>
     ),
-    [category, descriptionCutted, id, isActive]
+    [categories_id, descriptionCutted, id, isActive]
   );
 
   const seeMoreSection = useMemo(

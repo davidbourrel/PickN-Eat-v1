@@ -5,7 +5,7 @@ export interface BurgerType {
   description: string;
   image: string;
   allergens: string;
-  category: string;
+  categories_id: number;
   amount: number;
 }
 export interface DessertType {
@@ -15,7 +15,7 @@ export interface DessertType {
   description: string;
   image: string;
   allergens: string;
-  category: string;
+  categories_id: number;
   amount: number;
 }
 export interface DrinkType {
@@ -25,7 +25,7 @@ export interface DrinkType {
   description: string;
   image: string;
   allergens: string;
-  category: string;
+  categories_id: number;
   amount: number;
 }
 export interface SaladType {
@@ -35,7 +35,7 @@ export interface SaladType {
   description: string;
   image: string;
   allergens: string;
-  category: string;
+  categories_id: number;
   amount: number;
 }
 export interface SideType {
@@ -46,7 +46,7 @@ export interface SideType {
   image: string;
   allergens: string;
   pieces: number;
-  category: string;
+  categories_id: number;
   amount: number;
 }
 
@@ -56,3 +56,11 @@ export type CardItemTypes =
   | DrinkType
   | SaladType
   | SideType;
+
+export enum categoryFoodsEnum {
+  burgers = 1,
+  sides = 2,
+  drinks = 3,
+  desserts = 4,
+  salads = 5,
+}

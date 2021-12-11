@@ -9,7 +9,7 @@ import BurgerToggleButton from '../../elements/Buttons/BurgerToggleButton';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { OPENED_ITEM_CLASSNAME, LINK_CLASSNAME } from './const';
 import userContext from '../../../contexts/userContext';
-import { userRoleEnum } from '../../../_types/user';
+import { userRolesEnum } from '../../../_types/user';
 
 interface FLateralNavbarProps {
   closeMenu: () => void;
@@ -70,7 +70,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
             <DeliverySvg />
           </Link>
         </li>
-        {isAuth && userRoleEnum.admin === userRole ? (
+        {isAuth && userRolesEnum.admin === userRole ? (
           <li className='mr-2 px-4 rounded transition mb-7 text-red-600 bg-gray-100'>
             <Link to='/admin' onClick={closeMenu} className={LINK_CLASSNAME}>
               ADMIN

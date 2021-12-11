@@ -1,4 +1,5 @@
 const Burger = require('../models/burgers');
+const BURGER_CATEGORY = require('../_constants/category');
 const crypto = require('crypto');
 
 const newId = crypto.randomBytes(15).toString('hex');
@@ -38,6 +39,11 @@ const deleteBurger = async (req, res) => {
 const createBurger = async (req, res) => {
   try {
     const { body } = req;
+    console.log('body crea burger', {
+      id: newId,
+      categories_id: BURGER_CATEGORY,
+      ...body,
+    });
     res.status(201).json({
       id: newId,
       ...body,

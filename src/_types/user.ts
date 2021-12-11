@@ -3,9 +3,9 @@ export interface userLoginInterface {
   password: any;
 }
 
-export enum userRoleEnum {
-  admin = '1',
-  user = '2',
+export enum userRolesEnum {
+  admin = 'admin',
+  user = 'user',
 }
 
 export interface userInformationInterface {
@@ -16,4 +16,5 @@ export interface userInformationInterface {
   email: string;
   hashedPassword: any;
   roles_id: string;
+  role: string;
 }

@@ -4,7 +4,7 @@ import userContext from '../../contexts/userContext';
 import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
-import { userInformationInterface, userRoleEnum } from '../../_types/user';
+import { userInformationInterface } from '../../_types/user';
 import axios from 'axios';
 
 const User: FC = () => {
@@ -59,9 +59,7 @@ const User: FC = () => {
         </div>
         <div className='mb-2'>
           <span className='font-bold mr-1'>Role :</span>
-          <span>
-            {userRoleEnum.admin === user?.roles_id ? 'Admin !' : 'User'}
-          </span>
+          <span>{user?.role}</span>
         </div>
       </div>
       <SubmitButton

@@ -57,7 +57,7 @@ const UserProvider: FC = ({ children }) => {
         .get(`users/${tokenParsed.id}`, { withCredentials: true })
         .then((res) => {
           setUser(res.data);
-          setUserRole(res.data.roles_id);
+          setUserRole(res.data.role);
         });
     }
   }, [token, isAuth, tokenParsed]);
