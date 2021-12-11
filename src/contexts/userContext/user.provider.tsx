@@ -45,6 +45,7 @@ const UserProvider: FC = ({ children }) => {
 
   const tokenParsed = useParseJWT(token);
 
+  // User authentication
   useEffect(() => {
     const authAxios = axios.create({
       baseURL: BASE_URL,

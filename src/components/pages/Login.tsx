@@ -1,5 +1,5 @@
+import { FC, useCallback, useContext, useState } from 'react';
 import axios from 'axios';
-import { FC, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -32,35 +32,38 @@ const Login: FC = () => {
     timerProgressBar: true,
   });
 
-  const onSubmitHandler = async (values: userLoginInterface) => {
-    setError(null as unknown as boolean);
-    setLoading(true);
+  const onSubmitHandler = useCallback(
+    async (values: userLoginInterface) => {
+      setError(null as unknown as boolean);
+      setLoading(true);
 
-    axios
-      .post('/auth', values, { withCredentials: true })
-      .then((res) => {
-        if (res.statusText === 'OK') {
-          if (!!res.data.token && res.data.token.length > 0) {
-            setToken(res.data.token);
-            setIsAuth(true);
-            Toast.fire({
-              icon: 'success',
-              title: 'Successfully connected!',
-            });
-            navigate('/user');
-          } else {
-            setIsAuth(false);
+      return axios
+        .post('/auth', values, { withCredentials: true })
+        .then((res) => {
+          if (res.statusText === 'OK') {
+            if (!!res.data.token && res.data.token.length > 0) {
+              setToken(res.data.token);
+              setIsAuth(true);
+              Toast.fire({
+                icon: 'success',
+                title: 'Successfully connected!',
+              });
+              navigate('/user');
+            } else {
+              setIsAuth(false);
+            }
+            setLoading(false);
+            reset();
           }
+        })
+        .catch(() => {
           setLoading(false);
+          setError(true);
           reset();
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-        reset();
-      });
-  };
+        });
+    },
+    [Toast, navigate, reset, setIsAuth, setToken]
+  );
 
   if (loading)
     return (
@@ -77,37 +80,35 @@ const Login: FC = () => {
       >
         <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
         <img src={logo} alt='Logo PickNEat' className='max-h-32 mx-auto mb-5' />
+        <p>admin@pickandeat.com</p>
         <label htmlFor='email' className='flex flex-col mb-5 font-bold'>
           Email address:
           <input
             id='email'
-            className='border shadow-inner rounded p-1 my-2 w-full appearance-none'
             type='email'
-            {...register('email', {
-              required: true,
-              maxLength: 100,
-            })}
+            required
+            maxLength={100}
+            placeholder='Email...'
+            className='border shadow-inner rounded p-1 my-2 w-full appearance-none'
+            {...register('email')}
           />
-          {errors.email ||
-            (error && (
-              <span className={ERROR_CLASSNAME}>Your email is incorrect.</span>
-            ))}
         </label>
         <label htmlFor='password' className='flex flex-col mb-4 font-bold'>
           Password:
           <input
             id='password'
             type='password'
+            required
+            maxLength={255}
+            placeholder='Password...'
             className='border shadow-inner rounded p-1 my-2 w-full appearance-none'
-            {...register('password', {
-              required: true,
-              maxLength: 255,
-            })}
+            {...register('password')}
           />
-          {errors.password ||
+          {errors.email ||
+            errors.password ||
             (error && (
               <span className={ERROR_CLASSNAME}>
-                Your password is incorrect.
+                The email or password is incorrect.
               </span>
             ))}
         </label>

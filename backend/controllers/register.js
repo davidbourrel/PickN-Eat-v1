@@ -3,9 +3,7 @@ const User = require('../models/users');
 const handleNewUser = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
-    return res
-      .status(400)
-      .json({ message: 'Email and password are required.' });
+    return res.status(400).json({ message: 'Email or password is required.' });
 
   // check for duplicate user in the database
   const retrieveUsers = await User.getAll();

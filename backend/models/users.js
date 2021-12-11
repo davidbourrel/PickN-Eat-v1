@@ -42,7 +42,7 @@ const createOne = ({
   email,
   age,
   password,
-  roles_id,
+  roles_id = 2,
 }) => {
   return hashPassword(password).then((hashedPassword) =>
     connection.query(

@@ -1,9 +1,11 @@
+import axios from 'axios';
 import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
+import Loader from '../images/icons/Loader';
 import Section from '../modules/Section';
 import { ERROR_CLASSNAME } from './const';
 
@@ -17,13 +19,15 @@ const SignUp: FC = () => {
 
   const navigate = useNavigate();
 
-  const [errorPasswordCheck, setErrorPasswordCheck] = useState(false);
+  const [errorCheckPassword, setErrorCheckPassword] = useState(false);
+  const [error, setError] = useState(null as unknown as boolean);
+  const [loading, setLoading] = useState(false);
 
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1000,
+    timer: 1500,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -32,20 +36,47 @@ const SignUp: FC = () => {
   });
 
   const onSubmitHandler = useCallback(
-    async (data) => {
-      if (data.hashedPassword === data.secondPassword) {
-        reset();
-        Toast.fire({
-          icon: 'success',
-          title: 'Sign up done!',
-        });
-        navigate('/user');
-      } else {
-        setErrorPasswordCheck(true);
+    async (user) => {
+      setError(null as unknown as boolean);
+      setLoading(true);
+      setErrorCheckPassword(true);
+      if (user.password === user.secondPassword) {
+        return axios
+          .post('/register', user)
+          .then(() => {
+            Toast.fire({
+              icon: 'success',
+              title: 'Thank you ! You can connect now',
+            });
+            navigate('/login');
+            reset();
+          })
+          .catch(() => {
+            setLoading(false);
+            setError(true);
+            reset();
+          });
       }
+      setErrorCheckPassword(false);
     },
     [Toast, navigate, reset]
   );
+
+  if (error)
+    return (
+      <Section className='items-center flex-1'>
+        <p className='text-xl text-red-600 font-semibold'>
+          Error ! We cannot register you.
+        </p>
+      </Section>
+    );
+
+  if (loading)
+    return (
+      <Section className='items-center flex-1'>
+        <Loader />
+      </Section>
+    );
 
   return (
     <Section>
@@ -60,11 +91,10 @@ const SignUp: FC = () => {
               id='first_name'
               type='text'
               placeholder='First name...'
+              required
+              maxLength={50}
               className='border-2 rounded py-1 px-2 shadow-inner'
-              {...register('first_name', {
-                required: true,
-                maxLength: 50,
-              })}
+              {...register('first_name')}
             />
             {errors.first_name && (
               <span className={ERROR_CLASSNAME}>
@@ -80,11 +110,10 @@ const SignUp: FC = () => {
               id='last_name'
               type='text'
               placeholder='Last name...'
+              required
+              maxLength={50}
               className='border-2 rounded py-1 px-2 shadow-inner'
-              {...register('last_name', {
-                required: true,
-                maxLength: 50,
-              })}
+              {...register('last_name')}
             />
             {errors.last_name && (
               <span className={ERROR_CLASSNAME}>
@@ -100,11 +129,10 @@ const SignUp: FC = () => {
               id='email'
               type='email'
               placeholder='Enter your email...'
+              required
+              maxLength={100}
               className='border-2 rounded py-1 px-2 shadow-inner'
-              {...register('email', {
-                required: true,
-                maxLength: 100,
-              })}
+              {...register('email')}
             />
             {errors.email && (
               <span className={ERROR_CLASSNAME}>Your email is incorrect.</span>
@@ -118,41 +146,29 @@ const SignUp: FC = () => {
               id='age'
               type='number'
               placeholder='Enter your age...'
+              required
+              maxLength={100}
+              minLength={1}
               className='border-2 rounded py-1 px-2 shadow-inner'
-              {...register('age', {
-                required: true,
-                valueAsNumber: true,
-                max: 100,
-                min: 1,
-              })}
+              {...register('age')}
             />
             {errors.age && (
               <span className={ERROR_CLASSNAME}>Your age is incorrect.</span>
             )}
           </div>
           <div className='flex flex-col'>
-            <label htmlFor='hashedPassword' className='font-bold mb-2'>
+            <label htmlFor='password' className='font-bold mb-2'>
               Password
             </label>
             <input
-              id='hashedPassword'
+              id='password'
               type='password'
               placeholder='Password...'
+              required
+              maxLength={255}
               className='border-2 rounded py-1 px-2 shadow-inner'
-              {...register('hashedPassword', {
-                required: true,
-                maxLength: 255,
-              })}
+              {...register('password')}
             />
-            {errorPasswordCheck ? (
-              <span className={ERROR_CLASSNAME}>
-                Your passwords are not the same.
-              </span>
-            ) : errors.firstPassword ? (
-              <span className={ERROR_CLASSNAME}>
-                Your password is incorrect.
-              </span>
-            ) : null}
           </div>
           <div className='flex flex-col'>
             <label htmlFor='secondPassword' className='font-bold mb-2'>
@@ -162,17 +178,20 @@ const SignUp: FC = () => {
               id='secondPassword'
               type='password'
               placeholder='Password...'
+              required
+              maxLength={255}
               className='border-2 rounded py-1 px-2 shadow-inner'
-              {...register('secondPassword', {
-                required: true,
-                maxLength: 255,
-              })}
+              {...register('secondPassword')}
             />
-            {errors.secondPassword && (
+            {errorCheckPassword ? (
+              <span className={ERROR_CLASSNAME}>
+                Your passwords are not the same.
+              </span>
+            ) : errors.firstPassword || errors.secondPassword ? (
               <span className={ERROR_CLASSNAME}>
                 Your password is incorrect.
               </span>
-            )}
+            ) : null}
           </div>
         </div>
         <SubmitButton>Send !</SubmitButton>
