@@ -4,9 +4,8 @@ const getAllSalads = async (req, res) => {
   try {
     const [salads] = await Salad.getAll();
     res.status(200).json(salads);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while retrieving salads');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -15,9 +14,8 @@ const getSalad = async (req, res) => {
     const { id } = req.params;
     const [[salad]] = await Salad.getOne(id);
     res.status(200).json(salad);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while retrieving salad infos');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -26,9 +24,8 @@ const deleteSalad = async (req, res) => {
     const { id } = req.params;
     await Salad.deleteOne(id);
     res.sendStatus(204);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while deleting salad');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 

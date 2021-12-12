@@ -27,14 +27,6 @@ const SignUp: FC = () => {
   );
   const [loading, setLoading] = useState(false);
 
-  const Toast = Swal.mixin({
-    toast: false,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: false,
-  });
-
   const onSubmitHandler = useCallback(
     async (user) => {
       setErrorEmailDuplicated(null as unknown as boolean);
@@ -45,9 +37,12 @@ const SignUp: FC = () => {
         return await axios
           .post('/register', user)
           .then(() => {
-            Toast.fire({
+            Swal.fire({
+              position: 'center',
               icon: 'success',
               title: 'Thanks for joining us!',
+              showConfirmButton: false,
+              timer: 1500,
             });
             setLoading(false);
             reset();
@@ -63,7 +58,7 @@ const SignUp: FC = () => {
       }
       setErrorCheckPassword(true);
     },
-    [Toast, navigate, reset]
+    [navigate, reset]
   );
 
   if (loading)

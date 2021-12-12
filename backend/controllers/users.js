@@ -5,9 +5,8 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const [[user]] = await User.getOne(id);
     res.status(200).json(user);
-  } catch (error) {
-    console.log('users ', error);
-    res.status(500).send('An error occured while retrieving user infos');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -16,9 +15,8 @@ const deleteUser = async (req, res) => {
     const { id } = req.params;
     await User.deleteOne(id);
     res.sendStatus(204);
-  } catch (error) {
-    console.log('users ', error);
-    res.status(500).send('An error occured while deleting user');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -28,9 +26,8 @@ const updateUser = async (req, res) => {
     const { body } = req;
     await User.updateOne(id, body);
     res.sendStatus(204);
-  } catch (error) {
-    console.log('users ', error);
-    res.status(500).send('An error occured while updating user');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 

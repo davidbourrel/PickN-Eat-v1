@@ -25,8 +25,8 @@ const Admin = () => {
   const onSubmitHandler = useCallback(
     (items) => {
       Swal.fire({
-        title: 'Add this burger?',
-        text: 'Are you sure that you want to add this burger?',
+        title: `Add ${items.title}?`,
+        text: 'Are you sure that you want to add it?',
         icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -35,7 +35,6 @@ const Admin = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           setLoading(true);
-          console.log('création burger', items);
 
           return axios
             .post(FETCH_BURGERS_URL, items)
@@ -43,9 +42,9 @@ const Admin = () => {
               Swal.fire('Added!', 'Your burger has been added!', 'success');
               setLoading(false);
               reset();
-              navigate('/login');
+              navigate('/');
             })
-            .catch((err) => {
+            .catch(() => {
               setLoading(false);
             });
         }

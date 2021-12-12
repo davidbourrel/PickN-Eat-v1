@@ -4,9 +4,8 @@ const getAllSides = async (req, res) => {
   try {
     const [sides] = await Side.getAll();
     res.status(200).json(sides);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while retrieving sides');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -15,9 +14,8 @@ const getSide = async (req, res) => {
     const { id } = req.params;
     const [[side]] = await Side.getOne(id);
     res.status(200).json(side);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while retrieving side infos');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -26,9 +24,8 @@ const deleteSide = async (req, res) => {
     const { id } = req.params;
     await Side.deleteOne(id);
     res.sendStatus(204);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('An error occured while deleting side');
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 

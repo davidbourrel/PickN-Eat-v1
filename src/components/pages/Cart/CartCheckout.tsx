@@ -17,7 +17,7 @@ const CartCheckout: FC = () => {
       icon: 'success',
       title: 'Thank you!',
       showConfirmButton: false,
-      timer: 2000,
+      timer: 1500,
     });
   }, [removeAllFromCart]);
 

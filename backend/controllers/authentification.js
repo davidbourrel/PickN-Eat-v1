@@ -13,7 +13,6 @@ const handleLogin = async (req, res) => {
   const foundUser = retrieveUsers.find((person) => person.email === email);
 
   if (!foundUser) return res.sendStatus(401); //Unauthorized
-  // evaluate password
 
   const match = await User.verifyPassword(password, foundUser.hashedPassword);
   if (match) {

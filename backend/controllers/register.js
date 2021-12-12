@@ -13,8 +13,8 @@ const handleNewUser = async (req, res) => {
     return res.status(409).json({ message: 'This email is already used.' });
 
   try {
-    const [createdUser] = await User.createOne(req.body);
-    res.status(201).json(createdUser);
+    await User.createOne(req.body);
+    res.status(201).json({ success: 'New user created!' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
