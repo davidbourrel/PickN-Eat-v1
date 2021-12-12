@@ -12,26 +12,21 @@ const hashingOptions = {
   parallelism: 1,
 };
 
-const hashPassword = (plainPassword) => {
-  return argon2.hash(plainPassword, hashingOptions);
-};
+const verifyPassword = (plainPassword, hashedPassword) =>
+  argon2.verify(hashedPassword, plainPassword, hashingOptions);
 
-const verifyPassword = (plainPassword, hashedPassword) => {
-  return argon2.verify(hashedPassword, plainPassword, hashingOptions);
-};
+const getAll = () => connection.query('SELECT * FROM users');
 
-const getAll = () => {
-  return connection.query('SELECT * FROM users');
-};
-
-const getOne = (id) => {
-  return connection.query(
+const getOne = (id) =>
+  connection.query(
     'SELECT * FROM users INNER JOIN roles ON roles.id=users.roles_id WHERE users.id=?',
     [id]
   );
-};
 
-const createOne = ({
+const hashPassword = (plainPassword) =>
+  argon2.hash(plainPassword, hashingOptions);
+
+const createOne = async ({
   id = newId,
   first_name,
   last_name,
@@ -40,25 +35,22 @@ const createOne = ({
   password,
   roles_id = ROLE_USER,
 }) => {
-  return hashPassword(password)
-    .then((hashedPassword) =>
-      connection.query(
-        'INSERT INTO users (id, first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [id, first_name, last_name, email, age, hashedPassword, roles_id]
-      )
-    )
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const hashedPassword = await hashPassword(password);
+    return await connection.query(
+      'INSERT INTO users (id, first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [id, first_name, last_name, email, age, hashedPassword, roles_id]
+    );
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-const updateOne = (id, data) => {
-  return connection.query('UPDATE users SET ? WHERE id=?', [data, id]);
-};
+const updateOne = (id, data) =>
+  connection.query('UPDATE users SET ? WHERE id=?', [data, id]);
 
-const deleteOne = (id) => {
-  return connection.query('DELETE FROM users WHERE id=?', [id]);
-};
+const deleteOne = (id) =>
+  connection.query('DELETE FROM users WHERE id=?', [id]);
 
 module.exports = {
   verifyPassword,

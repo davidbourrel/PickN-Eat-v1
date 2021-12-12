@@ -2,8 +2,8 @@ const Salad = require('../models/salads');
 
 const getAllSalads = async (req, res) => {
   try {
-    const salads = await Salad.getAll();
-    res.status(200).json(salads[0]);
+    const [salads] = await Salad.getAll();
+    res.status(200).json(salads);
   } catch (error) {
     console.log(error);
     res.status(500).send('An error occured while retrieving salads');
@@ -13,8 +13,8 @@ const getAllSalads = async (req, res) => {
 const getSalad = async (req, res) => {
   try {
     const { id } = req.params;
-    const [salad] = await Salad.getOne(id);
-    res.status(200).json(salad[0]);
+    const [[salad]] = await Salad.getOne(id);
+    res.status(200).json(salad);
   } catch (error) {
     console.log(error);
     res.status(500).send('An error occured while retrieving salad infos');

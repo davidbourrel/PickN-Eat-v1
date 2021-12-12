@@ -6,8 +6,8 @@ const newId = crypto.randomBytes(15).toString('hex');
 
 const getAllBurgers = async (req, res) => {
   try {
-    const burgers = await Burger.getAll();
-    res.status(200).json(burgers[0]);
+    const [burgers] = await Burger.getAll();
+    res.status(200).json(burgers);
   } catch (error) {
     console.log(error);
     res.status(500).send('An error occured while retrieving burgers');
@@ -17,8 +17,8 @@ const getAllBurgers = async (req, res) => {
 const getBurger = async (req, res) => {
   try {
     const { id } = req.params;
-    const [burger] = await Burger.getOne(id);
-    res.status(200).json(burger[0]);
+    const [[burger]] = await Burger.getOne(id);
+    res.status(200).json(burger);
   } catch (error) {
     console.log(error);
     res.status(500).send('An error occured while retrieving burger infos');

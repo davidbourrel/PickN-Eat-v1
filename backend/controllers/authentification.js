@@ -9,8 +9,8 @@ const handleLogin = async (req, res) => {
     return res
       .status(400)
       .json({ message: 'Email and password are required.' });
-  const retrieveUsers = await User.getAll();
-  const foundUser = retrieveUsers[0].find((person) => person.email === email);
+  const [retrieveUsers] = await User.getAll();
+  const foundUser = retrieveUsers.find((person) => person.email === email);
 
   if (!foundUser) return res.sendStatus(401); //Unauthorized
   // evaluate password

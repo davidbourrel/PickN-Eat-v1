@@ -1,16 +1,12 @@
 const connection = require('../db');
 
-const getAll = () => {
-  return connection.query('SELECT * FROM salads');
-};
+const getAll = () => connection.query('SELECT * FROM salads');
 
-const getOne = (id) => {
-  return connection.query('SELECT * FROM salads WHERE id=?', [id]);
-};
+const getOne = (id) =>
+  connection.query('SELECT * FROM salads WHERE id=?', [id]);
 
-const deleteOne = (id) => {
-  return connection.query('DELETE FROM salads WHERE id=?', [id]);
-};
+const deleteOne = (id) =>
+  connection.query('DELETE FROM salads WHERE id=?', [id]);
 
 module.exports = {
   getAll,
