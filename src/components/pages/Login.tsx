@@ -27,6 +27,7 @@ const Login: FC = () => {
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
+    scrollbarPadding: false,
     showConfirmButton: false,
     timer: 1500,
     timerProgressBar: true,

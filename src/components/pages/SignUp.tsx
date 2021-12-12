@@ -41,6 +41,7 @@ const SignUp: FC = () => {
               position: 'center',
               icon: 'success',
               title: 'Thanks for joining us!',
+              scrollbarPadding: false,
               showConfirmButton: false,
               timer: 1500,
             });

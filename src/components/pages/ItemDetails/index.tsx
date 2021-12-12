@@ -30,10 +30,11 @@ const ItemDetails: FC = () => {
         title: `Delete ${data?.title}?`,
         text: 'Are you sure that you want to delete this item ?',
         icon: 'error',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it',
+        confirmButtonColor: '#3085d6',
+        scrollbarPadding: false,
+        showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
           return axios.delete(`${BASE_URL}/${category}/${id}`).then(() => {

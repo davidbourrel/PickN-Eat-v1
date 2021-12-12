@@ -28,6 +28,7 @@ const Admin = () => {
         title: `Add ${items.title}?`,
         text: 'Are you sure that you want to add it?',
         icon: 'info',
+        scrollbarPadding: false,
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',

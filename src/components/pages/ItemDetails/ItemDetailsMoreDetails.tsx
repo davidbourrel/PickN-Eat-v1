@@ -21,7 +21,7 @@ const ItemDetailsMoreDetails: FC<ItemDetailsMoreDetailsProps> = ({
   price,
 }) => {
   return (
-    <div className='bg-red-900 text-gray-300 p-5 max-w-2xl transition md:hover:text-white sm:rounded'>
+    <div className='bg-red-900 text-gray-300 rounded p-5 max-w-2xl transition md:hover:text-white'>
       <ul>
         {category ? (
           <li>

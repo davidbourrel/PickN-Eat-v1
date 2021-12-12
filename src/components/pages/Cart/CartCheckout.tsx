@@ -16,6 +16,7 @@ const CartCheckout: FC = () => {
       position: 'center',
       icon: 'success',
       title: 'Thank you!',
+      scrollbarPadding: false,
       showConfirmButton: false,
       timer: 1500,
     });
