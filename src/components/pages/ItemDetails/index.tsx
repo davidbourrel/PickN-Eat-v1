@@ -40,11 +40,12 @@ const ItemDetails: FC = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           return axios.delete(`${BASE_URL}/${category}/${id}`).then(() => {
-            Swal.fire(
-              'Deleted!',
-              `${data?.title} has been deleted.`,
-              'success'
-            );
+            Swal.fire({
+              title: 'Deleted!',
+              text: `${data?.title} has been deleted.`,
+              icon: 'success',
+              scrollbarPadding: false,
+            });
             navigate('/');
           });
         }

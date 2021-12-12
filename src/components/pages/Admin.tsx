@@ -40,7 +40,15 @@ const Admin = () => {
           return axios
             .post(FETCH_BURGERS_URL, items)
             .then(() => {
-              Swal.fire('Added!', 'Your burger has been added!', 'success');
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Added',
+                text: 'Your burger has been added!',
+                scrollbarPadding: false,
+                showConfirmButton: false,
+                timer: 1500,
+              });
               setLoading(false);
               reset();
               navigate('/');
