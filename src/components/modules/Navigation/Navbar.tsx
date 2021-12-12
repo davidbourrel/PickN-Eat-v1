@@ -1,6 +1,7 @@
-import { FC, useContext, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import userContext from '../../../contexts/userContext';
+import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
+import useUserRole from '../../../contexts/userContext/useUserRole';
 import { userRolesEnum } from '../../../_types/user';
 import { LINK_CLASSNAME, NAV_ITEM_CLASSNAME } from './const';
 
@@ -9,7 +10,8 @@ interface FNavbarProps {
 }
 
 const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
-  const { isAuth, userRole } = useContext(userContext);
+  const { userRole } = useUserRole();
+  const { isAuth } = useUserIsAuth();
 
   const isAdmin = useMemo(
     () =>

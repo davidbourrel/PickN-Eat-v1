@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { FC, useCallback, useContext, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import userContext from '../../../contexts/userContext';
 import useFetchingItem from '../../../hooks/useFetchingItem';
 import { BASE_URL } from '../../../_constants/dataUrls';
 import { FUseFetchingDataArgs } from '../../../_types/fetchData';
@@ -14,9 +13,12 @@ import { userRolesEnum } from '../../../_types/user';
 import ItemDetailsDescription from './ItemDetailsDescription';
 import { FoodItemTypes } from '../../../_types/datas';
 import ItemDetailsMoreDetails from './ItemDetailsMoreDetails';
+import useUserRole from '../../../contexts/userContext/useUserRole';
+import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
 
 const ItemDetails: FC = () => {
-  const { isAuth, userRole } = useContext(userContext);
+  const { userRole } = useUserRole();
+  const { isAuth } = useUserIsAuth();
   const { category, id } = useParams<string>();
   const navigate = useNavigate();
 

@@ -1,4 +1,4 @@
-import { FC, useCallback, useContext, useMemo, useRef } from 'react';
+import { FC, useCallback, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import MenuSvg from '../../images/icons/MenuSvg';
 import RestaurantsSvg from '../../images/icons/RestaurantsSvg';
@@ -8,8 +8,9 @@ import BCLogo from '../../images/BCLogo';
 import BurgerToggleButton from '../../elements/Buttons/BurgerToggleButton';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { OPENED_ITEM_CLASSNAME, LINK_CLASSNAME } from './const';
-import userContext from '../../../contexts/userContext';
 import { userRolesEnum } from '../../../_types/user';
+import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
+import useUserRole from '../../../contexts/userContext/useUserRole';
 
 interface FLateralNavbarProps {
   closeMenu: () => void;
@@ -22,7 +23,8 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
   isOpen,
   handleToggleMenu,
 }) => {
-  const { isAuth, userRole } = useContext(userContext);
+  const { isAuth } = useUserIsAuth();
+  const { userRole } = useUserRole();
 
   const navClassName = useMemo(
     () => `h-full fixed top-0 left-0 z-10 bg-gray-800 overflow-x-hidden overflow-y-auto transition-width duration-500 pt-7 shadow-2xl md:w-0

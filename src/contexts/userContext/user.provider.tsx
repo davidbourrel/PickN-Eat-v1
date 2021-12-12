@@ -1,38 +1,11 @@
-import {
-  FC,
-  createContext,
-  useState,
-  SetStateAction,
-  Dispatch,
-  useEffect,
-} from 'react';
+import { FC, useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { userInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
 import useParseJWT from '../../hooks/useParseJWT';
+import userContext from './user.context';
+import { UserContextInterface } from './user.types';
 
-export interface UserContextInterface {
-  isAuth: boolean;
-  setIsAuth: Dispatch<SetStateAction<boolean>>;
-  user: userInformationInterface;
-  setUser: Dispatch<SetStateAction<userInformationInterface>>;
-  userRole: string;
-  setUserRole: Dispatch<SetStateAction<string>>;
-  setToken: Dispatch<SetStateAction<string>>;
-}
-
-// Create an initial provider value.
-const initialProviderValue: UserContextInterface = {
-  isAuth: false,
-  setIsAuth: null as unknown as UserContextInterface['setIsAuth'],
-  user: null as unknown as UserContextInterface['user'],
-  setUser: null as unknown as UserContextInterface['setUser'],
-  userRole: null as unknown as UserContextInterface['userRole'],
-  setUserRole: null as unknown as UserContextInterface['setUserRole'],
-  setToken: null as unknown as UserContextInterface['setToken'],
-};
-// Create the store or 'context'.
-export const userContext = createContext(initialProviderValue);
 const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
@@ -60,21 +33,20 @@ const UserProvider: FC = ({ children }) => {
     }
   }, [token, isAuth, tokenParsed]);
 
-  return (
-    <Provider
-      value={{
-        isAuth,
-        setIsAuth,
-        user,
-        setUser,
-        userRole,
-        setUserRole,
-        setToken,
-      }}
-    >
-      {children}
-    </Provider>
+  const contextValue: UserContextInterface = useMemo(
+    () => ({
+      isAuth,
+      setIsAuth,
+      user,
+      setUser,
+      userRole,
+      setUserRole,
+      setToken,
+    }),
+    [isAuth, setIsAuth, user, setUser, userRole, setUserRole, setToken]
   );
+
+  return <Provider value={contextValue}>{children}</Provider>;
 };
 
 export default UserProvider;

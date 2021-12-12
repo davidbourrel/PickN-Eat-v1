@@ -1,24 +1,28 @@
-import { FC, useCallback, useContext, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import userContext from '../../contexts/userContext';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Loader from '../images/icons/Loader';
 import logo from '../images/logo.png';
 import Section from '../modules/Section';
 import ErrorMessage from '../elements/ErrorMessage';
+import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
+import useToken from '../../contexts/userContext/useToken';
 
 const Login: FC = () => {
-  const { setToken, setIsAuth } = useContext(userContext);
+  const { setIsAuth } = useUserIsAuth();
+  const setToken = useToken();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
   const navigate = useNavigate();
 
   const [error, setError] = useState(null as unknown as boolean);

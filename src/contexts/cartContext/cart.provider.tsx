@@ -1,6 +1,7 @@
 import { FC, useState, useCallback, useMemo } from 'react';
 import { FoodItemTypes } from '../../_types/datas';
 import cartContext from './cart.context';
+import { CartContextInterface } from './cart.types';
 
 const { Provider } = cartContext;
 
@@ -70,22 +71,30 @@ const CartProvider: FC = ({ children }) => {
     []
   );
 
-  return (
-    <Provider
-      value={{
-        cart,
-        setCart,
-        cartTotalPrice,
-        cartTotalItems,
-        addToCart,
-        removeFromCart,
-        removeItemsFromCart,
-        removeAllFromCart,
-      }}
-    >
-      {children}
-    </Provider>
+  const contextValue: CartContextInterface = useMemo(
+    () => ({
+      cart,
+      setCart,
+      cartTotalPrice,
+      cartTotalItems,
+      addToCart,
+      removeFromCart,
+      removeItemsFromCart,
+      removeAllFromCart,
+    }),
+    [
+      cart,
+      setCart,
+      cartTotalPrice,
+      cartTotalItems,
+      addToCart,
+      removeFromCart,
+      removeItemsFromCart,
+      removeAllFromCart,
+    ]
   );
+
+  return <Provider value={contextValue}>{children}</Provider>;
 };
 
 export default CartProvider;

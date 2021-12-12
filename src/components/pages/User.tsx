@@ -1,16 +1,21 @@
-import { FC, useCallback, useContext } from 'react';
+import { FC, useCallback } from 'react';
 import Section from '../modules/Section';
-import userContext from '../../contexts/userContext';
 import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import { userInformationInterface } from '../../_types/user';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
+import useUser from '../../contexts/userContext/useUser';
+import useToken from '../../contexts/userContext/useToken';
+import useUserRole from '../../contexts/userContext/useUserRole';
 
 const User: FC = () => {
-  const { setIsAuth, user, setUser, setToken, setUserRole } =
-    useContext(userContext);
+  const { setIsAuth } = useUserIsAuth();
+  const { user, setUser } = useUser();
+  const setToken = useToken();
+  const { setUserRole } = useUserRole();
 
   const navigate = useNavigate();
 
