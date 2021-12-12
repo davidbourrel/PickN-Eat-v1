@@ -101,6 +101,7 @@ const Admin = () => {
               placeholder='Url...'
               required
               maxLength={300}
+              minLength={20}
               className='border-2 rounded p-1 shadow-inner'
               {...register('image')}
             />
