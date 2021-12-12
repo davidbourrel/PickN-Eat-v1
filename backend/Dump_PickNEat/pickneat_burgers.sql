@@ -29,8 +29,8 @@ CREATE TABLE `burgers` (
   `description` varchar(300) NOT NULL,
   `image` varchar(300) NOT NULL,
   `allergens` varchar(300) DEFAULT NULL,
-  `category` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
+  `categories_id` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`,`categories_id`),
   UNIQUE KEY `idburgers_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +41,7 @@ CREATE TABLE `burgers` (
 
 LOCK TABLES `burgers` WRITE;
 /*!40000 ALTER TABLE `burgers` DISABLE KEYS */;
-INSERT INTO `burgers` VALUES ('BBBajptjhrpr','french veggie burger',8,'Flame-grilled veggie hash, old-fashioned mustard sauce, crispy onions, arugula and slices of melted cheddar! Same process as the other products','https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80','gluten, soja, mustard, milk, egg','burgers'),('BBBbgkphrh','double tower',9,'A new star is born! Two flame-grilled meats, bacon, crispy onions and a delicious barbecue sauce for a double dose of fun','https://images.unsplash.com/photo-1550547660-d9450f859349?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=765&q=80','gluten, soja, mustard, milk, egg','burgers'),('BBBcrhjhjrt','master rosti',7,'Flame-grilled veggie hash, old-fashioned mustard sauce, crispy onions, arugula and slices of melted cheddar! Same process as the other products','https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80','gluten, soja, mustard, milk, egg','burgers'),('BBBdhtrhjrhjtl','crispy kiss',8,'A new star is born! Two flame-grilled meats, bacon, crispy onions and a delicious barbecue sauce for a double dose of fun','https://images.unsplash.com/photo-1572448862527-d3c904757de6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80','gluten, soja, mustard, milk, egg','burgers');
+INSERT INTO `burgers` VALUES ('5t9548jyhg654yjuklgtrh2584ky86','master rosti',7,'Flame-grilled veggie hash, old-fashioned mustard sauce, crispy onions, arugula and slices of melted cheddar! Same process as the other products','https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80','gluten, soja, mustard, milk, egg','1'),('algkfitjrolgktiv,eigkylrmgplkr','french veggie burger',8,'Flame-grilled veggie hash, old-fashioned mustard sauce, crispy onions, arugula and slices of melted cheddar! Same process as the other products','https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80','gluten, soja, mustard, milk, egg','1'),('h1e5z1h14h5r8z5h4j7t4r5e7hjt49','crispy kiss',8,'A new star is born! Two flame-grilled meats, bacon, crispy onions and a delicious barbecue sauce for a double dose of fun','https://images.unsplash.com/photo-1572448862527-d3c904757de6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80','gluten, soja, mustard, milk, egg','1'),('h1j5t9e4h1j5f8z4h5f1h5r8h4e8j8','double tower',9,'A new star is born! Two flame-grilled meats, bacon, crispy onions and a delicious barbecue sauce for a double dose of fun','https://images.unsplash.com/photo-1550547660-d9450f859349?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=765&q=80','gluten, soja, mustard, milk, egg','1');
 /*!40000 ALTER TABLE `burgers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-11 17:07:42
+-- Dump completed on 2021-12-12 12:09:53

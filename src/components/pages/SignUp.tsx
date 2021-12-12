@@ -33,10 +33,6 @@ const SignUp: FC = () => {
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: false,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
   });
 
   const onSubmitHandler = useCallback(
@@ -46,7 +42,7 @@ const SignUp: FC = () => {
       if (user.password === user.secondPassword) {
         setErrorCheckPassword(null as unknown as boolean);
         setLoading(true);
-        return axios
+        return await axios
           .post('/register', user)
           .then(() => {
             Toast.fire({

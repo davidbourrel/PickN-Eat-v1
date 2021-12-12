@@ -11,8 +11,6 @@ import { userInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
 import useParseJWT from '../../hooks/useParseJWT';
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-
 export interface UserContextInterface {
   isAuth: boolean;
   setIsAuth: Dispatch<SetStateAction<boolean>>;

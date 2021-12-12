@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
-import { CardItemTypes } from '../../_types/datas';
+import { FoodItemTypes } from '../../_types/datas';
 
 export interface CartContextInterface {
-  cart: CardItemTypes[];
-  setCart: Dispatch<SetStateAction<CardItemTypes[]>>;
+  cart: FoodItemTypes[];
+  setCart: Dispatch<SetStateAction<FoodItemTypes[]>>;
   cartTotalPrice: number;
   cartTotalItems: number;
-  addToCart: (item: CardItemTypes) => void;
+  addToCart: (item: FoodItemTypes) => void;
   removeFromCart: (id: number) => void;
   removeItemsFromCart: (id: number) => void;
   removeAllFromCart: () => void;

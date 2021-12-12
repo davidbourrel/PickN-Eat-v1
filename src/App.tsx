@@ -26,13 +26,17 @@ const App: FC = () => {
     setIsOpen(false);
   }, []);
 
-  const filterContent = useMemo(
-    () =>
-      isOpen ? (
+  const filterContent = useMemo(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      return (
         <div className='absolute inset-0 bg-black bg-opacity-75 md:static md:bg-white md:bg-opacity-0' />
-      ) : null,
-    [isOpen]
-  );
+      );
+    } else {
+      document.body.style.overflow = 'auto';
+      return null;
+    }
+  }, [isOpen]);
 
   return (
     <div id='app' className='text-gray-800 flex flex-col min-h-screen'>

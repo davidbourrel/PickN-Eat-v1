@@ -50,14 +50,14 @@ export interface SideType {
   amount: number;
 }
 
-export type CardItemTypes =
+export type FoodItemTypes =
   | BurgerType
   | DessertType
   | DrinkType
   | SaladType
   | SideType;
 
-export enum categoryFoodsEnum {
+export enum categoryFoodEnum {
   burgers = 1,
   sides = 2,
   drinks = 3,

@@ -4,14 +4,14 @@ import HeaderThree from '../../elements/Headings/HeaderThree';
 import MinusSvg from '../../images/icons/MinusSvg';
 import PlusSvg from '../../images/icons/PlusSvg';
 import TrashSvg from '../../images/icons/TrashSvg';
-import { CardItemTypes } from '../../../_types/datas';
+import { FoodItemTypes } from '../../../_types/datas';
 import useAddToCart from '../../../contexts/cartContext/useAddToCart ';
 import useRemoveCart from '../../../contexts/cartContext/useRemoveCart';
 import useCart from '../../../contexts/cartContext/useCart';
 import useTotalCart from '../../../contexts/cartContext/useCartTotal';
 
 interface CartContentProps {
-  item: CardItemTypes;
+  item: FoodItemTypes;
 }
 
 const CartContent: FC<CartContentProps> = ({ item }) => {

@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useCallback, useContext } from 'react';
 import Section from '../modules/Section';
 import userContext from '../../contexts/userContext';
 import Swal from 'sweetalert2';
@@ -6,10 +6,13 @@ import SubmitButton from '../elements/Buttons/SubmitButton';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import { userInformationInterface } from '../../_types/user';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const User: FC = () => {
   const { setIsAuth, user, setUser, setToken, setUserRole } =
     useContext(userContext);
+
+  const navigate = useNavigate();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -19,23 +22,25 @@ const User: FC = () => {
     timerProgressBar: true,
   });
 
-  const handleLogOut = () => {
+  const handleLogOut = useCallback(() => {
     setToken(null as unknown as string);
     setUser(null as unknown as userInformationInterface);
     setUserRole(null as unknown as string);
     setIsAuth(false);
-    axios.post('/logout', { withCredentials: true });
-    Toast.fire({
-      icon: 'success',
-      title: 'Successfully deconnected!',
+    axios.post('/logout', { withCredentials: true }).then(() => {
+      Toast.fire({
+        icon: 'success',
+        title: 'Successfully disconnected!',
+      });
+      navigate('/login');
     });
-  };
+  }, [Toast, setIsAuth, setToken, setUser, setUserRole, navigate]);
 
-  const handleRefreshToken = () => {
+  const handleRefreshToken = useCallback(() => {
     axios.post('/refresh', { withCredentials: true }).then((res) => {
       console.log('resfresh Token', res.data);
     });
-  };
+  }, []);
 
   return (
     <Section>

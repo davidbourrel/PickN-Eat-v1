@@ -29,8 +29,8 @@ CREATE TABLE `salads` (
   `description` varchar(300) NOT NULL,
   `image` varchar(300) NOT NULL,
   `allergens` varchar(300) DEFAULT NULL,
-  `category` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
+  `categories_id` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`,`categories_id`),
   UNIQUE KEY `idsalads_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +41,7 @@ CREATE TABLE `salads` (
 
 LOCK TABLES `salads` WRITE;
 /*!40000 ALTER TABLE `salads` DISABLE KEYS */;
-INSERT INTO `salads` VALUES ('DDDamhrkmhrkmhr','Spring mood',6,'A tasty mix of salads, Neapolitan-style penne, marinated tomatoes, Grana Padano cheese, breaded chicken, and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80','eggs, mustard, milk, gluten','salads'),('DDDbrhmrkhmr','Big green',5,'A tasty mix of salads, coral and spelt lentils, marinated tomatoes, Mozzarella balls, breaded chicken and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1572357176061-7c96fd2af22f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHNhbGFkfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60','eggs, mustard, milk, gluten','salads'),('DDDcmhkrhmrhkrmh','The variety',7,'A tasty mix of salads, Neapolitan-style penne, marinated tomatoes, Grana Padano cheese, breaded chicken, and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80','eggs, mustard, milk, gluten','salads'),('DDDdhmrkhmrh','Greeny Cracky',6,'A tasty mix of salads, coral and spelt lentils, marinated tomatoes, Mozzarella balls, breaded chicken and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1547496502-affa22d38842?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=584&q=80','eggs, mustard, milk, gluten','salads');
+INSERT INTO `salads` VALUES ('cvfd8f7g8g8rghtn896nt3214hjyfr','Greeny Cracky',6,'A tasty mix of salads, coral and spelt lentils, marinated tomatoes, Mozzarella balls, breaded chicken and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1547496502-affa22d38842?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=584&q=80','eggs, mustard, milk, gluten','5'),('hytrh985475jyt5d5fgeb8854dghtr','The variety',7,'A tasty mix of salads, Neapolitan-style penne, marinated tomatoes, Grana Padano cheese, breaded chicken, and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80','eggs, mustard, milk, gluten','5'),('nhyg85462rgth8470hyteg85214hyt','Spring mood',6,'A tasty mix of salads, Neapolitan-style penne, marinated tomatoes, Grana Padano cheese, breaded chicken, and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80','eggs, mustard, milk, gluten','5'),('q8sdfr8547hygf869yhj754jytfr80','Big green',5,'A tasty mix of salads, coral and spelt lentils, marinated tomatoes, Mozzarella balls, breaded chicken and a delicious shallot and herb duo!','https://images.unsplash.com/photo-1572357176061-7c96fd2af22f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fHNhbGFkfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60','eggs, mustard, milk, gluten','5');
 /*!40000 ALTER TABLE `salads` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-11 17:07:42
+-- Dump completed on 2021-12-12 12:09:53
