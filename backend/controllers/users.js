@@ -6,7 +6,7 @@ const getUser = async (req, res) => {
     const [[user]] = await User.getOne(id);
     res.status(200).json(user);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
@@ -16,7 +16,7 @@ const deleteUser = async (req, res) => {
     await User.deleteOne(id);
     res.sendStatus(204);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
@@ -27,7 +27,7 @@ const updateUser = async (req, res) => {
     await User.updateOne(id, body);
     res.sendStatus(204);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 

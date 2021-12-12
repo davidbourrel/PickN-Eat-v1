@@ -9,7 +9,7 @@ const getAllBurgers = async (req, res) => {
     const [burgers] = await Burger.getAll();
     res.status(200).json(burgers);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
@@ -19,7 +19,7 @@ const getBurger = async (req, res) => {
     const [[burger]] = await Burger.getOne(id);
     res.status(200).json(burger);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
@@ -29,21 +29,21 @@ const deleteBurger = async (req, res) => {
     await Burger.deleteOne(id);
     res.sendStatus(204);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
 const createBurger = async (req, res) => {
   try {
     const { body } = req;
-    const [[burger]] = await Burger.createOne({
+    const [burger] = await Burger.createOne({
       id: newId,
       categories_id: BURGER_CATEGORY,
       ...body,
     });
     res.status(201).json(burger);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 

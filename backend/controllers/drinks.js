@@ -5,7 +5,7 @@ const getAllDrinks = async (req, res) => {
     const [drinks] = await Drink.getAll();
     res.status(200).json(drinks);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
@@ -15,7 +15,7 @@ const getDrink = async (req, res) => {
     const [[drink]] = await Drink.getOne(id);
     res.status(200).json(drink);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
@@ -25,7 +25,7 @@ const deleteDrink = async (req, res) => {
     await Drink.deleteOne(id);
     res.sendStatus(204);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err });
   }
 };
 
