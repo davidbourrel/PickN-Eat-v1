@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const burgersController = require('../../controllers/burgers');
+const verifyJWT = require('../../middlewares/verifyJWT');
 
 router
   .route('/')
   .get(burgersController.getAllBurgers)
-  .post(burgersController.createBurger);
+  .post(verifyJWT, burgersController.createBurger);
 
 router
   .route('/:id')
   .get(burgersController.getBurger)
-  .delete(burgersController.deleteBurger);
+  .delete(verifyJWT, burgersController.deleteBurger);
 
 module.exports = router;
