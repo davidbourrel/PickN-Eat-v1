@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const verifyJWT = require('./middlewares/verifyJWT');
 const cookieParser = require('cookie-parser');
-const PORT = process.env.PORT || 3001;
+const SERVER_PORT = process.env.SERVER_PORT || 3001;
 
 // pre-route middlewares
 app.use(cors());
@@ -27,10 +27,10 @@ app.use('/sides', require('./routes/api/sides'));
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
 
-app.listen(PORT, (error) => {
+app.listen(SERVER_PORT, (error) => {
   if (error) {
     console.log(error);
   } else {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${SERVER_PORT}`);
   }
 });
