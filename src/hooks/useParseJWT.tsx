@@ -1,7 +1,13 @@
 import { useMemo } from 'react';
-import { userInformationInterface } from '../_types/user';
 
-const useParseJWT = (token: string): userInformationInterface => {
+interface useParseJWTResult {
+  id: string;
+  email: string;
+  exp: number;
+  iat: number;
+}
+
+const useParseJWT = (token: string): useParseJWTResult => {
   const userInformation = useMemo(() => {
     if (token) {
       const base64Url = token.split('.')[1];
