@@ -42,12 +42,6 @@ const User: FC = () => {
     });
   }, [Toast, setIsAuth, setToken, setUser, setUserRole, navigate]);
 
-  const handleRefreshToken = useCallback(() => {
-    axios.post('/refresh', { withCredentials: true }).then((res) => {
-      console.log('resfresh Token', res.data);
-    });
-  }, []);
-
   return (
     <Section>
       <HeaderOne>My informations</HeaderOne>
@@ -79,13 +73,6 @@ const User: FC = () => {
         className='py-2 px-8 my-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 md:w-1/3 md:mr-auto'
       >
         Sign out
-      </SubmitButton>
-      <SubmitButton
-        onClick={handleRefreshToken}
-        value='submit'
-        className='py-2 px-8 my-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 md:w-1/3 md:mr-auto'
-      >
-        Refresh Token
       </SubmitButton>
     </Section>
   );

@@ -6,11 +6,12 @@ import Swal from 'sweetalert2';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Loader from '../images/icons/Loader';
-import logo from '../images/logo.png';
 import Section from '../modules/Section';
 import ErrorMessage from '../elements/ErrorMessage';
 import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 import useToken from '../../contexts/userContext/useToken';
+import HeaderOne from '../elements/Headings/HeaderOne';
+import BCLogo from '../images/BCLogo';
 
 const Login: FC = () => {
   const { setIsAuth } = useUserIsAuth();
@@ -83,8 +84,10 @@ const Login: FC = () => {
         onSubmit={handleSubmit(onSubmitHandler)}
         className='m-5 p-6 text-gray-700 border-2 rounded shadow-md w-full max-w-sm mx-auto'
       >
-        <h1 className='text-2xl text-center font-semibold'>Welcome !</h1>
-        <img src={logo} alt='Logo PickNEat' className='max-h-32 mx-auto mb-5' />
+        <HeaderOne className='border-none text-center mb-2'>
+          Welcome to PickN'Eat !
+        </HeaderOne>
+        <BCLogo className='mb-5 mx-auto' />
         <p>admin@pickandeat.com</p>
         <label htmlFor='email' className='flex flex-col mb-5 font-bold'>
           Email address:
