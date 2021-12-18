@@ -1,7 +1,6 @@
 const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const MILLISECONDS_PER_DAY = require('../_constants/time');
 
 const handleLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -18,27 +17,10 @@ const handleLogin = async (req, res) => {
   if (match) {
     // create JWTs
     const token = jwt.sign(
-      { id: foundUser.id, email: foundUser.email },
+      { id: foundUser.id },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '300s' }
-    );
-    const refreshToken = jwt.sign(
-      { id: foundUser.id, email: foundUser.email },
-      process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: '1d' }
     );
-
-    // Saving refreshToken with current user
-    await User.updateOne(foundUser.id, {
-      ...foundUser,
-      refreshToken: refreshToken,
-    });
-    res.cookie('jwt', refreshToken, {
-      httpOnly: true,
-      sameSite: 'None',
-      secure: true,
-      maxAge: MILLISECONDS_PER_DAY,
-    });
     res.json({ token });
   } else {
     res.sendStatus(401);

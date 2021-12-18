@@ -1,7 +1,8 @@
 import { FC, useCallback, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
@@ -12,6 +13,7 @@ import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 import useToken from '../../contexts/userContext/useToken';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import BCLogo from '../images/BCLogo';
+import { PICKANDEAT_LS_PREFIX } from '../../_constants/localStorage';
 
 const Login: FC = () => {
   const { setIsAuth } = useUserIsAuth();
@@ -48,6 +50,7 @@ const Login: FC = () => {
         .then((res) => {
           if (res.statusText === 'OK') {
             if (!!res.data.token && res.data.token.length > 0) {
+              localStorage.setItem(PICKANDEAT_LS_PREFIX, res.data.token);
               setToken(res.data.token);
               setIsAuth(true);
               Toast.fire({
