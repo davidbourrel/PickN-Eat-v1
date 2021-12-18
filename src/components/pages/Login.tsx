@@ -10,14 +10,12 @@ import Loader from '../images/icons/Loader';
 import Section from '../modules/Section';
 import ErrorMessage from '../elements/ErrorMessage';
 import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
-import useToken from '../../contexts/userContext/useToken';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import BCLogo from '../images/BCLogo';
 import { PICKANDEAT_LS_PREFIX } from '../../_constants/localStorage';
 
 const Login: FC = () => {
   const { setIsAuth } = useUserIsAuth();
-  const setToken = useToken();
 
   const {
     register,
@@ -51,7 +49,6 @@ const Login: FC = () => {
           if (res.statusText === 'OK') {
             if (!!res.data.token && res.data.token.length > 0) {
               localStorage.setItem(PICKANDEAT_LS_PREFIX, res.data.token);
-              setToken(res.data.token);
               setIsAuth(true);
               Toast.fire({
                 icon: 'success',
@@ -72,7 +69,7 @@ const Login: FC = () => {
           reset();
         });
     },
-    [Toast, navigate, reset, setIsAuth, setToken]
+    [Toast, navigate, reset, setIsAuth]
   );
 
   if (loading)

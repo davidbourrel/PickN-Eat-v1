@@ -8,6 +8,5 @@ export interface UserContextInterface {
   setUser: Dispatch<SetStateAction<userInformationInterface>>;
   userRole: string;
   setUserRole: Dispatch<SetStateAction<string>>;
-  setToken: Dispatch<SetStateAction<string>>;
   handleLogout: () => void;
 }

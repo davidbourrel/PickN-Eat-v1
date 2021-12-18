@@ -14,11 +14,15 @@ const UserProvider: FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null as unknown as userInformationInterface);
   const [userRole, setUserRole] = useState(null as unknown as string);
-  const [token, setToken] = useState(null as unknown as string);
+
+  const token = localStorage.getItem(PICKANDEAT_LS_PREFIX) as string;
 
   const tokenParsed = useParseJWT(
     localStorage.getItem(PICKANDEAT_LS_PREFIX) as string
   );
+
+  console.log('token :', token);
+  console.log('tokenParsed :', tokenParsed);
 
   /***************
     * User Logout
@@ -34,7 +38,6 @@ const UserProvider: FC = ({ children }) => {
       timerProgressBar: true,
     });
     localStorage.removeItem(PICKANDEAT_LS_PREFIX);
-    setToken(null as unknown as string);
     setUser(null as unknown as userInformationInterface);
     setUserRole(null as unknown as string);
     setIsAuth(false);
@@ -42,7 +45,7 @@ const UserProvider: FC = ({ children }) => {
       icon: 'success',
       title: 'Successfully disconnected!',
     });
-  }, [setIsAuth, setToken, setUser, setUserRole]);
+  }, [setIsAuth, setUser, setUserRole]);
 
   /***************
    * User authentication
@@ -88,19 +91,9 @@ const UserProvider: FC = ({ children }) => {
       setUser,
       userRole,
       setUserRole,
-      setToken,
       handleLogout,
     }),
-    [
-      isAuth,
-      setIsAuth,
-      user,
-      setUser,
-      userRole,
-      setUserRole,
-      setToken,
-      handleLogout,
-    ]
+    [isAuth, setIsAuth, user, setUser, userRole, setUserRole, handleLogout]
   );
 
   return <Provider value={contextValue}>{children}</Provider>;
