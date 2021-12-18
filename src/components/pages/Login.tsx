@@ -62,7 +62,8 @@ const Login: FC = () => {
             reset();
           }
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           setLoading(false);
           setError(true);
           reset();

@@ -8,4 +8,5 @@ export const INITIAL_USER_CONTEXT: UserContextInterface = {
   userRole: null as unknown as UserContextInterface['userRole'],
   setUserRole: null as unknown as UserContextInterface['setUserRole'],
   setToken: null as unknown as UserContextInterface['setToken'],
+  handleLogout: null as unknown as UserContextInterface['handleLogout'],
 };

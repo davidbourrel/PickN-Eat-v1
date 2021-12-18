@@ -53,7 +53,8 @@ const Admin = () => {
               reset();
               navigate('/');
             })
-            .catch(() => {
+            .catch((err) => {
+              console.log(err);
               setLoading(false);
             });
         }

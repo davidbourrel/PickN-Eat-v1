@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-import { userInformationInterface } from "../../_types/user";
+import { Dispatch, SetStateAction } from 'react';
+import { userInformationInterface } from '../../_types/user';
 
 export interface UserContextInterface {
   isAuth: boolean;
@@ -9,4 +9,5 @@ export interface UserContextInterface {
   userRole: string;
   setUserRole: Dispatch<SetStateAction<string>>;
   setToken: Dispatch<SetStateAction<string>>;
+  handleLogout: () => void;
 }
