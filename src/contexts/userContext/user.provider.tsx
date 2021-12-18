@@ -16,10 +16,7 @@ const UserProvider: FC = ({ children }) => {
   const [userRole, setUserRole] = useState(null as unknown as string);
 
   const token = localStorage.getItem(PICKANDEAT_LS_PREFIX) as string;
-
-  const tokenParsed = useParseJWT(
-    localStorage.getItem(PICKANDEAT_LS_PREFIX) as string
-  );
+  const tokenParsed = useParseJWT(token);
 
   /***************
     * User Logout
