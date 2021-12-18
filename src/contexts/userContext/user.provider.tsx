@@ -21,9 +21,6 @@ const UserProvider: FC = ({ children }) => {
     localStorage.getItem(PICKANDEAT_LS_PREFIX) as string
   );
 
-  console.log('token :', token);
-  console.log('tokenParsed :', tokenParsed);
-
   /***************
     * User Logout
   /**************/
@@ -51,18 +48,18 @@ const UserProvider: FC = ({ children }) => {
    * User authentication
    /**************/
   useEffect(() => {
-    const authAxios = axios.create({
-      baseURL: BASE_URL,
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
     if (!!token && token.length > 0) {
+      const authAxios = axios.create({
+        baseURL: BASE_URL,
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (tokenParsed?.id) {
         authAxios
           .get(`users/${tokenParsed.id}`, { withCredentials: true })
           .then((res) => {
             setUser(res.data);
             setUserRole(res.data.role);
+            setIsAuth(true);
           })
           .catch((err) => {
             console.log(err);
@@ -78,9 +75,10 @@ const UserProvider: FC = ({ children }) => {
    * Check if token is already valid
    /**************/
   useEffect(() => {
-    !tokenParsed?.id ||
-      !tokenParsed?.exp ||
-      (tokenParsed?.exp > Date.now() && handleLogout());
+    !tokenParsed ||
+      !tokenParsed.id ||
+      !tokenParsed.exp ||
+      (tokenParsed.exp > Date.now() && handleLogout());
   }, [token, isAuth, tokenParsed, handleLogout]);
 
   const contextValue: UserContextInterface = useMemo(

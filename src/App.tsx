@@ -10,10 +10,11 @@ import Cart from './components/pages/Cart';
 import Login from './components/pages/Login';
 import User from './components/pages/User';
 import Admin from './components/pages/Admin';
-import RequireAuth from './components/pages/RequireAuth';
+import RequireAuth from './components/routes/RequireAuth';
 import ItemDetails from './components/pages/ItemDetails';
 import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
+import AuthDone from './components/routes/AuthDone';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,14 @@ const App: FC = () => {
             <Route path='/restaurant' element={<Restaurant />} />
             <Route path='/delivery' element={<Delivery />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/login' element={<Login />} />
+            <Route
+              path='/login'
+              element={
+                <AuthDone>
+                  <Login />
+                </AuthDone>
+              }
+            />
             <Route path='/sign-up' element={<SignUp />} />
             <Route
               path='user'

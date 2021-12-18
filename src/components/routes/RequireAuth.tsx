@@ -3,6 +3,7 @@ import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 
 const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { isAuth } = useUserIsAuth();
+
   let location = useLocation();
 
   if (!isAuth) {
