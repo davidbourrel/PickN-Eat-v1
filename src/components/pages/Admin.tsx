@@ -3,12 +3,13 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Section from '../modules/Section';
-import { FETCH_BURGERS_URL } from '../../_constants/dataUrls';
+import { BASE_URL } from '../../_constants/dataUrls';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Loader from '../images/icons/Loader';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import ErrorMessage from '../elements/ErrorMessage';
+import { PICKANDEAT_LS_TOKEN } from '../../_constants/localStorage';
 
 const Admin = () => {
   const {
@@ -37,8 +38,17 @@ const Admin = () => {
         if (result.isConfirmed) {
           setLoading(true);
 
-          return axios
-            .post(FETCH_BURGERS_URL, items)
+          const authAxios = axios.create({
+            baseURL: BASE_URL,
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(
+                PICKANDEAT_LS_TOKEN
+              )}`,
+            },
+          });
+
+          return authAxios
+            .post('/burgers', items)
             .then(() => {
               Swal.fire({
                 position: 'center',
