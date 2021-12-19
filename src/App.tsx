@@ -14,7 +14,7 @@ import RequireAuth from './components/routes/RequireAuth';
 import ItemDetails from './components/pages/ItemDetails';
 import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
-import AuthDone from './components/routes/AuthDone';
+import ValidAuth from './components/routes/ValidAuth';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,9 +61,9 @@ const App: FC = () => {
             <Route
               path='/login'
               element={
-                <AuthDone>
+                <ValidAuth>
                   <Login />
-                </AuthDone>
+                </ValidAuth>
               }
             />
             <Route path='/sign-up' element={<SignUp />} />

@@ -18,7 +18,7 @@ import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
 
 const ItemDetails: FC = () => {
   const { userRole } = useUserRole();
-  const { isAuth } = useUserIsAuth();
+  const isAuth = useUserIsAuth();
   const { category, id } = useParams<string>();
   const navigate = useNavigate();
 

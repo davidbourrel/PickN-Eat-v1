@@ -11,7 +11,7 @@ interface FNavbarProps {
 
 const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
   const { userRole } = useUserRole();
-  const { isAuth } = useUserIsAuth();
+  const isAuth = useUserIsAuth();
 
   const isAdmin = useMemo(
     () =>

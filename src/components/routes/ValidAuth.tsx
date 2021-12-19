@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import { Navigate, useLocation } from 'react-router';
 import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 
-const AuthDone: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const { isAuth } = useUserIsAuth();
+const ValidAuth: FC<{ children: JSX.Element }> = ({ children }) => {
+  const isAuth = useUserIsAuth();
   let location = useLocation();
 
   if (isAuth) {
@@ -12,4 +13,4 @@ const AuthDone: React.FC<{ children: JSX.Element }> = ({ children }) => {
   return children;
 };
 
-export default AuthDone;
+export default ValidAuth;

@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router';
 import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 
 const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const { isAuth } = useUserIsAuth();
+  const isAuth = useUserIsAuth();
 
   let location = useLocation();
 

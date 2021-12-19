@@ -9,20 +9,19 @@ import SubmitButton from '../elements/Buttons/SubmitButton';
 import Loader from '../images/icons/Loader';
 import Section from '../modules/Section';
 import ErrorMessage from '../elements/ErrorMessage';
-import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import BCLogo from '../images/BCLogo';
-import { PICKANDEAT_LS_PREFIX } from '../../_constants/localStorage';
+import { PICKANDEAT_LS_TOKEN } from '../../_constants/localStorage';
+import useHandleLogin from '../../contexts/userContext/useHandleLogin';
 
 const Login: FC = () => {
-  const { setIsAuth } = useUserIsAuth();
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+  const handleLogin = useHandleLogin();
 
   const navigate = useNavigate();
 
@@ -43,20 +42,21 @@ const Login: FC = () => {
       setError(null as unknown as boolean);
       setLoading(true);
 
-      return axios
-        .post('/auth', values, { withCredentials: true })
+      return await axios
+        .post('/auth', values)
         .then((res) => {
           if (res.statusText === 'OK') {
             if (!!res.data.token && res.data.token.length > 0) {
-              localStorage.setItem(PICKANDEAT_LS_PREFIX, res.data.token);
-              setIsAuth(true);
+              handleLogin(res.data.token);
+              localStorage.setItem(
+                PICKANDEAT_LS_TOKEN,
+                JSON.stringify(res.data.token)
+              );
               Toast.fire({
                 icon: 'success',
                 title: 'Successfully connected!',
               });
               navigate('/user');
-            } else {
-              setIsAuth(false);
             }
             setLoading(false);
             reset();
@@ -69,7 +69,7 @@ const Login: FC = () => {
           reset();
         });
     },
-    [Toast, navigate, reset, setIsAuth]
+    [Toast, navigate, reset, handleLogin]
   );
 
   if (loading)

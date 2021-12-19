@@ -23,7 +23,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
   isOpen,
   handleToggleMenu,
 }) => {
-  const { isAuth } = useUserIsAuth();
+  const isAuth = useUserIsAuth();
   const { userRole } = useUserRole();
 
   const navClassName = useMemo(

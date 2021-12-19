@@ -2,11 +2,11 @@ import { useContext, useMemo } from 'react';
 import userContext from '.';
 import { UserContextInterface } from './user.types';
 
-type UseUserIsAuthResult = Pick<UserContextInterface, 'isAuth' | 'setIsAuth'>;
+type UseUserIsAuthResult = UserContextInterface['isAuth'];
 
 const useUserIsAuth = (): UseUserIsAuthResult => {
-  const { isAuth, setIsAuth } = useContext(userContext);
-  return useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);
+  const { isAuth } = useContext(userContext);
+  return useMemo(() => isAuth, [isAuth]);
 };
 
 export default useUserIsAuth;

@@ -2,11 +2,15 @@ import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import { userInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
-import useParseJWT from '../../hooks/useParseJWT';
 import userContext from './user.context';
 import { UserContextInterface } from './user.types';
 import Swal from 'sweetalert2';
-import { PICKANDEAT_LS_PREFIX } from '../../_constants/localStorage';
+import {
+  PICKANDEAT_LS_CONNECTED,
+  PICKANDEAT_LS_ROLE,
+  PICKANDEAT_LS_TOKEN,
+  PICKANDEAT_LS_USER,
+} from '../../_constants/localStorage';
 
 const { Provider } = userContext;
 
@@ -15,13 +19,9 @@ const UserProvider: FC = ({ children }) => {
   const [user, setUser] = useState(null as unknown as userInformationInterface);
   const [userRole, setUserRole] = useState(null as unknown as string);
 
-  const token = localStorage.getItem(PICKANDEAT_LS_PREFIX) as string;
-  const tokenParsed = useParseJWT(token);
-
   /***************
     * User Logout
   /**************/
-
   const handleLogout = useCallback(() => {
     const Toast = Swal.mixin({
       toast: true,
@@ -31,7 +31,7 @@ const UserProvider: FC = ({ children }) => {
       timer: 1500,
       timerProgressBar: true,
     });
-    localStorage.removeItem(PICKANDEAT_LS_PREFIX);
+    localStorage.clear();
     setUser(null as unknown as userInformationInterface);
     setUserRole(null as unknown as string);
     setIsAuth(false);
@@ -44,51 +44,85 @@ const UserProvider: FC = ({ children }) => {
   /***************
    * User authentication
    /**************/
+  const handleLogin = useCallback(
+    async (token) => {
+      if (!!token && token.length > 0) {
+        const authAxios = axios.create({
+          baseURL: BASE_URL,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const parsedToken = await JSON.parse(
+          window.atob(token.split('.')[1].replace('-', '+').replace('_', '/'))
+        );
+
+        if (parsedToken?.id) {
+          return await authAxios
+            .get(`users/${parsedToken.id}`)
+            .then((res) => {
+              localStorage.setItem(
+                PICKANDEAT_LS_USER,
+                JSON.stringify(res.data)
+              );
+              setUser(res.data);
+              localStorage.setItem(
+                PICKANDEAT_LS_ROLE,
+                JSON.stringify(res.data.role)
+              );
+              setUserRole(res.data.role);
+              localStorage.setItem(PICKANDEAT_LS_CONNECTED, 'true');
+              setIsAuth(true);
+            })
+            .catch((err) => {
+              console.log(err);
+              handleLogout();
+            });
+        } else {
+          handleLogout();
+        }
+      }
+    },
+    [handleLogout]
+  );
+
+  /***************
+   * Check if a user has previously logged in
+   /**************/
+
   useEffect(() => {
-    if (!!token && token.length > 0) {
-      const authAxios = axios.create({
-        baseURL: BASE_URL,
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (tokenParsed?.id) {
-        authAxios
-          .get(`users/${tokenParsed.id}`, { withCredentials: true })
-          .then((res) => {
-            setUser(res.data);
-            setUserRole(res.data.role);
-            setIsAuth(true);
-          })
-          .catch((err) => {
-            console.log(err);
-            handleLogout();
-          });
+    const refetch = () => {
+      const userToken = localStorage.getItem(PICKANDEAT_LS_TOKEN);
+      const userInformation = localStorage.getItem(PICKANDEAT_LS_USER);
+      const userRole = localStorage.getItem(PICKANDEAT_LS_ROLE);
+      const userConnected = localStorage.getItem(PICKANDEAT_LS_CONNECTED);
+
+      if (userToken && userInformation && userRole && userConnected) {
+        setUser(JSON.parse(userInformation));
+        setUserRole(JSON.parse(userRole));
+        setIsAuth(JSON.parse(userConnected));
       } else {
         handleLogout();
       }
-    }
-  }, [token, isAuth, tokenParsed, handleLogout]);
+    };
 
-  /***************
-   * Check if token is already valid
-   /**************/
-  useEffect(() => {
-    !tokenParsed ||
-      !tokenParsed.id ||
-      !tokenParsed.exp ||
-      (tokenParsed.exp > Date.now() && handleLogout());
-  }, [token, isAuth, tokenParsed, handleLogout]);
+    refetch();
+
+    window.addEventListener('storage', refetch);
+
+    return () => window.removeEventListener('storage', refetch);
+  }, [handleLogout]);
 
   const contextValue: UserContextInterface = useMemo(
     () => ({
       isAuth,
-      setIsAuth,
       user,
       setUser,
       userRole,
       setUserRole,
       handleLogout,
+      handleLogin,
     }),
-    [isAuth, setIsAuth, user, setUser, userRole, setUserRole, handleLogout]
+    [isAuth, user, setUser, userRole, setUserRole, handleLogout, handleLogin]
   );
 
   return <Provider value={contextValue}>{children}</Provider>;

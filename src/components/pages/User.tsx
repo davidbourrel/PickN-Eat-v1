@@ -11,7 +11,7 @@ const User: FC = () => {
 
   return (
     <Section>
-      <HeaderOne>My informations</HeaderOne>
+      <HeaderOne>My information</HeaderOne>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-2 my-5 text-lg'>
         <div className='mb-2'>
           <span className='font-bold mr-1'>First name :</span>
@@ -28,10 +28,6 @@ const User: FC = () => {
         <div className='mb-2'>
           <span className='font-bold mr-1'>Email address :</span>
           <span>{user?.email}</span>
-        </div>
-        <div className='mb-2'>
-          <span className='font-bold mr-1'>Role :</span>
-          <span>{user?.role}</span>
         </div>
       </div>
       <SubmitButton
