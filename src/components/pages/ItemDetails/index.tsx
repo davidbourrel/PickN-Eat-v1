@@ -15,6 +15,7 @@ import { FoodItemTypes } from '../../../_types/datas';
 import ItemDetailsMoreDetails from './ItemDetailsMoreDetails';
 import useUserRole from '../../../contexts/userContext/useUserRole';
 import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
+import { PICKANDEAT_LS_TOKEN } from '../../../_constants/localStorage';
 
 const ItemDetails: FC = () => {
   const { userRole } = useUserRole();
@@ -26,7 +27,7 @@ const ItemDetails: FC = () => {
     `${BASE_URL}/${category}/${id}` as unknown as FUseFetchingDataArgs
   );
 
-  const handleMenuDelete = useCallback(
+  const handleDeleteItem = useCallback(
     () =>
       Swal.fire({
         title: `Delete ${data?.title}?`,
@@ -39,7 +40,16 @@ const ItemDetails: FC = () => {
         showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          return axios
+          const authAxios = axios.create({
+            baseURL: BASE_URL,
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(
+                PICKANDEAT_LS_TOKEN
+              )}`,
+            },
+          });
+
+          return authAxios
             .delete(`${BASE_URL}/${category}/${id}`)
             .then(() => {
               Swal.fire({
@@ -64,14 +74,14 @@ const ItemDetails: FC = () => {
           <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
           <button
             type='button'
-            onClick={handleMenuDelete}
+            onClick={handleDeleteItem}
             className='rounded transition bg-red-600 text-white font-semibold px-4 py-2 mt-4 hover:bg-red-700 capitalize'
           >
             Delete {data?.title}
           </button>
         </div>
       ),
-    [handleMenuDelete, isAuth, userRole, data]
+    [handleDeleteItem, isAuth, userRole, data]
   );
 
   if (error)
