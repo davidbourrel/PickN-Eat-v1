@@ -34,40 +34,40 @@ const Admin = () => {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, add it!',
-      }).then((result) => {
-        const token = localStorage.getItem(PICKANDEAT_LS_TOKEN);
-        if (result.isConfirmed && token) {
-          setLoading(true);
+      })
+        .then((result) => {
+          const token = localStorage.getItem(PICKANDEAT_LS_TOKEN);
+          if (result.isConfirmed && token) {
+            setLoading(true);
 
-          const authAxios = axios.create({
-            baseURL: BASE_URL,
-            headers: {
-              Authorization: `Bearer ${JSON.parse(token)}`,
-            },
-          });
-
-          return authAxios
-            .post('/burgers', items)
-            .then(() => {
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Added',
-                text: 'Your burger has been added!',
-                scrollbarPadding: false,
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              setLoading(false);
-              reset();
-              navigate('/');
-            })
-            .catch((err) => {
-              console.log(err);
-              setLoading(false);
+            const authAxios = axios.create({
+              baseURL: BASE_URL,
+              headers: { Authorization: `Bearer ${JSON.parse(token)}` },
             });
-        }
-      });
+
+            return authAxios
+              .post('burgers', items)
+              .then(() => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Added',
+                  text: 'Your burger has been added!',
+                  scrollbarPadding: false,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                setLoading(false);
+                reset();
+                navigate('/');
+              })
+              .catch((err) => {
+                console.log(err);
+                setLoading(false);
+              });
+          }
+        })
+        .catch((err) => console.log(err));
     },
     [reset, navigate]
   );

@@ -49,7 +49,7 @@ const ItemDetails: FC = () => {
           });
 
           return authAxios
-            .delete(`${BASE_URL}/${category}/${id}`)
+            .delete(`${category}/${id}`)
             .then(() => {
               Swal.fire({
                 title: 'Deleted!',
