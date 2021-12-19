@@ -23,6 +23,11 @@ app.use('/sides', require('./routes/api/sides'));
 
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
+app.use('/burgers', require('./routes/api/privateRoutes/burgers'));
+app.use('/desserts', require('./routes/api/privateRoutes/desserts'));
+app.use('/drinks', require('./routes/api/privateRoutes/drinks'));
+app.use('/salads', require('./routes/api/privateRoutes/salads'));
+app.use('/sides', require('./routes/api/privateRoutes/sides'));
 
 app.listen(SERVER_PORT, (error) => {
   if (error) {

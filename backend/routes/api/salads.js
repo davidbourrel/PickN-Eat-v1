@@ -4,9 +4,6 @@ const saladsController = require('../../controllers/salads');
 
 router.route('/').get(saladsController.getAllSalads);
 
-router
-  .route('/:id')
-  .get(saladsController.getSalad)
-  .delete(saladsController.deleteSalad);
+router.route('/:id').get(saladsController.getSalad);
 
 module.exports = router;

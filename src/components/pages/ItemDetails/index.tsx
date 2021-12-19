@@ -39,13 +39,12 @@ const ItemDetails: FC = () => {
         scrollbarPadding: false,
         showCancelButton: true,
       }).then((result) => {
-        if (result.isConfirmed) {
+        const token = localStorage.getItem(PICKANDEAT_LS_TOKEN);
+        if (result.isConfirmed && token) {
           const authAxios = axios.create({
             baseURL: BASE_URL,
             headers: {
-              Authorization: `Bearer ${localStorage.getItem(
-                PICKANDEAT_LS_TOKEN
-              )}`,
+              Authorization: `Bearer ${JSON.parse(token)}`,
             },
           });
 

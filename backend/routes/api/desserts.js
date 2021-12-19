@@ -4,9 +4,6 @@ const dessertsController = require('../../controllers/desserts');
 
 router.route('/').get(dessertsController.getAllDesserts);
 
-router
-  .route('/:id')
-  .get(dessertsController.getDessert)
-  .delete(dessertsController.deleteDessert);
+router.route('/:id').get(dessertsController.getDessert);
 
 module.exports = router;
