@@ -26,20 +26,12 @@ const getOne = (id) =>
 const hashPassword = (plainPassword) =>
   argon2.hash(plainPassword, hashingOptions);
 
-const createOne = async ({
-  id = newId,
-  first_name,
-  last_name,
-  email,
-  age,
-  password,
-  roles_id = ROLE_USER,
-}) => {
+const createOne = async ({ first_name, last_name, email, age, password }) => {
   try {
     const hashedPassword = await hashPassword(password);
     return await connection.query(
       'INSERT INTO users (id, first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [id, first_name, last_name, email, age, hashedPassword, roles_id]
+      [newId, first_name, last_name, email, age, hashedPassword, ROLE_USER]
     );
   } catch (err) {
     console.log(err);
