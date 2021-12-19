@@ -42,13 +42,13 @@ const SidesList: FC = () => {
       </Section>
     );
 
-  return (
+  return sidesList && sidesList.length > 0 ? (
     <Section>
       <HeaderTwo>{sidesTitle}</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allSides}
       </div>
     </Section>
-  );
+  ) : null;
 };
 export default SidesList;

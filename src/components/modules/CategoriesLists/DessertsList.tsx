@@ -42,13 +42,13 @@ const DessertsList: FC = () => {
       </Section>
     );
 
-  return (
+  return dessertsList && dessertsList.length > 0 ? (
     <Section>
       <HeaderTwo>{dessertsTitle}</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allDesserts}
       </div>
     </Section>
-  );
+  ) : null;
 };
 export default DessertsList;

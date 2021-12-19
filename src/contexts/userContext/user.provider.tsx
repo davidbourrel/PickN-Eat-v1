@@ -4,7 +4,6 @@ import { userInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
 import userContext from './user.context';
 import { UserContextInterface } from './user.types';
-import Swal from 'sweetalert2';
 import {
   PICKANDEAT_LS_CONNECTED,
   PICKANDEAT_LS_ROLE,
@@ -23,22 +22,10 @@ const UserProvider: FC = ({ children }) => {
     * User Logout
   /**************/
   const handleLogout = useCallback(() => {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      scrollbarPadding: false,
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true,
-    });
     localStorage.clear();
     setUser(null as unknown as userInformationInterface);
     setUserRole(null as unknown as string);
     setIsAuth(false);
-    Toast.fire({
-      icon: 'success',
-      title: 'Successfully disconnected!',
-    });
   }, [setIsAuth, setUser, setUserRole]);
 
   /***************
@@ -88,7 +75,6 @@ const UserProvider: FC = ({ children }) => {
   /***************
    * Check if a user has previously logged in
    /**************/
-
   useEffect(() => {
     const refetch = () => {
       const userToken = localStorage.getItem(PICKANDEAT_LS_TOKEN);
@@ -104,7 +90,6 @@ const UserProvider: FC = ({ children }) => {
         handleLogout();
       }
     };
-
     refetch();
 
     window.addEventListener('storage', refetch);

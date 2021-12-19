@@ -42,13 +42,13 @@ const DrinksList: FC = () => {
       </Section>
     );
 
-  return (
+  return drinksList && drinksList.length > 0 ? (
     <Section>
       <HeaderTwo>{drinksTitle}</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allDrinks}
       </div>
     </Section>
-  );
+  ) : null;
 };
 export default DrinksList;

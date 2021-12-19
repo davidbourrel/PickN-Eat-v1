@@ -40,13 +40,13 @@ const BurgersList: FC = () => {
       </Section>
     );
 
-  return (
+  return burgersList && burgersList.length > 0 ? (
     <Section>
       <HeaderTwo>Burgers</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {allBurgers}
       </div>
     </Section>
-  );
+  ) : null;
 };
 export default BurgersList;
