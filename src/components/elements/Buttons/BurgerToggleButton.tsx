@@ -1,38 +1,40 @@
 import { FC, useMemo } from 'react';
 
-const BURGER_CLASSNAME = `w-8 h-2 border-t-2 transition duration-300`;
+const BURGER_CLASSNAME = `h-2 border-t-2 transition duration-300`;
 
 interface BurgerToggleButtonProps {
   handleToggleMenu: () => void;
   isOpen: boolean;
-  color: string;
 }
 
 const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
   handleToggleMenu,
   isOpen,
-  color,
 }) => {
-  const computedClassName = useMemo(
-    () => `border-${color} ${BURGER_CLASSNAME}`,
-    [color]
-  );
-
-  // BurgerButton
   const borderTopClassName = useMemo(
-    () => `${computedClassName}
-      ${isOpen ? 'transform -rotate-45 translate-y-2' : ''}`,
-    [isOpen, computedClassName]
+    () => `${BURGER_CLASSNAME}
+      ${
+        isOpen
+          ? 'w-8 border-white transform -rotate-45 translate-y-2'
+          : 'w-8 border-black'
+      }`,
+    [isOpen]
   );
   const borderMiddleClassName = useMemo(
-    () => `${computedClassName}
-      ${isOpen ? 'opacity-0' : 'opacity-100'}`,
-    [isOpen, computedClassName]
+    () => `${BURGER_CLASSNAME}
+      ${
+        isOpen ? 'w-8 border-white opacity-0' : 'w-4 border-black opacity-100'
+      }`,
+    [isOpen]
   );
   const borderBottomClassName = useMemo(
-    () => `${computedClassName}
-      ${isOpen ? 'transform rotate-45 -translate-y-2 -translate-x-1' : ''}`,
-    [isOpen, computedClassName]
+    () => `${BURGER_CLASSNAME}
+      ${
+        isOpen
+          ? 'w-8 border-white transform rotate-45 -translate-y-2 -translate-x-1'
+          : 'w-6 border-black'
+      }`,
+    [isOpen]
   );
 
   return (

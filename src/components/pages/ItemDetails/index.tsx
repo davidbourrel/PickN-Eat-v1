@@ -67,8 +67,7 @@ const ItemDetails: FC = () => {
 
   const adminSection = useMemo(
     () =>
-      isAuth &&
-      userRolesEnum.admin === userRole && (
+      isAuth && userRolesEnum.admin === userRole ? (
         <div>
           <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
           <button
@@ -79,7 +78,7 @@ const ItemDetails: FC = () => {
             Delete {data?.title}
           </button>
         </div>
-      ),
+      ) : null,
     [handleDeleteItem, isAuth, userRole, data]
   );
 

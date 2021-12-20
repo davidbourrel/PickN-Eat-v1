@@ -13,7 +13,7 @@ const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
   const { userRole } = useUserRole();
   const isAuth = useUserIsAuth();
 
-  const isAdmin = useMemo(
+  const linkAdmin = useMemo(
     () =>
       isAuth && userRolesEnum.admin === userRole ? (
         <li className='mr-3 transition text-red-600 md:hover:text-red-700'>
@@ -43,7 +43,7 @@ const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
             DELIVERY
           </Link>
         </li>
-        {isAdmin}
+        {linkAdmin}
       </ul>
     </nav>
   );

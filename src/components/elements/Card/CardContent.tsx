@@ -21,7 +21,7 @@ const CardContent: FC<CardItemProps> = ({ item }) => {
 
   const [isActive, setIsActive] = useState(false);
 
-  const handleToggle = useCallback(() => setIsActive(!isActive), [isActive]);
+  const handleToggle = useCallback(() => setIsActive((c) => !c), []);
   const handleAddToCart = useCallback(() => addToCart(item), [addToCart, item]);
 
   const cardImage = useMemo(

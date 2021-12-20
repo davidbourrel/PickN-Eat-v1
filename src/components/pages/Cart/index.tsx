@@ -12,7 +12,7 @@ const Cart: FC = () => {
   const { cart } = useCart();
   const { cartTotalItems } = useTotalCart();
 
-  const emptyCart = useMemo(
+  const emptyCartMessage = useMemo(
     () =>
       cartTotalItems === 0 ? (
         <HeaderTwo className='font-bold text-red-600 border-none text-center'>
@@ -22,7 +22,7 @@ const Cart: FC = () => {
     [cartTotalItems]
   );
 
-  const cartContent = useMemo(
+  const cartItemsContent = useMemo(
     () =>
       cart.map((item) => (
         <CartContent key={item.id} item={item as FoodItemTypes} />
@@ -38,8 +38,8 @@ const Cart: FC = () => {
   return (
     <Section>
       <HeaderOne className='mb-4'>Your cart</HeaderOne>
-      {emptyCart}
-      {cartContent}
+      {emptyCartMessage}
+      {cartItemsContent}
       {cartCheckout}
     </Section>
   );

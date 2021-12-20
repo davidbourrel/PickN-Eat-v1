@@ -32,7 +32,6 @@ const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
           <BurgerToggleButton
             isOpen={isOpen}
             handleToggleMenu={handleToggleMenu}
-            color='black'
           />
           <Navbar closeMenu={closeMenu} />
           <Link to='/' onClick={closeMenu}>

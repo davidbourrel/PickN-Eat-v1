@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
@@ -14,15 +14,6 @@ const BurgersList: FC = () => {
     loading,
     error,
   } = useFetchingDatas(FETCH_BURGERS_URL as unknown as FUseFetchingDataArgs);
-
-  const allBurgers = useMemo(
-    () =>
-      burgersList &&
-      burgersList.map((burger) => (
-        <CardContent key={burger.id} item={burger as BurgerType} />
-      )),
-    [burgersList]
-  );
 
   if (error)
     return (
@@ -44,7 +35,9 @@ const BurgersList: FC = () => {
     <Section>
       <HeaderTwo>Burgers</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
-        {allBurgers}
+        {burgersList.map((burger) => (
+          <CardContent key={burger.id} item={burger as BurgerType} />
+        ))}
       </div>
     </Section>
   ) : null;

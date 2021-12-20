@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 const ITEM_TITLE_CLASSNAME = 'font-bold mr-2';
 const ITEM_CONTENT_CLASSNAME = 'capitalize';
@@ -20,15 +20,28 @@ const ItemDetailsMoreDetails: FC<ItemDetailsMoreDetailsProps> = ({
   pieces,
   price,
 }) => {
+  const categoryItem = useMemo(
+    () =>
+      category ? (
+        <li>
+          <span className={ITEM_TITLE_CLASSNAME}>Category:</span>
+          <span className={ITEM_CONTENT_CLASSNAME}>{category}</span>
+        </li>
+      ) : null,
+    [category]
+  );
+
+  const allergensItem = useMemo(
+    () =>
+      allergens
+        ? allergens
+        : 'This product does not contain any reportable allergens.',
+    [allergens]
+  );
   return (
     <div className='bg-red-900 text-gray-300 rounded p-5 max-w-2xl transition md:hover:text-white'>
       <ul>
-        {category ? (
-          <li>
-            <span className={ITEM_TITLE_CLASSNAME}>Category:</span>
-            <span className={ITEM_CONTENT_CLASSNAME}>{category}</span>
-          </li>
-        ) : null}
+        {categoryItem}
         <li>
           <span className={ITEM_TITLE_CLASSNAME}>Name:</span>
           <span className={ITEM_CONTENT_CLASSNAME}>{title}</span>
@@ -45,11 +58,7 @@ const ItemDetailsMoreDetails: FC<ItemDetailsMoreDetailsProps> = ({
         </li>
         <li>
           <span className={ITEM_TITLE_CLASSNAME}>Allergens:</span>
-          <span className={ITEM_CONTENT_CLASSNAME}>
-            {!!allergens
-              ? allergens
-              : 'This product does not contain any reportable allergens.'}
-          </span>
+          <span className={ITEM_CONTENT_CLASSNAME}>{allergensItem}</span>
         </li>
       </ul>
     </div>
