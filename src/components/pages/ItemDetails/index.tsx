@@ -6,7 +6,6 @@ import useFetchingItem from '../../../hooks/useFetchingItem';
 import { BASE_URL } from '../../../_constants/dataUrls';
 import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 import HeaderOne from '../../elements/Headings/HeaderOne';
-import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../../modules/Section';
 import Loader from '../../images/icons/Loader';
 import { userRolesEnum } from '../../../_types/user';
@@ -16,6 +15,7 @@ import ItemDetailsMoreDetails from './ItemDetailsMoreDetails';
 import useUserRole from '../../../contexts/userContext/useUserRole';
 import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
 import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
+import ItemDetailsAdmin from './ItemDetailsAdmin';
 
 const ItemDetails: FC = () => {
   const { userRole } = useUserRole();
@@ -68,16 +68,10 @@ const ItemDetails: FC = () => {
   const adminSection = useMemo(
     () =>
       isAuth && userRolesEnum.admin === userRole ? (
-        <div>
-          <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
-          <button
-            type='button'
-            onClick={handleDeleteItem}
-            className='rounded transition bg-red-600 text-white font-semibold px-4 py-2 mt-4 hover:bg-red-700 capitalize'
-          >
-            Delete {data?.title}
-          </button>
-        </div>
+        <ItemDetailsAdmin
+          handleDeleteItem={handleDeleteItem}
+          {...(data as FoodItemTypes)}
+        />
       ) : null,
     [handleDeleteItem, isAuth, userRole, data]
   );
@@ -99,19 +93,14 @@ const ItemDetails: FC = () => {
     );
 
   return (
-    <Section>
-      <HeaderOne className='capitalize'>{data?.title}</HeaderOne>
-      <HeaderTwo className='font-bold mt-6 mb-3 md:text-2xl'>
-        Description
-      </HeaderTwo>
+    <>
+      <div className=' w-full p-4 pb-0 sm:p-8 sm:pb-0 xl:mx-auto xl:max-w-6xl '>
+        <HeaderOne className='capitalize'>{data?.title}</HeaderOne>
+      </div>
       <ItemDetailsDescription {...(data as FoodItemTypes)} />
-      <HeaderTwo className='font-bold mt-6 mb-3 md:text-2xl'>Details</HeaderTwo>
-      <ItemDetailsMoreDetails
-        category={category}
-        {...(data as FoodItemTypes)}
-      />
+      <ItemDetailsMoreDetails {...(data as FoodItemTypes)} />
       {adminSection}
-    </Section>
+    </>
   );
 };
 

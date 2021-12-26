@@ -16,7 +16,7 @@ const Section: ForwardRefRenderFunction<
 > = ({ id, className, children }, ref) => {
   const computedClassName = useMemo(
     () =>
-      `flex flex-col p-4 w-full sm:p-8 xl:mx-auto xl:max-w-6xl ${
+      `flex flex-col w-full p-4 sm:p-8 xl:mx-auto xl:max-w-6xl ${
         className ?? ''
       }`,
     [className]
