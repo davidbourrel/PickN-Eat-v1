@@ -2,9 +2,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const verifyJWT = (req, res, next) => {
-  // Bearer token
-
   const { headers } = req;
+
   if (!headers.authorization) {
     return res.status(401).json({
       message: 'Missing Authorization header',
@@ -12,7 +11,6 @@ const verifyJWT = (req, res, next) => {
   }
 
   const parts = headers.authorization.split(' ');
-
   if (parts.length !== 2) {
     return res.status(403).json({
       message: `Header format is Authorization: ${process.env.ACCESS_TOKEN_TYPE} token`,

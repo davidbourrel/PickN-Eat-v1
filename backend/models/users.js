@@ -3,7 +3,13 @@ const connection = require('../db');
 const { ROLE_USER } = require('../_constants/roles');
 const crypto = require('crypto');
 
-const newId = crypto.randomBytes(15).toString('hex');
+const getAll = () => connection.query('SELECT * FROM users');
+
+const getOne = (id) =>
+  connection.query(
+    'SELECT * FROM users INNER JOIN roles ON roles.id=users.roles_id WHERE users.id=?',
+    [id]
+  );
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -15,16 +21,10 @@ const hashingOptions = {
 const verifyPassword = (plainPassword, hashedPassword) =>
   argon2.verify(hashedPassword, plainPassword, hashingOptions);
 
-const getAll = () => connection.query('SELECT * FROM users');
-
-const getOne = (id) =>
-  connection.query(
-    'SELECT * FROM users INNER JOIN roles ON roles.id=users.roles_id WHERE users.id=?',
-    [id]
-  );
-
 const hashPassword = (plainPassword) =>
   argon2.hash(plainPassword, hashingOptions);
+
+const newId = crypto.randomBytes(15).toString('hex'); // newId.length = 30
 
 const createOne = async ({ first_name, last_name, email, age, password }) => {
   try {
@@ -45,9 +45,9 @@ const deleteOne = (id) =>
   connection.query('DELETE FROM users WHERE id=?', [id]);
 
 module.exports = {
-  verifyPassword,
   getAll,
   getOne,
+  verifyPassword,
   createOne,
   updateOne,
   deleteOne,
