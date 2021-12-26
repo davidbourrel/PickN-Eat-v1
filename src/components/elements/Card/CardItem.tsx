@@ -12,7 +12,7 @@ interface CardItemProps {
   item: FoodItemTypes;
 }
 
-const CardContent: FC<CardItemProps> = ({ item }) => {
+const CardItem: FC<CardItemProps> = ({ item }) => {
   const { image, title, id, categories_id, description, price } = item;
 
   const addToCart = useAddToCart();
@@ -116,4 +116,4 @@ const CardContent: FC<CardItemProps> = ({ item }) => {
   );
 };
 
-export default CardContent;
+export default CardItem;

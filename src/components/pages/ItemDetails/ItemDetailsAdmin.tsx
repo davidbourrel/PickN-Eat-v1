@@ -17,7 +17,7 @@ const ItemDetailsAdmin: FC<ItemDetailsAdminProps> = ({
       <HeaderTwo className='mt-6 mb-3 font-bold'>Admin section</HeaderTwo>
       <RemoveButton
         onClick={handleDeleteItem}
-        className='rounded transition bg-red-600 text-white font-semibold px-4 py-2 mt-2 hover:bg-red-700 capitalize w-full md:w-48'
+        className='rounded transition bg-red-600 text-white font-semibold px-4 py-2 mt-2 hover:bg-red-700 capitalize w-52'
       >
         Delete {title}
       </RemoveButton>

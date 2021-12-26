@@ -2,9 +2,9 @@ import { FC } from 'react';
 import Loader from '../../images/icons/Loader';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../Section';
-import { FETCH_DESSERTS_URL } from '../../../_constants/dataUrls';
+import { BASE_URL } from '../../../_constants/dataUrls';
 import { DessertType } from '../../../_types/datas';
-import CardContent from '../../elements/Card/CardContent';
+import CardContent from '../../elements/Card/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
 import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 
@@ -13,7 +13,9 @@ const DessertsList: FC = () => {
     data: dessertsList,
     loading,
     error,
-  } = useFetchingDatas(FETCH_DESSERTS_URL as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(
+    `${BASE_URL}desserts` as unknown as FUseFetchingDataArgs
+  );
 
   if (error)
     return (

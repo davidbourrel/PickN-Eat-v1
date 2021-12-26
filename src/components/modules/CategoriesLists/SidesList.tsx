@@ -2,9 +2,9 @@ import { FC } from 'react';
 import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { FETCH_SIDES_URL } from '../../../_constants/dataUrls';
+import { BASE_URL } from '../../../_constants/dataUrls';
 import { SideType } from '../../../_types/datas';
-import CardContent from '../../elements/Card/CardContent';
+import CardContent from '../../elements/Card/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
 import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 
@@ -13,7 +13,7 @@ const SidesList: FC = () => {
     data: sidesList,
     loading,
     error,
-  } = useFetchingDatas(FETCH_SIDES_URL as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(`${BASE_URL}sides` as unknown as FUseFetchingDataArgs);
 
   if (error)
     return (

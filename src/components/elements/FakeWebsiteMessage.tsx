@@ -7,21 +7,25 @@ const FakeWebsiteMessage: FC = () => {
 
   return (
     <div
-      className={`fixed bottom-0 w-full bg-red-900 text-white flex items-center justify-center p-4 ${
+      className={`fixed bottom-0 w-full bg-red-900 text-white  ${
         removeMessage && 'hidden'
       }`}
     >
-      <p className='font-light'>
-        Ce site web est uniquement créé dans le but d'une présentation à un
-        examen. Vous ne pourrez rien commander et aucune information bancaire ne
-        sera sauvegardée.
-      </p>
-      <span
-        onClick={handleRemoveMessage}
-        className='w-1/6 flex-shrink-0 text-center text-lg font-semibold cursor-pointer transition hover:text-gray-900'
-      >
-        OK
-      </span>
+      <div className='flex p-4 sm:px-8 xl:mx-auto xl:max-w-6xl items-center justify-center'>
+        <p className='font-light'>
+          Ce site web est uniquement créé dans le but d'une présentation à un
+          examen. Vous ne pourrez rien commander et aucune information bancaire
+          ne sera sauvegardée.
+        </p>
+        <span className='w-1/6 flex-shrink-0 text-right'>
+          <button
+            onClick={handleRemoveMessage}
+            className='cursor-pointer transition hover:text-gray-900 text-lg font-semibold'
+          >
+            OK
+          </button>
+        </span>
+      </div>
     </div>
   );
 };

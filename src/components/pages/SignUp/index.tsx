@@ -3,11 +3,16 @@ import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-import SubmitButton from '../elements/Buttons/SubmitButton';
-import ErrorMessage from '../elements/ErrorMessage';
-import HeaderOne from '../elements/Headings/HeaderOne';
-import Loader from '../images/icons/Loader';
-import Section from '../modules/Section';
+import SubmitButton from '../../elements/Buttons/SubmitButton';
+import ErrorMessage from '../../elements/ErrorMessage';
+import HeaderOne from '../../elements/Headings/HeaderOne';
+import Loader from '../../images/icons/Loader';
+import Section from '../../modules/Section';
+import {
+  FIELD_CONTAINER_CLASSNAME,
+  INPUT_CLASSNAME,
+  LABEL_CLASSNAME,
+} from './const';
 
 const SignUp: FC = () => {
   const {
@@ -74,9 +79,9 @@ const SignUp: FC = () => {
     <Section>
       <HeaderOne>Create an account</HeaderOne>
       <form className='my-6' onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-5'>
-          <div className='flex flex-col'>
-            <label htmlFor='first_name' className='font-bold mb-2'>
+        <div className='grid grid-cols-1 gap-4 mb-5 sm:grid-cols-2 lg:grid-cols-3'>
+          <div className={FIELD_CONTAINER_CLASSNAME}>
+            <label htmlFor='first_name' className={LABEL_CLASSNAME}>
               First name
             </label>
             <input
@@ -85,15 +90,15 @@ const SignUp: FC = () => {
               placeholder='First name...'
               required
               maxLength={50}
-              className='border-2 rounded py-1 px-2 shadow-inner'
+              className={INPUT_CLASSNAME}
               {...register('first_name')}
             />
             {errors.first_name && (
               <ErrorMessage>Your first name is incorrect.</ErrorMessage>
             )}
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor='last_name' className='font-bold mb-2'>
+          <div className={FIELD_CONTAINER_CLASSNAME}>
+            <label htmlFor='last_name' className={LABEL_CLASSNAME}>
               Last name
             </label>
             <input
@@ -102,15 +107,15 @@ const SignUp: FC = () => {
               placeholder='Last name...'
               required
               maxLength={50}
-              className='border-2 rounded py-1 px-2 shadow-inner'
+              className={INPUT_CLASSNAME}
               {...register('last_name')}
             />
             {errors.last_name && (
               <ErrorMessage>Your last name is incorrect.</ErrorMessage>
             )}
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor='email' className='font-bold mb-2'>
+          <div className={FIELD_CONTAINER_CLASSNAME}>
+            <label htmlFor='email' className={LABEL_CLASSNAME}>
               Email
             </label>
             <input
@@ -119,7 +124,7 @@ const SignUp: FC = () => {
               placeholder='Enter your email...'
               required
               maxLength={100}
-              className='border-2 rounded py-1 px-2 shadow-inner'
+              className={INPUT_CLASSNAME}
               {...register('email')}
             />
             {errors.email ? (
@@ -128,8 +133,8 @@ const SignUp: FC = () => {
               <ErrorMessage>This email is already used.</ErrorMessage>
             ) : null}
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor='age' className='font-bold mb-2'>
+          <div className={FIELD_CONTAINER_CLASSNAME}>
+            <label htmlFor='age' className={LABEL_CLASSNAME}>
               Age
             </label>
             <input
@@ -139,15 +144,15 @@ const SignUp: FC = () => {
               required
               maxLength={100}
               minLength={1}
-              className='border-2 rounded py-1 px-2 shadow-inner'
+              className={INPUT_CLASSNAME}
               {...register('age')}
             />
             {errors.age && (
               <ErrorMessage>Your age must be a number.</ErrorMessage>
             )}
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor='password' className='font-bold mb-2'>
+          <div className={FIELD_CONTAINER_CLASSNAME}>
+            <label htmlFor='password' className={LABEL_CLASSNAME}>
               Password
             </label>
             <input
@@ -156,12 +161,12 @@ const SignUp: FC = () => {
               placeholder='Password...'
               required
               maxLength={255}
-              className='border-2 rounded py-1 px-2 shadow-inner'
+              className={INPUT_CLASSNAME}
               {...register('password')}
             />
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor='secondPassword' className='font-bold mb-2'>
+          <div className={FIELD_CONTAINER_CLASSNAME}>
+            <label htmlFor='secondPassword' className={LABEL_CLASSNAME}>
               Confirm Password
             </label>
             <input
@@ -170,7 +175,7 @@ const SignUp: FC = () => {
               placeholder='Confirm Password...'
               required
               maxLength={255}
-              className='border-2 rounded py-1 px-2 shadow-inner'
+              className={INPUT_CLASSNAME}
               {...register('secondPassword')}
             />
             {errorCheckPassword ? (

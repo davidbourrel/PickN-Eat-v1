@@ -8,13 +8,13 @@ import BCLogo from '../images/BCLogo';
 import BurgerToggleButton from '../elements/Buttons/BurgerToggleButton';
 import useTotalCart from '../../contexts/cartContext/useCartTotal';
 
-interface FHeaderProps {
+interface HeaderProps {
   handleToggleMenu: () => void;
   closeMenu: () => void;
   isOpen: boolean;
 }
 
-const Header: FC<FHeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
+const Header: FC<HeaderProps> = ({ handleToggleMenu, isOpen, closeMenu }) => {
   const { cartTotalItems } = useTotalCart();
 
   const computedClassName = useMemo(

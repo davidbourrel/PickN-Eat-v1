@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
-import { HeaderProps } from '../types';
+import { ClassNameComponentProps } from '../../../_types/components';
 
-const HeaderThree: FC<HeaderProps> = ({ className, children }) => {
+const HeaderThree: FC<ClassNameComponentProps> = ({ className, children }) => {
   const computedClassName = useMemo(
     () => `text-lg text-gray-800 font-semibold ${className ?? ''}`,
     [className]
