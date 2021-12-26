@@ -15,6 +15,7 @@ import ItemDetails from './components/pages/ItemDetails';
 import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
 import ValidAuth from './components/routes/ValidAuth';
+import FakeWebsiteMessage from './components/elements/FakeWebsiteMessage';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,6 +90,7 @@ const App: FC = () => {
         </div>
       </main>
       <Footer />
+      <FakeWebsiteMessage />
       {filterContent}
     </div>
   );
