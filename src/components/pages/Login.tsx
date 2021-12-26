@@ -11,7 +11,7 @@ import Section from '../modules/Section';
 import ErrorMessage from '../elements/ErrorMessage';
 import HeaderOne from '../elements/Headings/HeaderOne';
 import BCLogo from '../images/BCLogo';
-import { PICKANDEAT_LS_TOKEN } from '../../_constants/localStorage';
+import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 import useHandleLogin from '../../contexts/userContext/useHandleLogin';
 
 const Login: FC = () => {
@@ -49,7 +49,7 @@ const Login: FC = () => {
             if (!!res.data.token && res.data.token.length > 0) {
               handleLogin(res.data.token);
               localStorage.setItem(
-                PICKANDEAT_LS_TOKEN,
+                PICKANDEAT_LS_T,
                 JSON.stringify(res.data.token)
               );
               Toast.fire({

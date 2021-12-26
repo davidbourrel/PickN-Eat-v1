@@ -15,7 +15,7 @@ import { FoodItemTypes } from '../../../_types/datas';
 import ItemDetailsMoreDetails from './ItemDetailsMoreDetails';
 import useUserRole from '../../../contexts/userContext/useUserRole';
 import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
-import { PICKANDEAT_LS_TOKEN } from '../../../_constants/localStorage';
+import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
 
 const ItemDetails: FC = () => {
   const { userRole } = useUserRole();
@@ -39,7 +39,7 @@ const ItemDetails: FC = () => {
         scrollbarPadding: false,
         showCancelButton: true,
       }).then((result) => {
-        const token = localStorage.getItem(PICKANDEAT_LS_TOKEN);
+        const token = localStorage.getItem(PICKANDEAT_LS_T);
         if (result.isConfirmed && token) {
           const authAxios = axios.create({
             baseURL: BASE_URL,

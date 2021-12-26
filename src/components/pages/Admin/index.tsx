@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 import Loader from '../../images/icons/Loader';
 import HeaderOne from '../../elements/Headings/HeaderOne';
 import ErrorMessage from '../../elements/ErrorMessage';
-import { PICKANDEAT_LS_TOKEN } from '../../../_constants/localStorage';
+import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
 import { INPUT_CLASSNAME, LABEL_CLASSNAME } from './const';
 
 const Admin = () => {
@@ -37,7 +37,7 @@ const Admin = () => {
         confirmButtonText: 'Yes, add it!',
       })
         .then((result) => {
-          const token = localStorage.getItem(PICKANDEAT_LS_TOKEN);
+          const token = localStorage.getItem(PICKANDEAT_LS_T);
           if (result.isConfirmed && token) {
             setLoading(true);
 

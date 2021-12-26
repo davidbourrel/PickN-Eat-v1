@@ -4,12 +4,7 @@ import { userInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
 import userContext from './user.context';
 import { UserContextInterface } from './user.types';
-import {
-  PICKANDEAT_LS_CONNECTED,
-  PICKANDEAT_LS_ROLE,
-  PICKANDEAT_LS_TOKEN,
-  PICKANDEAT_LS_USER,
-} from '../../_constants/localStorage';
+import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 
 const { Provider } = userContext;
 
@@ -40,24 +35,15 @@ const UserProvider: FC = ({ children }) => {
         });
 
         const parsedToken = await JSON.parse(
-          window.atob(token.split('.')[1].replace('-', '+').replace('_', '/'))
+          Buffer.from(token.split('.')[1], 'base64').toString()
         );
 
         if (parsedToken?.id) {
           return await authAxios
             .get(`users/${parsedToken.id}`)
             .then((res) => {
-              localStorage.setItem(
-                PICKANDEAT_LS_USER,
-                JSON.stringify(res.data)
-              );
               setUser(res.data);
-              localStorage.setItem(
-                PICKANDEAT_LS_ROLE,
-                JSON.stringify(res.data.role)
-              );
               setUserRole(res.data.role);
-              localStorage.setItem(PICKANDEAT_LS_CONNECTED, 'true');
               setIsAuth(true);
             })
             .catch((err) => {
@@ -77,15 +63,10 @@ const UserProvider: FC = ({ children }) => {
    /**************/
   useEffect(() => {
     const refetch = () => {
-      const userToken = localStorage.getItem(PICKANDEAT_LS_TOKEN);
-      const userInformation = localStorage.getItem(PICKANDEAT_LS_USER);
-      const userRole = localStorage.getItem(PICKANDEAT_LS_ROLE);
-      const userConnected = localStorage.getItem(PICKANDEAT_LS_CONNECTED);
+      const userToken = localStorage.getItem(PICKANDEAT_LS_T);
 
-      if (userToken && userInformation && userRole && userConnected) {
-        setUser(JSON.parse(userInformation));
-        setUserRole(JSON.parse(userRole));
-        setIsAuth(JSON.parse(userConnected));
+      if (userToken) {
+        handleLogin(JSON.parse(userToken));
       } else {
         handleLogout();
       }
@@ -95,7 +76,7 @@ const UserProvider: FC = ({ children }) => {
     window.addEventListener('storage', refetch);
 
     return () => window.removeEventListener('storage', refetch);
-  }, [handleLogout]);
+  }, [handleLogin, handleLogout]);
 
   const contextValue: UserContextInterface = useMemo(
     () => ({
