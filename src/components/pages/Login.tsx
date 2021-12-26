@@ -89,7 +89,6 @@ const Login: FC = () => {
           Welcome to PickN'Eat !
         </HeaderOne>
         <BCLogo className='mb-5 mx-auto' />
-        <p>admin@pickandeat.com</p>
         <label htmlFor='email' className='flex flex-col mb-5 font-bold'>
           Email address:
           <input
