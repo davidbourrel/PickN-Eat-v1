@@ -1,6 +1,6 @@
 const argon2 = require('argon2');
 const connection = require('../db');
-const ROLE_USER = require('../_constants/roles');
+const { ROLE_USER } = require('../_constants/roles');
 const crypto = require('crypto');
 
 const newId = crypto.randomBytes(15).toString('hex');

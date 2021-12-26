@@ -1,3 +1,5 @@
 const ROLE_USER = 2;
 
-module.exports = ROLE_USER;
+const ADMIN_RESULT = 'admin';
+
+module.exports = { ROLE_USER, ADMIN_RESULT };

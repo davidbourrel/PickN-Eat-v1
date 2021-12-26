@@ -5,10 +5,11 @@ const verifyJWT = (req, res, next) => {
   // Bearer token
 
   const { headers } = req;
-  if (!headers.authorization)
+  if (!headers.authorization) {
     return res.status(401).json({
       message: 'Missing Authorization header',
     });
+  }
 
   const parts = headers.authorization.split(' ');
 
