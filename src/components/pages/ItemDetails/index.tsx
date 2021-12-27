@@ -94,7 +94,7 @@ const ItemDetails: FC = () => {
 
   return (
     <>
-      <div className=' w-full p-4 pb-0 sm:p-8 sm:pb-0 xl:mx-auto xl:max-w-6xl '>
+      <div className=' w-full p-4 pb-0 sm:px-8 sm:py-6 sm:pb-0 xl:mx-auto xl:max-w-6xl '>
         <HeaderOne className='capitalize'>{data?.title}</HeaderOne>
       </div>
       <ItemDetailsDescription {...(data as FoodItemTypes)} />

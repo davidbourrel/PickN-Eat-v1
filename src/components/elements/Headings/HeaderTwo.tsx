@@ -4,7 +4,7 @@ import { ClassNameComponentProps } from '../../../_types/components';
 const HeaderTwo: FC<ClassNameComponentProps> = ({ className, children }) => {
   const computedClassName = useMemo(
     () =>
-      `text-xl py-2 text-gray-800 font-bold border-b border-gray-300 md:text-2xl ${
+      `text-2xl py-2 text-gray-800 font-bold border-b border-gray-300 ${
         className ?? ''
       }`,
     [className]

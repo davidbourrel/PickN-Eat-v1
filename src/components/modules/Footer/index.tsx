@@ -4,7 +4,7 @@ import { COL_CLASSNAME, HEADER_CLASSNAME, ITEM_CLASSNAME } from './const';
 
 const Footer: FC = () => {
   return (
-    <footer className='w-full pb-10 shadow-sm bg-gray-800 text-white'>
+    <footer className='w-full mt-4 pb-10 shadow-sm bg-gray-800 text-white'>
       <div className='py-2 flex flex-col flex-wrap xs:flex-row xs:justify-center xs:text-center xl:mx-auto xl:max-w-6xl'>
         <div className={COL_CLASSNAME}>
           <h3 className={HEADER_CLASSNAME}>About Us</h3>

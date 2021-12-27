@@ -9,7 +9,7 @@ import SidesList from '../modules/CategoriesLists/SidesList';
 const Homepage: FC = () => {
   return (
     <>
-      <HeaderOne className='border-none text-center mt-2 p-4 pb-0 w-full sm:p-8 sm:pb-0 xl:mx-auto xl:max-w-6xl'>
+      <HeaderOne className='border-none text-center mt-2 p-4 w-full sm:px-8 sm:py-6 sm:pb-0 xl:mx-auto xl:max-w-6xl'>
         Choose whatever you want, just{' '}
         <strong className='font-black'>pick and eat</strong> !
       </HeaderOne>
