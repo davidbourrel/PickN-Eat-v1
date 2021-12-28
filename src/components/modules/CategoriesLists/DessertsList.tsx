@@ -4,7 +4,7 @@ import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../Section';
 import { BASE_URL } from '../../../_constants/dataUrls';
 import { DessertType } from '../../../_types/datas';
-import CardContent from '../../elements/Card/CardItem';
+import CardItem from '../../elements/Card/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
 import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 
@@ -38,7 +38,7 @@ const DessertsList: FC = () => {
       <HeaderTwo>Desserts</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {dessertsList.map((dessert) => (
-          <CardContent key={dessert.id} item={dessert as DessertType} />
+          <CardItem key={dessert.id} item={dessert as DessertType} />
         ))}
       </div>
     </Section>
