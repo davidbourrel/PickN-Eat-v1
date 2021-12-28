@@ -27,10 +27,11 @@ const CartProvider: FC = ({ children }) => {
       );
 
       if (checkIndex !== -1) {
-        return currentCart.map((item) => ({
-          ...item,
-          amount: item.amount + 1,
-        }));
+        return currentCart.map((item) =>
+          item.id === clickedItem.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
       }
       // First time the item is added
       return [...currentCart, { ...clickedItem, amount: 1 }];
