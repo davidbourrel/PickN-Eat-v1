@@ -21,18 +21,16 @@ const CartProvider: FC = ({ children }) => {
 
   const addToCart = useCallback((clickedItem: FoodItemTypes) => {
     setCart((currentCart) => {
-      
       // Is the item already added in the cart?
       const checkIndex = currentCart.findIndex(
         (item) => item.id === clickedItem.id
       );
 
       if (checkIndex !== -1) {
-        return currentCart.map((item) =>
-          item.id === clickedItem.id
-            ? { ...item, amount: item.amount + 1 }
-            : item
-        );
+        return currentCart.map((item) => ({
+          ...item,
+          amount: item.amount + 1,
+        }));
       }
       // First time the item is added
       return [...currentCart, { ...clickedItem, amount: 1 }];
