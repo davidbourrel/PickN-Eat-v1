@@ -11,7 +11,7 @@ const verifyRole = async (req, res, next) => {
 
   const [[retrieveUsers]] = await User.getOne(parsedToken.id);
   if (retrieveUsers.role !== ADMIN_RESULT) {
-    return res.sendStatus(401); //Unauthorized
+    return res.sendStatus(403); // Forbidden
   }
   next();
 };
