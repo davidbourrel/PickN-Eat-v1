@@ -21,8 +21,8 @@ const CartProvider: FC = ({ children }) => {
 
   const addToCart = useCallback((clickedItem: FoodItemTypes) => {
     setCart((currentCart) => {
+      
       // Is the item already added in the cart?
-
       const checkIndex = currentCart.findIndex(
         (item) => item.id === clickedItem.id
       );
