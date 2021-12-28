@@ -22,9 +22,12 @@ const CartProvider: FC = ({ children }) => {
   const addToCart = useCallback((clickedItem: FoodItemTypes) => {
     setCart((currentCart) => {
       // Is the item already added in the cart?
-      const exist = currentCart.find((item) => item.id === clickedItem.id);
 
-      if (exist) {
+      const checkIndex = currentCart.findIndex(
+        (item) => item.id === clickedItem.id
+      );
+
+      if (checkIndex !== -1) {
         return currentCart.map((item) =>
           item.id === clickedItem.id
             ? { ...item, amount: item.amount + 1 }
