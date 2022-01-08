@@ -24,11 +24,11 @@ const Delivery: FC = () => {
 
         <div className='flex justify-between items-center my-6 mx-auto'>
           <span className='rounded-full w-10 h-1 bg-red-900' />
-          <span className='mx-4'>OR</span>
+          <span className='mx-4 mb-1'>OR</span>
           <span className='rounded-full w-10 h-1 bg-red-900' />
         </div>
         <HeaderTwo className='border-none'>TAKEAWAY</HeaderTwo>
-        <p className='font-semibold text-lg'>Order and pick up on site</p>
+        <p className='font-semibold text-lg'>Order now and pick up on site</p>
         <Link to='/'>
           <OrderButton>ORDER ONLINE</OrderButton>
         </Link>

@@ -1,13 +1,19 @@
 import { FC, useMemo } from 'react';
 import { MapContainer, Marker, Tooltip } from 'react-leaflet';
 import VectorTileLayer from 'react-leaflet-vector-tile-layer';
-import { Point } from 'leaflet';
+import { Icon, Point } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ItineraryIcon from '../../images/icons/ItineraryIcon';
-import markerIcon from './markerIcon';
 
 const RestaurantMap: FC = () => {
   const position: [number, number] = [43.597539595572556, 1.4307798046657012];
+
+  const markerIcon = new Icon({
+    iconUrl: '/img/pinIcon.svg',
+    iconRetinaUrl: '/img/pinIcon.svg',
+    iconSize: new Point(73, 79),
+    iconAnchor: new Point(36.5, 55),
+  });
 
   const styleUrl = useMemo(
     () =>

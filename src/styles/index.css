@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* To desable z-index on the map */
-#app .leaflet-pane,
-.leaflet-control-container * {
+#app .leaflet-pane {
+  z-index: 0;
+}
+#app .leaflet-control-container * {
   z-index: 0;
 }
 
