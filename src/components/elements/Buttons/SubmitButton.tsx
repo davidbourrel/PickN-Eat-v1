@@ -12,7 +12,7 @@ const SubmitButton: FC<PropsWithChildren<SubmitButtonProps>> = ({
 }) => {
   const computedClassName = useMemo(
     () =>
-      `py-2 px-8 mb-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-gray-700 ${
+      `py-2 px-8 mb-5 bg-gray-800 text-white font-semibold rounded cursor-pointer transition transform-gpu active:scale-95 md:hover:bg-gray-700 ${
         className ?? ''
       }`,
     [className]

@@ -24,20 +24,27 @@ const Cart: FC = () => {
 
   const cartItemsContent = useMemo(
     () =>
-      cart.map((item) => (
-        <CartContent key={item.id} item={item as FoodItemTypes} />
-      )),
-    [cart]
+      cart && cart.length > 0
+        ? cart.map((item) => (
+            <CartContent
+              key={item.id}
+              cart={cart}
+              cartTotalItems={cartTotalItems}
+              item={item as FoodItemTypes}
+            />
+          ))
+        : null,
+    [cart, cartTotalItems]
   );
 
   const cartCheckout = useMemo(
-    () => cart.length !== 0 && <CartCheckout />,
+    () => (cart && cart.length > 0 ? <CartCheckout /> : null),
     [cart]
   );
 
   return (
     <Section>
-      <HeaderOne className='mb-4'>Your cart</HeaderOne>
+      <HeaderOne className='mb-4'>Shopping Cart</HeaderOne>
       {emptyCartMessage}
       {cartItemsContent}
       {cartCheckout}

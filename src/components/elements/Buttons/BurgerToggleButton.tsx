@@ -15,7 +15,7 @@ const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
     () => `${BURGER_CLASSNAME}
       ${
         isOpen
-          ? 'w-8 border-white transform -rotate-45 translate-y-2'
+          ? 'w-8 border-white transform-gpu -rotate-45 translate-y-2'
           : 'w-8 border-black'
       }`,
     [isOpen]
@@ -31,7 +31,7 @@ const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
     () => `${BURGER_CLASSNAME}
       ${
         isOpen
-          ? 'w-8 border-white transform rotate-45 -translate-y-2 -translate-x-1'
+          ? 'w-8 border-white transform-gpu rotate-45 -translate-y-2 -translate-x-1'
           : 'w-6 border-black'
       }`,
     [isOpen]

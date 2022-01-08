@@ -12,7 +12,7 @@ const OrderButton: FC<OrderButtonProps> = ({
 }) => {
   const computedClassName = useMemo(
     () =>
-      `bg-red-800 text-white text-sm font-bold px-5 py-2 transition transform-gpu md:hover:bg-red-700 md:active:scale-95 ${className}`,
+      `bg-red-800 text-white text-sm font-bold px-5 py-2 transition transform-gpu active:scale-95 md:hover:bg-red-700 ${className}`,
     [className]
   );
 

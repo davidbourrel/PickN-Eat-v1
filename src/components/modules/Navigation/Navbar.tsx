@@ -15,7 +15,7 @@ const Navbar: FC<FNavbarProps> = ({ closeMenu }) => {
 
   const linkAdmin = useMemo(
     () =>
-      isAuth && userRolesEnum.admin === userRole ? (
+      isAuth && userRole === userRolesEnum.admin ? (
         <li className='mr-3 transition text-red-600 md:hover:text-red-700'>
           <Link to='/admin' onClick={closeMenu} className={LINK_CLASSNAME}>
             ADMIN

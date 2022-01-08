@@ -86,7 +86,7 @@ const Login: FC = () => {
         className='m-5 p-6 text-gray-700 border-2 rounded shadow-md w-full max-w-sm mx-auto'
       >
         <HeaderOne className='border-none text-center mb-2'>
-          Welcome to PickN'Eat !
+          Sign-In to PickN'Eat !
         </HeaderOne>
         <BCLogo className='mb-5 mx-auto' />
         <label htmlFor='email' className='flex flex-col mb-5 font-bold'>

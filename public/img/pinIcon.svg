@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="73px" height="79px" viewBox="0 0 73 79" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Pin Map</title>
+    <defs>
+        <path d="M16.5,0 C7.425,0 0,7.3125 0,16.25 C0,28.275 15.015,38.35 15.51,38.675 C15.84,38.8375 16.17,39 16.5,39 C16.83,39 17.16,38.8375 17.49,38.675 C17.985,38.35 33,28.275 33,16.25 C33,7.3125 25.575,0 16.5,0 Z" id="path-1" />
+        <filter x="-101.5%" y="-67.9%" width="303.0%" height="271.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="7" in="SourceAlpha" result="shadowOffsetOuter1" />
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.304036458 0" type="matrix" in="shadowBlurOuter1" />
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-689.000000, -6252.000000)">
+            <g transform="translate(-240.000000, 6075.000000)">
+                <g transform="translate(949.000000, 190.000000)">
+                    <g fill-rule="nonzero">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1" />
+                        <use fill="#7f1d1d" xlink:href="#path-1" />
+                    </g>
+                    <circle fill="#FFFFFF" cx="16.5" cy="15.5" r="5.5" />
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

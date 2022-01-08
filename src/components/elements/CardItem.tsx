@@ -1,12 +1,12 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderThree from '../Headings/HeaderThree';
-import OrderButton from '../Buttons/OrderButton';
-import SeeMoreButton from '../Buttons/SeeMoreButton';
-import { FoodItemTypes, categoryFoodEnum } from '../../../_types/datas';
-import useCart from '../../../contexts/cartContext/useCart';
-import useAddToCart from '../../../contexts/cartContext/useAddToCart ';
-import useTotalCart from '../../../contexts/cartContext/useCartTotal';
+import HeaderThree from './Headings/HeaderThree';
+import OrderButton from './Buttons/OrderButton';
+import SeeMoreButton from './Buttons/SeeMoreButton';
+import { FoodItemTypes, categoryFoodEnum } from '../../_types/datas';
+import useCart from '../../contexts/cartContext/useCart';
+import useAddToCart from '../../contexts/cartContext/useAddToCart ';
+import useTotalCart from '../../contexts/cartContext/useCartTotal';
 
 interface CardItemProps {
   item: FoodItemTypes;
@@ -30,7 +30,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
         <img
           src={image}
           alt={title}
-          className='h-36 w-full object-cover transition duration-300 transform-gpu filter contrast-75 md:hover:contrast-100 md:hover:scale-125'
+          className='contrast-100 h-36 w-full object-cover transition duration-300 transform-gpu filter md:contrast-75 md:hover:contrast-100'
         />
       </div>
     ),
@@ -90,14 +90,14 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
     () => (
       <>
         <button
-          className='flex justify-center items-center py-4'
+          className='flex justify-center items-center pt-4 pb-2'
           onClick={handleToggle}
         >
           <span
-            className={`inline-block transform transition-transform w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800 ${
+            className={`inline-block transform-gpu transition-transform w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800 ${
               isActive
-                ? 'transform rotate-135 translate-y-1'
-                : 'transform -rotate-45 -translate-y-1'
+                ? 'rotate-135 translate-y-1'
+                : '-rotate-45 -translate-y-1'
             }`}
           />
         </button>
@@ -108,7 +108,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   );
 
   return (
-    <div className='card_content flex flex-col rounded overflow-hidden transition shadow-md md:hover:shadow-lg'>
+    <div className='card_content flex flex-col rounded overflow-hidden transition transform-gpu shadow-md md:hover:shadow-lg md:hover:-translate-y-1'>
       {cardImage}
       {addToCartSection}
       {seeMoreSection}

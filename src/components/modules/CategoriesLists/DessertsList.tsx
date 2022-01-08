@@ -4,7 +4,7 @@ import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../Section';
 import { BASE_URL } from '../../../_constants/dataUrls';
 import { DessertType } from '../../../_types/datas';
-import CardItem from '../../elements/Card/CardItem';
+import CardItem from '../../elements/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
 import { FUseFetchingDataArgs } from '../../../_types/fetchData';
 

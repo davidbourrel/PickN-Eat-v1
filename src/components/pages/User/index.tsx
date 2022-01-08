@@ -28,7 +28,7 @@ const User: FC = () => {
 
   return (
     <Section>
-      <HeaderOne>My information</HeaderOne>
+      <HeaderOne>Your Account</HeaderOne>
       <UserContent />
       <SubmitButton
         onClick={onSubmitHandler}

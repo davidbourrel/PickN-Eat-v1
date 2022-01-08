@@ -77,7 +77,7 @@ const SignUp: FC = () => {
 
   return (
     <Section>
-      <HeaderOne>Create an account</HeaderOne>
+      <HeaderOne>Create account</HeaderOne>
       <form className='my-6' onSubmit={handleSubmit(onSubmitHandler)}>
         <div className='grid grid-cols-1 gap-4 mb-5 sm:grid-cols-2 lg:grid-cols-3'>
           <div className={FIELD_CONTAINER_CLASSNAME}>

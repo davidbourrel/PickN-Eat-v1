@@ -82,7 +82,7 @@ const Admin = () => {
 
   return (
     <Section>
-      <HeaderOne>Add your new burger</HeaderOne>
+      <HeaderOne>Add new burger</HeaderOne>
       <form className='my-6' onSubmit={handleSubmit(onSubmitHandler)}>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 mb-5'>
           <div className='flex flex-col'>
