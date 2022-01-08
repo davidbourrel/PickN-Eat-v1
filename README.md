@@ -1,8 +1,8 @@
 # DOSSIER FRONT-END
 
-- Mettre le .env à jour. Pour "REACT_APP_GOOGLE_MAP=" je vous passe la clé uniquement par MP.
-- npm i
-- Après il faut faire un **npm start**
+1 Mettre le .env à jour. Pour "REACT_APP_GOOGLE_MAP=" je vous passe la clé uniquement par MP.
+2 npm i
+3 Après il faut faire un **npm start**
 
 # DOSSIER BACK-END
 
