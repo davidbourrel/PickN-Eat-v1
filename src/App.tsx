@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/modules/Header';
 import Footer from './components/modules/Footer';
@@ -16,6 +16,7 @@ import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
 import HasAuth from './components/routes/HasAuth';
 import FakeWebsiteMessage from './components/elements/FakeWebsiteMessage';
+import BlackFilter from './components/modules/BlackFilter';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,18 +28,6 @@ const App: FC = () => {
   const closeMenu = useCallback(() => {
     setIsOpen(false);
   }, []);
-
-  const filterContent = useMemo(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      return (
-        <div className='absolute inset-0 bg-black bg-opacity-75 md:static md:bg-white md:bg-opacity-0' />
-      );
-    } else {
-      document.body.style.overflow = 'auto';
-      return null;
-    }
-  }, [isOpen]);
 
   return (
     <div id='app' className='text-gray-800 flex flex-col min-h-screen'>
@@ -91,7 +80,7 @@ const App: FC = () => {
       </main>
       <Footer />
       <FakeWebsiteMessage />
-      {filterContent}
+      <BlackFilter isOpen={isOpen} />
     </div>
   );
 };

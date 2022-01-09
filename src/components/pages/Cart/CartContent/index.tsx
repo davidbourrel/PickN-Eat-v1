@@ -30,7 +30,7 @@ const CartContent: FC<CartContentProps> = ({ cart, cartTotalItems, item }) => {
         />
       </div>
 
-      <div className='cart-information flex flex-col flex-grow self-stretch px-4'>
+      <div className='cart-information flex flex-col flex-grow self-stretch px-2 xxs:px-4'>
         <HeaderThree className='font-bold capitalize md:text-xl'>
           {item.title}
         </HeaderThree>
