@@ -2,7 +2,6 @@ import { FC, useCallback, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
@@ -22,8 +21,6 @@ const Login: FC = () => {
     formState: { errors },
   } = useForm();
   const handleLogin = useHandleLogin();
-
-  const navigate = useNavigate();
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -47,20 +44,19 @@ const Login: FC = () => {
         .then((res) => {
           if (res.statusText === 'OK') {
             if (!!res.data.token && res.data.token.length > 0) {
-              handleLogin(res.data.token);
               localStorage.setItem(
                 PICKANDEAT_LS_T,
                 JSON.stringify(res.data.token)
               );
+              handleLogin(res.data.token);
               Toast.fire({
                 icon: 'success',
                 title: 'Successfully connected!',
               });
-              navigate('/user');
             }
-            setLoading(false);
-            reset();
           }
+          setLoading(false);
+          reset();
         })
         .catch((err) => {
           console.log(err);
@@ -69,7 +65,7 @@ const Login: FC = () => {
           reset();
         });
     },
-    [Toast, navigate, reset, handleLogin]
+    [Toast, reset, handleLogin]
   );
 
   if (loading)

@@ -14,7 +14,7 @@ import RequireAuth from './components/routes/RequireAuth';
 import ItemDetails from './components/pages/ItemDetails';
 import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
-import ValidAuth from './components/routes/ValidAuth';
+import HasAuth from './components/routes/HasAuth';
 import FakeWebsiteMessage from './components/elements/FakeWebsiteMessage';
 
 const App: FC = () => {
@@ -62,9 +62,9 @@ const App: FC = () => {
             <Route
               path='/login'
               element={
-                <ValidAuth>
+                <HasAuth>
                   <Login />
-                </ValidAuth>
+                </HasAuth>
               }
             />
             <Route path='/sign-up' element={<SignUp />} />

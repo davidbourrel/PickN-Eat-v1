@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Navigate, useLocation } from 'react-router';
 import useUserIsAuth from '../../contexts/userContext/useUserIsAuth';
 
-const ValidAuth: FC<{ children: JSX.Element }> = ({ children }) => {
+const HasAuth: FC<{ children: JSX.Element }> = ({ children }) => {
   const isAuth = useUserIsAuth();
   let location = useLocation();
 
@@ -13,4 +13,4 @@ const ValidAuth: FC<{ children: JSX.Element }> = ({ children }) => {
   return children;
 };
 
-export default ValidAuth;
+export default HasAuth;
