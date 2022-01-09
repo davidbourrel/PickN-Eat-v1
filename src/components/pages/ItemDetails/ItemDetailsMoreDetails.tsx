@@ -20,6 +20,16 @@ const ItemDetailsMoreDetails: FC<ItemDetailsMoreDetailsProps> = ({
   pieces,
   price,
 }) => {
+  const computedPieces = useMemo(
+    () =>
+      pieces ? (
+        <li>
+          <span className={ITEM_TITLE_CLASSNAME}>Pieces:</span>
+          <span className={ITEM_CONTENT_CLASSNAME}>{pieces}</span>
+        </li>
+      ) : null,
+    [pieces]
+  );
   const allergensItem = useMemo(
     () =>
       allergens
@@ -36,12 +46,7 @@ const ItemDetailsMoreDetails: FC<ItemDetailsMoreDetailsProps> = ({
             <span className={ITEM_TITLE_CLASSNAME}>Name:</span>
             <span className={ITEM_CONTENT_CLASSNAME}>{title}</span>
           </li>
-          {pieces ? (
-            <li>
-              <span className={ITEM_TITLE_CLASSNAME}>Pieces:</span>
-              <span className={ITEM_CONTENT_CLASSNAME}>{pieces}</span>
-            </li>
-          ) : null}
+          {computedPieces}
           <li>
             <span className={ITEM_TITLE_CLASSNAME}>Price:</span>
             <span className={ITEM_CONTENT_CLASSNAME}>${price}</span>

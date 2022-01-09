@@ -26,13 +26,11 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
 
   const cardImage = useMemo(
     () => (
-      <div className='overflow-hidden'>
-        <img
-          src={image}
-          alt={title}
-          className='contrast-100 h-36 w-full object-cover transition duration-300 transform-gpu filter md:contrast-75 md:hover:contrast-100'
-        />
-      </div>
+      <img
+        src={image}
+        alt={title}
+        className='contrast-100 h-36 w-full object-cover transition duration-300 transform-gpu filter md:contrast-75 md:group-hover:contrast-100'
+      />
     ),
     [image, title]
   );
@@ -108,7 +106,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   );
 
   return (
-    <div className='card_content flex flex-col rounded overflow-hidden transition transform-gpu shadow-md md:hover:shadow-lg md:hover:-translate-y-1'>
+    <div className='card_content group flex flex-col rounded overflow-hidden transition transform-gpu shadow-md md:hover:shadow-lg md:hover:-translate-y-1'>
       {cardImage}
       {addToCartSection}
       {seeMoreSection}

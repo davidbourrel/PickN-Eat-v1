@@ -24,20 +24,16 @@ const SignUp: FC = () => {
 
   const navigate = useNavigate();
 
-  const [errorCheckPassword, setErrorCheckPassword] = useState(
-    null as unknown as boolean
-  );
-  const [errorEmailDuplicated, setErrorEmailDuplicated] = useState(
-    null as unknown as boolean
-  );
+  const [errorCheckPassword, setErrorCheckPassword] = useState(false);
+  const [errorEmailDuplicated, setErrorEmailDuplicated] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = useCallback(
     async (user) => {
-      setErrorEmailDuplicated(null as unknown as boolean);
+      setErrorEmailDuplicated(false);
 
       if (user.password === user.secondPassword) {
-        setErrorCheckPassword(null as unknown as boolean);
+        setErrorCheckPassword(false);
         setLoading(true);
         return await axios
           .post('/register', user)

@@ -28,7 +28,7 @@ const largeSizes = {
 const allSizes = { ...smallSizes, ...largeSizes };
 
 module.exports = {
-  purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
+  purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
@@ -54,7 +54,7 @@ module.exports = {
   variants: {
     extend: {
       filter: ['hover', 'focus'],
-      contrast: ['hover', 'focus'],
+      contrast: ['hover', 'focus', 'group-hover'],
       scale: ['active'],
     },
   },

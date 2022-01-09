@@ -25,7 +25,7 @@ const Login: FC = () => {
 
   const navigate = useNavigate();
 
-  const [error, setError] = useState(null as unknown as boolean);
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const Toast = Swal.mixin({
@@ -39,7 +39,7 @@ const Login: FC = () => {
 
   const onSubmitHandler = useCallback(
     async (values: userLoginInterface) => {
-      setError(null as unknown as boolean);
+      setError(false);
       setLoading(true);
 
       return await axios

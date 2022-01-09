@@ -43,7 +43,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
 
   const linkAdmin = useMemo(
     () =>
-      isAuth && userRolesEnum.admin === userRole ? (
+      isAuth && userRole === userRolesEnum.admin ? (
         <li className='mr-2 px-4 rounded transition mb-7 text-red-600 bg-gray-100'>
           <Link to='/admin' onClick={closeMenu} className={LINK_CLASSNAME}>
             ADMIN
