@@ -11,6 +11,7 @@ const { Provider } = userContext;
 const UserProvider: FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null as unknown as userInformationInterface);
+  const [userLoading, setUserLoading] = useState(false);
   const [userRole, setUserRole] = useState(null as unknown as string);
 
   /***************
@@ -45,12 +46,15 @@ const UserProvider: FC = ({ children }) => {
               setUser(res.data);
               setUserRole(res.data.role);
               setIsAuth(true);
+              setUserLoading(false);
             })
             .catch((err) => {
               console.log(err);
+              setUserLoading(false);
               handleLogout();
             });
         } else {
+          setUserLoading(false);
           handleLogout();
         }
       }
@@ -83,12 +87,24 @@ const UserProvider: FC = ({ children }) => {
       isAuth,
       user,
       setUser,
+      userLoading,
+      setUserLoading,
       userRole,
       setUserRole,
       handleLogout,
       handleLogin,
     }),
-    [isAuth, user, setUser, userRole, setUserRole, handleLogout, handleLogin]
+    [
+      isAuth,
+      user,
+      setUser,
+      userLoading,
+      setUserLoading,
+      userRole,
+      setUserRole,
+      handleLogout,
+      handleLogin,
+    ]
   );
 
   return <Provider value={contextValue}>{children}</Provider>;

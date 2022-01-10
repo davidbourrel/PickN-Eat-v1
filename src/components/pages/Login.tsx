@@ -2,7 +2,6 @@ import { FC, useCallback, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { userLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Loader from '../images/icons/Loader';
@@ -12,6 +11,7 @@ import HeaderOne from '../elements/Headings/HeaderOne';
 import BCLogo from '../images/BCLogo';
 import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 import useHandleLogin from '../../contexts/userContext/useHandleLogin';
+import useUser from '../../contexts/userContext/useUser';
 
 const Login: FC = () => {
   const {
@@ -21,23 +21,14 @@ const Login: FC = () => {
     formState: { errors },
   } = useForm();
   const handleLogin = useHandleLogin();
+  const { userLoading, setUserLoading } = useUser();
 
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    scrollbarPadding: false,
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-  });
 
   const onSubmitHandler = useCallback(
     async (values: userLoginInterface) => {
       setError(false);
-      setLoading(true);
+      setUserLoading(true);
 
       return await axios
         .post('/auth', values)
@@ -49,26 +40,21 @@ const Login: FC = () => {
                 JSON.stringify(res.data.token)
               );
               handleLogin(res.data.token);
-              Toast.fire({
-                icon: 'success',
-                title: 'Successfully connected!',
-              });
             }
           }
-          setLoading(false);
           reset();
         })
         .catch((err) => {
           console.log(err);
-          setLoading(false);
+          setUserLoading(false);
           setError(true);
           reset();
         });
     },
-    [Toast, reset, handleLogin]
+    [reset, handleLogin, setUserLoading]
   );
 
-  if (loading)
+  if (userLoading)
     return (
       <Section className='items-center flex-1'>
         <Loader />

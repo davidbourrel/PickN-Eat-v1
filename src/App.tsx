@@ -14,7 +14,7 @@ import RequireAuth from './components/routes/RequireAuth';
 import ItemDetails from './components/pages/ItemDetails';
 import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
-import HasAuth from './components/routes/HasAuth';
+import HasValidAuth from './components/routes/HasValidAuth';
 import FakeWebsiteMessage from './components/elements/FakeWebsiteMessage';
 import BlackFilter from './components/modules/BlackFilter';
 
@@ -51,9 +51,9 @@ const App: FC = () => {
             <Route
               path='/login'
               element={
-                <HasAuth>
+                <HasValidAuth>
                   <Login />
-                </HasAuth>
+                </HasValidAuth>
               }
             />
             <Route path='/sign-up' element={<SignUp />} />

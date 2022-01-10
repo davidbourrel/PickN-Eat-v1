@@ -5,6 +5,8 @@ export interface UserContextInterface {
   isAuth: boolean;
   user: userInformationInterface;
   setUser: Dispatch<SetStateAction<userInformationInterface>>;
+  userLoading: boolean;
+  setUserLoading: Dispatch<SetStateAction<boolean>>;
   userRole: string;
   setUserRole: Dispatch<SetStateAction<string>>;
   handleLogout: () => void;
