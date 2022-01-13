@@ -37,7 +37,7 @@ const Login: FC = () => {
             if (!!res.data.token && res.data.token.length > 0) {
               localStorage.setItem(
                 PICKANDEAT_LS_T,
-                JSON.stringify(res.data.token)
+                Buffer.from(JSON.stringify(res.data.token)).toString('base64')
               );
               handleLogin(res.data.token);
             }

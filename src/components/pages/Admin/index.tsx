@@ -37,13 +37,17 @@ const Admin = () => {
         confirmButtonText: 'Yes, add it!',
       })
         .then((result) => {
-          const token = localStorage.getItem(PICKANDEAT_LS_T);
-          if (result.isConfirmed && token) {
+          const userToken = localStorage.getItem(PICKANDEAT_LS_T);
+          if (result.isConfirmed && !!userToken && userToken.length > 0) {
             setLoading(true);
 
             const authAxios = axios.create({
               baseURL: BASE_URL,
-              headers: { Authorization: `Bearer ${JSON.parse(token)}` },
+              headers: {
+                Authorization: `Bearer ${JSON.parse(
+                  Buffer.from(userToken, 'base64').toString()
+                )}`,
+              },
             });
 
             return authAxios

@@ -39,7 +39,10 @@ const UserProvider: FC = ({ children }) => {
           Buffer.from(token.split('.')[1], 'base64').toString()
         );
 
-        if (parsedToken?.id) {
+        const now = Date.now() / 1000;
+        const expiry = parsedToken?.iat + parsedToken?.exp;
+
+        if (parsedToken?.id && now < expiry) {
           return await authAxios
             .get(`users/${parsedToken.id}`)
             .then((res) => {
@@ -69,8 +72,8 @@ const UserProvider: FC = ({ children }) => {
     const refetch = () => {
       const userToken = localStorage.getItem(PICKANDEAT_LS_T);
 
-      if (userToken) {
-        handleLogin(JSON.parse(userToken));
+      if (!!userToken && userToken.length > 0) {
+        handleLogin(JSON.parse(Buffer.from(userToken, 'base64').toString()));
       } else {
         handleLogout();
       }
