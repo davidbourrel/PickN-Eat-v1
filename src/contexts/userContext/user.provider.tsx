@@ -32,7 +32,9 @@ const UserProvider: FC = ({ children }) => {
       if (!!token && token.length > 0) {
         const authAxios = axios.create({
           baseURL: BASE_URL,
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${token}`,
+          },
         });
 
         const parsedToken = await JSON.parse(

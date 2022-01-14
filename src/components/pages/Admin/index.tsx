@@ -44,9 +44,9 @@ const Admin = () => {
             const authAxios = axios.create({
               baseURL: BASE_URL,
               headers: {
-                Authorization: `Bearer ${JSON.parse(
-                  Buffer.from(userToken, 'base64').toString()
-                )}`,
+                Authorization: `${
+                  process.env.REACT_APP_ACCESS_TOKEN_TYPE
+                } ${JSON.parse(Buffer.from(userToken, 'base64').toString())}`,
               },
             });
 
