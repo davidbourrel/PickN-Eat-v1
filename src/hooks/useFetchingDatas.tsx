@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import {
-  FUseFetchingDataArgs,
-  FUseFetchingDatasResult,
+  UseFetchingDatasUrl,
+  UseFetchingDatasResult,
 } from '../_types/fetchData';
 
 type FUseFetchingDatasHook = (
-  url: FUseFetchingDataArgs
-) => FUseFetchingDatasResult;
+  url: UseFetchingDatasUrl
+) => UseFetchingDatasResult;
 
 const useFetchingDatas: FUseFetchingDatasHook = (url) => {
   const [data, setData] = useState(null as unknown as []);

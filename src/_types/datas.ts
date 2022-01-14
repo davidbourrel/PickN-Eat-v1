@@ -1,4 +1,4 @@
-export interface BurgerType {
+export interface BurgerInterface {
   id: number;
   title: string;
   price: number;
@@ -8,7 +8,7 @@ export interface BurgerType {
   categories_id: number;
   amount: number;
 }
-export interface DessertType {
+export interface DessertInterface {
   id: number;
   title: string;
   price: number;
@@ -18,7 +18,7 @@ export interface DessertType {
   categories_id: number;
   amount: number;
 }
-export interface DrinkType {
+export interface DrinkInterface {
   id: number;
   title: string;
   price: number;
@@ -28,7 +28,7 @@ export interface DrinkType {
   categories_id: number;
   amount: number;
 }
-export interface SaladType {
+export interface SaladInterface {
   id: number;
   title: string;
   price: number;
@@ -38,7 +38,7 @@ export interface SaladType {
   categories_id: number;
   amount: number;
 }
-export interface SideType {
+export interface SideInterface {
   id: number;
   title: string;
   price: number;
@@ -51,11 +51,11 @@ export interface SideType {
 }
 
 export type FoodItemTypes =
-  | BurgerType
-  | DessertType
-  | DrinkType
-  | SaladType
-  | SideType;
+  | BurgerInterface
+  | DessertInterface
+  | DrinkInterface
+  | SaladInterface
+  | SideInterface;
 
 export enum categoryFoodEnum {
   burgers = 1,

@@ -1,9 +1,9 @@
-import { FC, useMemo } from 'react';
+import { FC, HTMLProps, useMemo } from 'react';
 import { ClassNameComponentProps } from '../../../_types/components';
 
 interface OrderButtonProps
   extends ClassNameComponentProps,
-    React.HTMLProps<HTMLButtonElement> {}
+    HTMLProps<HTMLButtonElement> {}
 
 const OrderButton: FC<OrderButtonProps> = ({
   className,

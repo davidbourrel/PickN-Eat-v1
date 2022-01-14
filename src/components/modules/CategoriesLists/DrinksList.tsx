@@ -3,17 +3,17 @@ import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { BASE_URL } from '../../../_constants/dataUrls';
-import { DrinkType } from '../../../_types/datas';
+import { DrinkInterface } from '../../../_types/datas';
 import CardItem from '../../elements/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
-import { FUseFetchingDataArgs } from '../../../_types/fetchData';
+import { UseFetchingDatasUrl } from '../../../_types/fetchData';
 
 const DrinksList: FC = () => {
   const {
     data: drinksList,
     loading,
     error,
-  } = useFetchingDatas(`${BASE_URL}drinks` as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(`${BASE_URL}drinks` as unknown as UseFetchingDatasUrl);
 
   if (error)
     return (
@@ -36,7 +36,7 @@ const DrinksList: FC = () => {
       <HeaderTwo>Drinks</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {drinksList.map((drink) => (
-          <CardItem key={drink.id} item={drink as DrinkType} />
+          <CardItem key={drink.id} item={drink as DrinkInterface} />
         ))}
       </div>
     </Section>

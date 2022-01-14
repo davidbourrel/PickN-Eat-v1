@@ -1,4 +1,4 @@
-export interface userLoginInterface {
+export interface UserLoginInterface {
   email: string;
   password: any;
 }
@@ -8,7 +8,7 @@ export enum userRolesEnum {
   user = 'user',
 }
 
-export interface userInformationInterface {
+export interface UserInformationInterface {
   id: string;
   first_name: string;
   last_name: string;

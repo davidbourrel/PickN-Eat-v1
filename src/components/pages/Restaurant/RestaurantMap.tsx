@@ -47,7 +47,7 @@ const RestaurantMap: FC = () => {
                 <span className='mr-1'>
                   <ItineraryIcon />
                 </span>
-                <span>Itinerary</span>
+                <span>18 place Roguet 31300 - Toulouse</span>
               </a>
             </div>
           </Tooltip>

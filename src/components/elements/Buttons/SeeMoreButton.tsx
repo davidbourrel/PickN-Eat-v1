@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, HTMLProps, PropsWithChildren } from 'react';
 import { ClassNameComponentProps } from '../../../_types/components';
 
 interface SeeMoreButtonProps
   extends ClassNameComponentProps,
-    React.HTMLProps<HTMLButtonElement> {}
+    HTMLProps<HTMLButtonElement> {}
 
 const SeeMoreButton: FC<PropsWithChildren<SeeMoreButtonProps>> = ({
   children,

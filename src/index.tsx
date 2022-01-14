@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from './components/modules/ScrollToTop';
@@ -8,7 +8,7 @@ import { CartProvider } from './contexts/cartContext';
 import { UserProvider } from './contexts/userContext/';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <UserProvider>
         <CartProvider>
@@ -17,6 +17,6 @@ ReactDOM.render(
         </CartProvider>
       </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root')
 );

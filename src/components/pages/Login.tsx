@@ -2,7 +2,7 @@ import { FC, useCallback, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { userLoginInterface } from '../../_types/user';
+import { UserLoginInterface } from '../../_types/user';
 import SubmitButton from '../elements/Buttons/SubmitButton';
 import Loader from '../images/icons/Loader';
 import Section from '../modules/Section';
@@ -26,7 +26,7 @@ const Login: FC = () => {
   const [error, setError] = useState(false);
 
   const onSubmitHandler = useCallback(
-    async (values: userLoginInterface) => {
+    async (values: UserLoginInterface) => {
       setError(false);
       setUserLoading(true);
 

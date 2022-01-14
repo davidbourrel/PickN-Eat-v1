@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren, useMemo } from 'react';
+import { FC, HTMLProps, PropsWithChildren, useMemo } from 'react';
 import { ClassNameComponentProps } from '../../../_types/components';
 
 interface SubmitButtonProps
   extends ClassNameComponentProps,
-    React.HTMLProps<HTMLButtonElement> {}
+    HTMLProps<HTMLButtonElement> {}
 
 const SubmitButton: FC<PropsWithChildren<SubmitButtonProps>> = ({
   className,

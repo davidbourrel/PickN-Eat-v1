@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { FoodItemTypes } from '../_types/datas';
 import {
-  FUseFetchingDataArgs,
-  FUseFetchingItemResult,
+  UseFetchingDatasUrl,
+  UseFetchingItemResult,
 } from '../_types/fetchData';
 
-type FUseFetchingDataHook = (
-  url: FUseFetchingDataArgs
-) => FUseFetchingItemResult;
+type FUseFetchingDataHook = (url: UseFetchingDatasUrl) => UseFetchingItemResult;
 
 const useFetchingItem: FUseFetchingDataHook = (url) => {
   const [data, setData] = useState(null as unknown as FoodItemTypes);

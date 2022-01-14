@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
-import { userInformationInterface } from '../../_types/user';
+import { UserInformationInterface } from '../../_types/user';
 import { BASE_URL } from '../../_constants/dataUrls';
 import userContext from './user.context';
 import { UserContextInterface } from './user.types';
@@ -10,7 +10,7 @@ const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [user, setUser] = useState(null as unknown as userInformationInterface);
+  const [user, setUser] = useState(null as unknown as UserInformationInterface);
   const [userLoading, setUserLoading] = useState(false);
   const [userRole, setUserRole] = useState(null as unknown as string);
 
@@ -19,7 +19,7 @@ const UserProvider: FC = ({ children }) => {
   /**************/
   const handleLogout = useCallback(() => {
     localStorage.clear();
-    setUser(null as unknown as userInformationInterface);
+    setUser(null as unknown as UserInformationInterface);
     setUserRole(null as unknown as string);
     setIsAuth(false);
   }, [setIsAuth, setUser, setUserRole]);
@@ -41,10 +41,10 @@ const UserProvider: FC = ({ children }) => {
           Buffer.from(token.split('.')[1], 'base64').toString()
         );
 
-        const now = Date.now() / 1000;
-        const expiry = parsedToken?.iat + parsedToken?.exp;
+        // parsedToken.exp * 1000 to get it in millisecond
+        const notExpiry = parsedToken?.exp * 1000 > Date.now();
 
-        if (parsedToken?.id && now < expiry) {
+        if (parsedToken?.id && notExpiry) {
           return await authAxios
             .get(`users/${parsedToken.id}`)
             .then((res) => {

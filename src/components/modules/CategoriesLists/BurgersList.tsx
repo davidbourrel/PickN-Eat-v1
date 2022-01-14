@@ -3,17 +3,17 @@ import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import { BASE_URL } from '../../../_constants/dataUrls';
-import { BurgerType } from '../../../_types/datas';
+import { BurgerInterface } from '../../../_types/datas';
 import CardItem from '../../elements/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
-import { FUseFetchingDataArgs } from '../../../_types/fetchData';
+import { UseFetchingDatasUrl } from '../../../_types/fetchData';
 
 const BurgersList: FC = () => {
   const {
     data: burgersList,
     loading,
     error,
-  } = useFetchingDatas(`${BASE_URL}burgers` as unknown as FUseFetchingDataArgs);
+  } = useFetchingDatas(`${BASE_URL}burgers` as unknown as UseFetchingDatasUrl);
 
   if (error)
     return (
@@ -36,7 +36,7 @@ const BurgersList: FC = () => {
       <HeaderTwo>Burgers</HeaderTwo>
       <div className='grid grid-cols-1 xs:grid-cols-2 mt-8 gap-8 items-start md:grid-cols-3 xl:grid-cols-4'>
         {burgersList.map((burger) => (
-          <CardItem key={burger.id} item={burger as BurgerType} />
+          <CardItem key={burger.id} item={burger as BurgerInterface} />
         ))}
       </div>
     </Section>

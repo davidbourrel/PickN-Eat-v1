@@ -41,7 +41,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
   }, [isOpen, handleToggleMenu]);
   useOutsideClick(NavbarRef, handleOutsideClick);
 
-  const linkAdmin = useMemo(
+  const adminItem = useMemo(
     () =>
       isAuth && userRole === userRolesEnum.admin ? (
         <li className='mr-2 px-4 rounded transition mb-7 text-red-600 bg-gray-100'>
@@ -84,7 +84,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
             <DeliverySvg />
           </Link>
         </li>
-        {linkAdmin}
+        {adminItem}
         <li className='mr-3 transition mb-7 text-gray-800'>
           <Link
             to='/'

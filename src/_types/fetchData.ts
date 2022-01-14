@@ -1,14 +1,14 @@
-export interface FUseFetchingDataArgs {
+export interface UseFetchingDatasUrl {
   url: string;
 }
 
-export interface FUseFetchingDatasResult {
+export interface UseFetchingDatasResult {
   loading: boolean;
   error: string;
   data: any[];
 }
 
-export interface FUseFetchingItemResult {
+export interface UseFetchingItemResult {
   loading: boolean;
   error: string;
   data: any;

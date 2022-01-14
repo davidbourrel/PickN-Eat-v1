@@ -7,6 +7,7 @@ import { FoodItemTypes, categoryFoodEnum } from '../../_types/datas';
 import useCart from '../../contexts/cartContext/useCart';
 import useAddToCart from '../../contexts/cartContext/useAddToCart ';
 import useTotalCart from '../../contexts/cartContext/useCartTotal';
+import useSeeMoreText from '../../hooks/useSeeMoreText';
 
 interface CardItemProps {
   item: FoodItemTypes;
@@ -18,6 +19,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   const addToCart = useAddToCart();
   const { cart } = useCart();
   const { cartTotalItems } = useTotalCart();
+  const descriptionCutted = useSeeMoreText(description);
 
   const [isActive, setIsActive] = useState(false);
 
@@ -34,6 +36,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
     ),
     [image, title]
   );
+
   const addToCartSection = useMemo(
     () => (
       <div className='px-3'>
@@ -56,14 +59,6 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
     [cart, handleAddToCart, price, cartTotalItems, title]
   );
 
-  const descriptionCutted = useMemo(() => {
-    const descriptionWords = description.split(' ');
-    if (descriptionWords.length > 10) {
-      descriptionWords.length = 10;
-    }
-    return `${descriptionWords.join(' ')}...`;
-  }, [description]);
-
   const seeMoreDescription = useMemo(
     () => (
       <div
@@ -76,7 +71,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
         <p className='pb-3 px-3'>
           {descriptionCutted}
           <Link to={`/${categoryFoodEnum[categories_id]}/${id}`}>
-            <SeeMoreButton children='See more' />
+            <SeeMoreButton>see more</SeeMoreButton>
           </Link>
         </p>
       </div>
