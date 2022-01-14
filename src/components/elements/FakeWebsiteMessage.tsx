@@ -13,9 +13,9 @@ const FakeWebsiteMessage: FC = () => {
     >
       <div className='flex p-4 sm:px-8 xl:mx-auto xl:max-w-6xl items-center justify-center'>
         <p className='font-light'>
-          Ce site web est uniquement créé dans le but d'une présentation à un
-          examen. Vous ne pourrez rien commander et aucune information bancaire
-          ne sera sauvegardée.
+          Attention! Ce site web est factice. Il a été créé dans le but d'une
+          présentation à un examen. Vous ne pourrez rien commander et aucune
+          information bancaire ne sera sauvegardée.
         </p>
         <span className='w-1/6 flex-shrink-0 text-right'>
           <button
