@@ -36,7 +36,7 @@ const ScrollToTop: FC = () => {
   }, []);
 
   return (
-    <button className={buttonClassName} onClick={handleScrollToTop}>
+    <button className={buttonClassName} onClick={handleScrollToTop} aria-label="scroll to top">
       <span
         className='inline-block transform-gpu transition w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800
         rotate-135 translate-y-1 group-hover:border-white'

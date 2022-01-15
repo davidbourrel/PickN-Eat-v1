@@ -85,6 +85,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
         <button
           className='flex justify-center items-center pt-4 pb-2'
           onClick={handleToggle}
+          aria-label='display description'
         >
           <span
             className={`inline-block transform-gpu transition-transform w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800 ${

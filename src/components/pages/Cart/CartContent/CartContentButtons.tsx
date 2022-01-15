@@ -30,6 +30,7 @@ const CartContentButtons: FC<CartContentButtonsProps> = ({
           : ' opacity-100 transition md:hover:bg-red-700 md:hover:text-white pointer-events-auto select-auto'
       }
         `}
+        aria-label='remove item'
       >
         <MinusSvg />
       </button>
@@ -48,6 +49,7 @@ const CartContentButtons: FC<CartContentButtonsProps> = ({
         : ' opacity-100 transition md:hover:bg-red-700 md:hover:text-white pointer-events-auto select-auto'
     }
       `}
+        aria-label='add item'
       >
         <PlusSvg />
       </button>

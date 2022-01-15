@@ -18,7 +18,7 @@ const SubmitButton: FC<PropsWithChildren<SubmitButtonProps>> = ({
     [className]
   );
   return (
-    <button type='submit' onClick={onClick} className={computedClassName}>
+    <button type='submit' onClick={onClick} className={computedClassName} aria-label="submit">
       {children}
     </button>
   );

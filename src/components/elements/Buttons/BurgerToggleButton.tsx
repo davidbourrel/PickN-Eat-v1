@@ -38,7 +38,7 @@ const BurgerToggleButton: FC<BurgerToggleButtonProps> = ({
   );
 
   return (
-    <button className='cursor-pointer md:hidden' onClick={handleToggleMenu}>
+    <button className='cursor-pointer md:hidden' onClick={handleToggleMenu} aria-label="menu">
       <div className={borderTopClassName} />
       <div className={borderMiddleClassName} />
       <div className={borderBottomClassName} />

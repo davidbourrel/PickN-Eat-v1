@@ -17,7 +17,7 @@ const OrderButton: FC<OrderButtonProps> = ({
   );
 
   return (
-    <button onClick={onClick} className={computedClassName}>
+    <button onClick={onClick} className={computedClassName} aria-label="add to cart">
       {children}
     </button>
   );

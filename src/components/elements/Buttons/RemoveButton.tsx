@@ -13,7 +13,7 @@ const RemoveButton: FC<PropsWithChildren<RemoveButtonProps>> = ({
   const computedClassName = useMemo(() => `${className ?? ''}`, [className]);
 
   return (
-    <button onClick={onClick} className={computedClassName}>
+    <button onClick={onClick} className={computedClassName} aria-label="remove to cart">
       {children}
     </button>
   );

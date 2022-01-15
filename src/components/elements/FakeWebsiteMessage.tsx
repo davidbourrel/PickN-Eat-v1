@@ -21,6 +21,7 @@ const FakeWebsiteMessage: FC = () => {
           <button
             onClick={handleRemoveMessage}
             className='cursor-pointer transition hover:text-gray-900 text-lg font-semibold'
+            aria-label='warning message'
           >
             OK
           </button>

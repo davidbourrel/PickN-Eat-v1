@@ -13,6 +13,7 @@ const SeeMoreButton: FC<PropsWithChildren<SeeMoreButtonProps>> = ({
     <button
       onClick={onClick}
       className='inline text-center font-semibold pl-1 transition text-red-800 md:hover:text-red-600'
+      aria-label="see more button"
     >
       {children}
     </button>
