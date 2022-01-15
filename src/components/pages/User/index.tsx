@@ -6,6 +6,7 @@ import useHandleLogout from '../../../contexts/userContext/useHandleLogout';
 import Swal from 'sweetalert2';
 import UserContent from './UserContent';
 import useHandleDeleteUserAccount from '../../../contexts/userContext/useHandleDeleteUserAccount';
+import HeaderTwo from '../../elements/Headings/HeaderTwo';
 
 const User: FC = () => {
   const handleLogout = useHandleLogout();
@@ -39,13 +40,11 @@ const User: FC = () => {
         confirmButtonColor: '#3085d6',
         scrollbarPadding: false,
         showCancelButton: true,
-      })
-        .then((result) => {
-          if (result.isConfirmed) {
-            handleDeleteUserAccount();
-          }
-        })
-        .catch((err) => console.log(err)),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleDeleteUserAccount();
+        }
+      }),
     [handleDeleteUserAccount]
   );
 
@@ -63,7 +62,7 @@ const User: FC = () => {
         </SubmitButton>
       </Section>
       <Section>
-        <HeaderOne className='text-red-700'>Delete account</HeaderOne>
+        <HeaderTwo className='text-red-700'>Delete account</HeaderTwo>
         <p className='mt-4'>
           Once you delete your account, there is no going back. Please be
           certain.

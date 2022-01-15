@@ -1,6 +1,6 @@
 const User = require('../models/users');
 
-const handleNewUser = async (req, res) => {
+const handleRegister = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({ message: 'Email or password is required.' });
@@ -20,4 +20,4 @@ const handleNewUser = async (req, res) => {
   }
 };
 
-module.exports = { handleNewUser };
+module.exports = { handleRegister };

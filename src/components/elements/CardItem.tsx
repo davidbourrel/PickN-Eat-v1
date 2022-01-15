@@ -51,7 +51,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
                 : 'opacity-100 pointer-events-auto'
             }
           >
-            Add to cart
+            {cart && cartTotalItems >= 20 ? 'MAX' : 'Add to cart'}
           </OrderButton>
         </div>
       </div>

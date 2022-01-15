@@ -30,6 +30,16 @@ const UserProvider: FC = ({ children }) => {
    /**************/
   const handleLogin = useCallback(
     async (token) => {
+      // Modal message
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        scrollbarPadding: false,
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
+
       if (!!token && token.length > 0) {
         const authAxios = axios.create({
           baseURL: BASE_URL,
@@ -53,9 +63,12 @@ const UserProvider: FC = ({ children }) => {
               setUserRole(res.data.role);
               setIsAuth(true);
               setUserLoading(false);
+              Toast.fire({
+                icon: 'success',
+                title: 'Successfully connected!',
+              });
             })
-            .catch((err) => {
-              console.log(err);
+            .catch(() => {
               setUserLoading(false);
               handleLogout();
             });
@@ -123,8 +136,7 @@ const UserProvider: FC = ({ children }) => {
             scrollbarPadding: false,
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           handleLogout();
         });
     }

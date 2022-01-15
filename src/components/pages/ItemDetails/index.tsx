@@ -56,18 +56,15 @@ const ItemDetails: FC = () => {
             },
           });
 
-          return authAxios
-            .delete(`${category}/${id}`)
-            .then(() => {
-              Swal.fire({
-                title: 'Deleted!',
-                text: `${data?.title} has been deleted.`,
-                icon: 'success',
-                scrollbarPadding: false,
-              });
-              navigate('/');
-            })
-            .catch((err) => console.log(err));
+          return authAxios.delete(`${category}/${id}`).then(() => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: `${data?.title} has been deleted.`,
+              icon: 'success',
+              scrollbarPadding: false,
+            });
+            navigate('/');
+          });
         }
       }),
     [category, id, navigate, data]

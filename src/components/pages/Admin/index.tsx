@@ -35,50 +35,47 @@ const Admin = () => {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, add it!',
-      })
-        .then((result) => {
-          const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
-          if (
-            result.isConfirmed &&
-            !!encodedUserToken &&
-            encodedUserToken.length > 0
-          ) {
-            setLoading(true);
+      }).then((result) => {
+        const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
+        if (
+          result.isConfirmed &&
+          !!encodedUserToken &&
+          encodedUserToken.length > 0
+        ) {
+          setLoading(true);
 
-            const decodedToken = JSON.parse(
-              Buffer.from(encodedUserToken, 'base64').toString()
-            );
+          const decodedToken = JSON.parse(
+            Buffer.from(encodedUserToken, 'base64').toString()
+          );
 
-            const authAxios = axios.create({
-              baseURL: BASE_URL,
-              headers: {
-                Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
-              },
-            });
+          const authAxios = axios.create({
+            baseURL: BASE_URL,
+            headers: {
+              Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
+            },
+          });
 
-            return authAxios
-              .post('burgers', items)
-              .then(() => {
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Added',
-                  text: 'Your burger has been added!',
-                  scrollbarPadding: false,
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                setLoading(false);
-                reset();
-                navigate('/');
-              })
-              .catch((err) => {
-                console.log(err);
-                setLoading(false);
+          return authAxios
+            .post('burgers', items)
+            .then(() => {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Added',
+                text: 'Your burger has been added!',
+                scrollbarPadding: false,
+                showConfirmButton: false,
+                timer: 1500,
               });
-          }
-        })
-        .catch((err) => console.log(err));
+              setLoading(false);
+              reset();
+              navigate('/');
+            })
+            .catch(() => {
+              setLoading(false);
+            });
+        }
+      });
     },
     [reset, navigate]
   );
