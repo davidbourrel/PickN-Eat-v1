@@ -37,16 +37,22 @@ const Admin = () => {
         confirmButtonText: 'Yes, add it!',
       })
         .then((result) => {
-          const userToken = localStorage.getItem(PICKANDEAT_LS_T);
-          if (result.isConfirmed && !!userToken && userToken.length > 0) {
+          const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
+          if (
+            result.isConfirmed &&
+            !!encodedUserToken &&
+            encodedUserToken.length > 0
+          ) {
             setLoading(true);
+
+            const decodedToken = JSON.parse(
+              Buffer.from(encodedUserToken, 'base64').toString()
+            );
 
             const authAxios = axios.create({
               baseURL: BASE_URL,
               headers: {
-                Authorization: `${
-                  process.env.REACT_APP_ACCESS_TOKEN_TYPE
-                } ${JSON.parse(Buffer.from(userToken, 'base64').toString())}`,
+                Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
               },
             });
 

@@ -10,4 +10,6 @@ export const INITIAL_USER_CONTEXT: UserContextInterface = {
   setUserRole: null as unknown as UserContextInterface['setUserRole'],
   handleLogout: null as unknown as UserContextInterface['handleLogout'],
   handleLogin: null as unknown as UserContextInterface['handleLogin'],
+  handleDeleteUserAccount:
+    null as unknown as UserContextInterface['handleDeleteUserAccount'],
 };

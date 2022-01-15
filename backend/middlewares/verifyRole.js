@@ -5,6 +5,7 @@ const verifyRole = async (req, res, next) => {
   const { headers } = req;
 
   const token = headers.authorization;
+
   const parsedToken = await JSON.parse(
     Buffer.from(token.split('.')[1], 'base64').toString()
   );

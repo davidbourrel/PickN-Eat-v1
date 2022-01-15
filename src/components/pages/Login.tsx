@@ -44,8 +44,7 @@ const Login: FC = () => {
           }
           reset();
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setUserLoading(false);
           setError(true);
           reset();

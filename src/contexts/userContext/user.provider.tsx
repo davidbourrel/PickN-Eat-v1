@@ -5,6 +5,7 @@ import { BASE_URL } from '../../_constants/dataUrls';
 import userContext from './user.context';
 import { UserContextInterface } from './user.types';
 import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
+import Swal from 'sweetalert2';
 
 const { Provider } = userContext;
 
@@ -18,7 +19,7 @@ const UserProvider: FC = ({ children }) => {
     * User Logout
   /**************/
   const handleLogout = useCallback(() => {
-    localStorage.clear();
+    localStorage.removeItem(PICKANDEAT_LS_T);
     setUser(null as unknown as UserInformationInterface);
     setUserRole(null as unknown as string);
     setIsAuth(false);
@@ -72,10 +73,12 @@ const UserProvider: FC = ({ children }) => {
    /**************/
   useEffect(() => {
     const refetch = () => {
-      const userToken = localStorage.getItem(PICKANDEAT_LS_T);
+      const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
 
-      if (!!userToken && userToken.length > 0) {
-        handleLogin(JSON.parse(Buffer.from(userToken, 'base64').toString()));
+      if (!!encodedUserToken && encodedUserToken.length > 0) {
+        handleLogin(
+          JSON.parse(Buffer.from(encodedUserToken, 'base64').toString())
+        );
       } else {
         handleLogout();
       }
@@ -86,6 +89,47 @@ const UserProvider: FC = ({ children }) => {
 
     return () => window.removeEventListener('storage', refetch);
   }, [handleLogin, handleLogout]);
+
+  /***************
+   * User delete account
+   /**************/
+  const handleDeleteUserAccount = useCallback(() => {
+    const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
+
+    if (!!encodedUserToken && encodedUserToken.length > 0) {
+      const decodedToken = JSON.parse(
+        Buffer.from(encodedUserToken, 'base64').toString()
+      );
+
+      const authAxios = axios.create({
+        baseURL: BASE_URL,
+        headers: {
+          Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
+        },
+      });
+
+      const parsedToken = JSON.parse(
+        Buffer.from(decodedToken.split('.')[1], 'base64').toString()
+      );
+
+      return authAxios
+        .delete(`users/${parsedToken?.id}`)
+        .then(() => {
+          handleLogout();
+          Swal.fire({
+            title: 'Deleted!',
+            text: `Your account has been deleted.`,
+            icon: 'success',
+            scrollbarPadding: false,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          handleLogout();
+        });
+    }
+    return handleLogout();
+  }, [handleLogout]);
 
   const contextValue: UserContextInterface = useMemo(
     () => ({
@@ -98,6 +142,7 @@ const UserProvider: FC = ({ children }) => {
       setUserRole,
       handleLogout,
       handleLogin,
+      handleDeleteUserAccount,
     }),
     [
       isAuth,
@@ -109,6 +154,7 @@ const UserProvider: FC = ({ children }) => {
       setUserRole,
       handleLogout,
       handleLogin,
+      handleDeleteUserAccount,
     ]
   );
 

@@ -11,4 +11,5 @@ export interface UserContextInterface {
   setUserRole: Dispatch<SetStateAction<string>>;
   handleLogout: () => void;
   handleLogin: (token: string) => void;
+  handleDeleteUserAccount: () => void;
 }
