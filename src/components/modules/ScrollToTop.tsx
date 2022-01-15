@@ -1,14 +1,48 @@
-import { FC, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 const ScrollToTop: FC = () => {
-  const { pathname } = useLocation();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const buttonClassName = useMemo(
+    () =>
+      `group fixed bottom-4 right-4 flex justify-center items-center border-2 border-gray-800 p-2 shadow-lg rounded transition transform-gpu bg-white hover:bg-gray-800 ${
+        isVisible ? '' : 'scale-0'
+      } sm:right-8 2xl:hidden`,
+    [isVisible]
+  );
+
+  const handleScrollToTop = useCallback(
+    () =>
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      }),
+    []
+  );
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Button is displayed after scrolling for 500 pixels
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 500) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-  return null;
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  return (
+    <button className={buttonClassName} onClick={handleScrollToTop}>
+      <span
+        className='inline-block transform-gpu transition w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800
+        rotate-135 translate-y-1 group-hover:border-white'
+      />
+    </button>
+  );
 };
 
 export default ScrollToTop;

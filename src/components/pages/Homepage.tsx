@@ -5,6 +5,7 @@ import DessertsList from '../modules/CategoriesLists/DessertsList';
 import DrinksList from '../modules/CategoriesLists/DrinksList';
 import SaladsList from '../modules/CategoriesLists/SaladsList';
 import SidesList from '../modules/CategoriesLists/SidesList';
+import ScrollToTop from '../modules/ScrollToTop';
 
 const Homepage: FC = () => {
   return (
@@ -18,6 +19,7 @@ const Homepage: FC = () => {
       <DrinksList />
       <SaladsList />
       <DessertsList />
+      <ScrollToTop />
     </>
   );
 };

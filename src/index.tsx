@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import ScrollToTop from './components/modules/ScrollToTop';
+import ScrollRestoration from './components/modules/ScrollRestoration';
 import './styles/index.css';
 import App from './App';
 import { CartProvider } from './contexts/cartContext';
@@ -12,7 +12,7 @@ ReactDOM.render(
     <BrowserRouter>
       <UserProvider>
         <CartProvider>
-          <ScrollToTop />
+          <ScrollRestoration />
           <App />
         </CartProvider>
       </UserProvider>
