@@ -4,10 +4,11 @@ const helmet = require('helmet');
 const cors = require('cors');
 const verifyJWT = require('./middlewares/verifyJWT');
 const verifyRole = require('./middlewares/verifyRole');
+require('dotenv').config();
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

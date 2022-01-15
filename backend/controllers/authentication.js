@@ -9,7 +9,7 @@ const handleLogin = async (req, res) => {
     return res
       .status(400)
       .json({ message: 'Email and password are required.' });
-      
+
   const [retrieveUsers] = await User.getAll();
   const foundUser = retrieveUsers.find((person) => person.email === email);
 
