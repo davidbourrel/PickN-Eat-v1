@@ -7,8 +7,8 @@ const verifyRole = require('./middlewares/verifyRole');
 require('dotenv').config();
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
 
-app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL }));
+app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -21,17 +21,17 @@ app.use('/drinks', require('./routes/api/drinks'));
 app.use('/salads', require('./routes/api/salads'));
 app.use('/sides', require('./routes/api/sides'));
 
-// Public routes with auth
+// Routes with auth
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
 
-// Private routes
+// Admin routes
 app.use(verifyRole);
-app.use('/burgers', require('./routes/api/privateRoutes/burgers'));
-app.use('/desserts', require('./routes/api/privateRoutes/desserts'));
-app.use('/drinks', require('./routes/api/privateRoutes/drinks'));
-app.use('/salads', require('./routes/api/privateRoutes/salads'));
-app.use('/sides', require('./routes/api/privateRoutes/sides'));
+app.use('/burgers', require('./routes/api/adminRoutes/burgers'));
+app.use('/desserts', require('./routes/api/adminRoutes/desserts'));
+app.use('/drinks', require('./routes/api/adminRoutes/drinks'));
+app.use('/salads', require('./routes/api/adminRoutes/salads'));
+app.use('/sides', require('./routes/api/adminRoutes/sides'));
 
 app.listen(SERVER_PORT, (error) => {
   if (error) {

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-interface BlackFilterProps {
+interface BlackBackgroundFilterProps {
   isOpen: boolean;
 }
 
-const BlackFilter: FC<BlackFilterProps> = ({ isOpen }) => {
+const BlackBackgroundFilter: FC<BlackBackgroundFilterProps> = ({ isOpen }) => {
   isOpen
     ? (document.body.style.overflow = 'hidden')
     : (document.body.style.overflow = 'auto');
@@ -14,4 +14,4 @@ const BlackFilter: FC<BlackFilterProps> = ({ isOpen }) => {
   ) : null;
 };
 
-export default BlackFilter;
+export default BlackBackgroundFilter;

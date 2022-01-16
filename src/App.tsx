@@ -16,7 +16,7 @@ import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
 import HasValidAuth from './components/routes/HasValidAuth';
 import FakeWebsiteMessage from './components/elements/FakeWebsiteMessage';
-import BlackFilter from './components/modules/BlackFilter';
+import BlackBackgroundFilter from './components/modules/BlackBackgroundFilter';
 
 const App: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,7 +80,7 @@ const App: FC = () => {
       </main>
       <Footer />
       <FakeWebsiteMessage />
-      <BlackFilter isOpen={isOpen} />
+      <BlackBackgroundFilter isOpen={isOpen} />
     </div>
   );
 };

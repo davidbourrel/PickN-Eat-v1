@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-// import ApplicationContext from '../context/ApplicationContext';
 import Navbar from './Navigation/Navbar';
 import ShopSvg from '../images/icons/ShopSvg';
 import UserSvg from '../images/icons/UserSvg';
