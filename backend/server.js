@@ -5,7 +5,7 @@ const cors = require('cors');
 const verifyJWT = require('./middlewares/verifyJWT');
 const verifyRole = require('./middlewares/verifyRole');
 require('dotenv').config();
-const SERVER_PORT = process.env.SERVER_PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use(helmet());
@@ -33,10 +33,10 @@ app.use('/drinks', require('./routes/api/adminRoutes/drinks'));
 app.use('/salads', require('./routes/api/adminRoutes/salads'));
 app.use('/sides', require('./routes/api/adminRoutes/sides'));
 
-app.listen(SERVER_PORT, (error) => {
+app.listen(PORT, (error) => {
   if (error) {
     console.log(error);
   } else {
-    console.log(`Server running on port ${SERVER_PORT}`);
+    console.log(`Server running on port ${PORT}`);
   }
 });
