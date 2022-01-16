@@ -3,6 +3,7 @@ import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { BASE_URL } from '../../../_constants/dataUrls';
 import SubmitButton from '../../elements/Buttons/SubmitButton';
 import ErrorMessage from '../../elements/ErrorMessage';
 import HeaderOne from '../../elements/Headings/HeaderOne';
@@ -35,7 +36,12 @@ const SignUp: FC = () => {
       if (user.password === user.secondPassword) {
         setErrorCheckPassword(false);
         setLoading(true);
-        return await axios
+
+        const axiosInstance = axios.create({
+          baseURL: BASE_URL,
+        });
+
+        return await axiosInstance
           .post('/register', user)
           .then(() => {
             Swal.fire({

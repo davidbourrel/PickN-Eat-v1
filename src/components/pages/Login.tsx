@@ -12,6 +12,7 @@ import BCLogo from '../images/BCLogo';
 import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 import useHandleLogin from '../../contexts/userContext/useHandleLogin';
 import useUser from '../../contexts/userContext/useUser';
+import { BASE_URL } from '../../_constants/dataUrls';
 
 const Login: FC = () => {
   const {
@@ -30,7 +31,11 @@ const Login: FC = () => {
       setError(false);
       setUserLoading(true);
 
-      return await axios
+      const axiosInstance = axios.create({
+        baseURL: BASE_URL,
+      });
+
+      return await axiosInstance
         .post('/auth', values)
         .then((res) => {
           if (res.statusText === 'OK') {
