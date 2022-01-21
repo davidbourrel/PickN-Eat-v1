@@ -3,7 +3,6 @@ import { FC, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useFetchingItem from '../../../hooks/useFetchingItem';
-import { BASE_URL } from '../../../_constants/dataUrls';
 import { UseFetchingDatasUrl } from '../../../_types/fetchData';
 import HeaderOne from '../../elements/Headings/HeaderOne';
 import Section from '../../modules/Section';
@@ -24,7 +23,7 @@ const ItemDetails: FC = () => {
   const navigate = useNavigate();
 
   const { data, loading, error } = useFetchingItem(
-    `${BASE_URL}/${category}/${id}` as unknown as UseFetchingDatasUrl
+    `${process.env.REACT_APP_API_URL}/${category}/${id}` as unknown as UseFetchingDatasUrl
   );
 
   const handleDeleteItem = useCallback(
@@ -50,7 +49,7 @@ const ItemDetails: FC = () => {
           );
 
           const authAxios = axios.create({
-            baseURL: BASE_URL,
+            baseURL: process.env.REACT_APP_API_URL,
             headers: {
               Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
             },

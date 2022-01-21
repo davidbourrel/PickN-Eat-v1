@@ -3,7 +3,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import SubmitButton from '../../elements/Buttons/SubmitButton';
 import Section from '../../modules/Section';
-import { BASE_URL } from '../../../_constants/dataUrls';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Loader from '../../images/icons/Loader';
@@ -49,7 +48,7 @@ const Admin = () => {
           );
 
           const authAxios = axios.create({
-            baseURL: BASE_URL,
+            baseURL: process.env.REACT_APP_API_URL,
             headers: {
               Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
             },

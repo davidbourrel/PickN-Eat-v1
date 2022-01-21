@@ -1,7 +1,6 @@
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import { UserInformationInterface } from '../../_types/user';
-import { BASE_URL } from '../../_constants/dataUrls';
 import userContext from './user.context';
 import { UserContextInterface } from './user.types';
 import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
@@ -42,7 +41,7 @@ const UserProvider: FC = ({ children }) => {
 
       if (!!token && token.length > 0) {
         const authAxios = axios.create({
-          baseURL: BASE_URL,
+          baseURL: process.env.REACT_APP_API_URL,
           headers: {
             Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${token}`,
           },
@@ -115,7 +114,7 @@ const UserProvider: FC = ({ children }) => {
       );
 
       const authAxios = axios.create({
-        baseURL: BASE_URL,
+        baseURL: process.env.REACT_APP_API_URL,
         headers: {
           Authorization: `${process.env.REACT_APP_ACCESS_TOKEN_TYPE} ${decodedToken}`,
         },

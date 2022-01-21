@@ -1,37 +1,26 @@
 const express = require('express');
-const app = express();
-const helmet = require('helmet');
 const cors = require('cors');
-const verifyJWT = require('./middlewares/verifyJWT');
-const verifyRole = require('./middlewares/verifyRole');
+const helmet = require('helmet');
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
+const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL }));
-app.use(helmet());
-app.use(express.urlencoded({ extended: true }));
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  optionsSuccessStatus: 200,
+};
+
+// pre-route middlewares
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
 
-// Public routes
-app.use('/register', require('./routes/register'));
-app.use('/auth', require('./routes/auth'));
-app.use('/burgers', require('./routes/api/burgers'));
-app.use('/desserts', require('./routes/api/desserts'));
-app.use('/drinks', require('./routes/api/drinks'));
-app.use('/salads', require('./routes/api/salads'));
-app.use('/sides', require('./routes/api/sides'));
+// routes
+require('./routes')(app);
 
-// Routes with auth
-app.use(verifyJWT);
-app.use('/users', require('./routes/api/users'));
-
-// Admin routes
-app.use(verifyRole);
-app.use('/burgers', require('./routes/api/adminRoutes/burgers'));
-app.use('/desserts', require('./routes/api/adminRoutes/desserts'));
-app.use('/drinks', require('./routes/api/adminRoutes/drinks'));
-app.use('/salads', require('./routes/api/adminRoutes/salads'));
-app.use('/sides', require('./routes/api/adminRoutes/sides'));
+// post-route middlewares
+app.disable('x-powered-by');
 
 app.listen(PORT, (error) => {
   if (error) {

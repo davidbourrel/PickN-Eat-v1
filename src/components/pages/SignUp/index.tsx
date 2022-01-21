@@ -3,7 +3,6 @@ import { FC, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-import { BASE_URL } from '../../../_constants/dataUrls';
 import SubmitButton from '../../elements/Buttons/SubmitButton';
 import ErrorMessage from '../../elements/ErrorMessage';
 import HeaderOne from '../../elements/Headings/HeaderOne';
@@ -38,7 +37,7 @@ const SignUp: FC = () => {
         setLoading(true);
 
         const axiosInstance = axios.create({
-          baseURL: BASE_URL,
+          baseURL: process.env.REACT_APP_API_URL,
         });
 
         return await axiosInstance

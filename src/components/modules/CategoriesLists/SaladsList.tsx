@@ -2,7 +2,6 @@ import { FC } from 'react';
 import Loader from '../../images/icons/Loader';
 import Section from '../Section';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
-import { BASE_URL } from '../../../_constants/dataUrls';
 import { SaladInterface } from '../../../_types/datas';
 import CardItem from '../../elements/CardItem';
 import useFetchingDatas from '../../../hooks/useFetchingDatas';
@@ -13,7 +12,9 @@ const SaladsList: FC = () => {
     data: saladsList,
     loading,
     error,
-  } = useFetchingDatas(`${BASE_URL}salads` as unknown as UseFetchingDatasUrl);
+  } = useFetchingDatas(
+    `${process.env.REACT_APP_API_URL}/salads` as unknown as UseFetchingDatasUrl
+  );
 
   if (error)
     return (
