@@ -4,8 +4,8 @@ import { COL_CLASSNAME, HEADER_CLASSNAME, ITEM_CLASSNAME } from './const';
 
 const Footer: FC = () => {
   return (
-    <footer className='w-full mt-4 pb-10 shadow-sm bg-gray-800 text-white'>
-      <div className='py-2 flex flex-col flex-wrap xs:flex-row xs:justify-center xs:text-center xl:mx-auto xl:max-w-6xl'>
+    <footer className='w-full mt-4 pb-4 shadow-sm bg-gray-800 text-white'>
+      <div className='flex flex-col flex-wrap xs:flex-row xs:justify-center xs:text-center xl:mx-auto xl:max-w-6xl'>
         <div className={COL_CLASSNAME}>
           <h3 className={HEADER_CLASSNAME}>About Us</h3>
           <ul>
@@ -16,9 +16,6 @@ const Footer: FC = () => {
               <Link to='/'>Values In Action</Link>
             </li>
             <li className={ITEM_CLASSNAME}>
-              <Link to='/'>Digital Accessibility</Link>
-            </li>
-            <li className={ITEM_CLASSNAME}>
               <Link to='/'>Franchise Info</Link>
             </li>
           </ul>
@@ -26,9 +23,6 @@ const Footer: FC = () => {
         <div className={COL_CLASSNAME}>
           <h3 className={HEADER_CLASSNAME}>Careers</h3>
           <ul>
-            <li className={ITEM_CLASSNAME}>
-              <Link to='/'>Education Opportunities</Link>
-            </li>
             <li className={ITEM_CLASSNAME}>
               <Link to='/'>Employee Perks</Link>
             </li>
@@ -43,9 +37,6 @@ const Footer: FC = () => {
         <div className={COL_CLASSNAME}>
           <h3 className={HEADER_CLASSNAME}>Contact Us</h3>
           <ul>
-            <li className={ITEM_CLASSNAME}>
-              <Link to='/'>Arch Card</Link>
-            </li>
             <li className={ITEM_CLASSNAME}>
               <Link to='/'>Restaurant Feedback</Link>
             </li>

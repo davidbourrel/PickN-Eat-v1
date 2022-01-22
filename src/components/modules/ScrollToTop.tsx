@@ -5,7 +5,7 @@ const ScrollToTop: FC = () => {
 
   const buttonClassName = useMemo(
     () =>
-      `group fixed bottom-4 right-4 flex justify-center items-center border-2 border-gray-800 p-2 shadow-lg rounded transition transform-gpu bg-white hover:bg-gray-800 ${
+      `group fixed bottom-4 right-4 flex justify-center items-center border-2 border-gray-800 p-2 shadow-lg rounded transition transform-gpu bg-gray-800 hover:bg-white ${
         isVisible ? '' : 'scale-0'
       } sm:right-8 2xl:hidden`,
     [isVisible]
@@ -36,10 +36,14 @@ const ScrollToTop: FC = () => {
   }, []);
 
   return (
-    <button className={buttonClassName} onClick={handleScrollToTop} aria-label="scroll to top">
+    <button
+      className={buttonClassName}
+      onClick={handleScrollToTop}
+      aria-label='scroll to top'
+    >
       <span
-        className='inline-block transform-gpu transition w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-gray-800
-        rotate-135 translate-y-1 group-hover:border-white'
+        className='inline-block transform-gpu transition w-4 h-4 border-b-2 border-l-2 border-t-0 border-r-0 border-white
+        rotate-135 translate-y-1 group-hover:border-gray-800'
       />
     </button>
   );
