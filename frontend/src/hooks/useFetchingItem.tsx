@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FoodItemTypes } from '../_types/datas';
+import { FoodCategoryType } from '../_types/datas';
 import {
   UseFetchingDatasUrl,
   UseFetchingItemResult,
@@ -8,7 +8,7 @@ import {
 type FUseFetchingDataHook = (url: UseFetchingDatasUrl) => UseFetchingItemResult;
 
 const useFetchingItem: FUseFetchingDataHook = (url) => {
-  const [data, setData] = useState(null as unknown as FoodItemTypes);
+  const [data, setData] = useState(null as unknown as FoodCategoryType);
   const [error, setError] = useState(null as unknown as string);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,7 @@ const useFetchingItem: FUseFetchingDataHook = (url) => {
       .catch((error) => {
         if (isMounted) {
           setError(error);
-          setData(null as unknown as FoodItemTypes);
+          setData(null as unknown as FoodCategoryType);
         }
       })
       .finally(() => isMounted && setLoading(false));

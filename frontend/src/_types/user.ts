@@ -3,7 +3,7 @@ export interface UserLoginInterface {
   password: any;
 }
 
-export enum userRolesEnum {
+export enum UserRolesEnum {
   admin = 'admin',
   user = 'user',
 }

@@ -2,14 +2,14 @@ import { FC, useMemo } from 'react';
 import RemoveButton from '../../../elements/Buttons/RemoveButton';
 import HeaderThree from '../../../elements/Headings/HeaderThree';
 import TrashSvg from '../../../images/icons/TrashSvg';
-import { FoodItemTypes } from '../../../../_types/datas';
+import { FoodCategoryType } from '../../../../_types/datas';
 import useRemoveCart from '../../../../contexts/cartContext/useRemoveCart';
 import CartContentButtons from './CartContentButtons';
 
 interface CartContentProps {
-  cart: FoodItemTypes[];
+  cart: FoodCategoryType[];
   cartTotalItems: number;
-  item: FoodItemTypes;
+  item: FoodCategoryType;
 }
 
 const CartContent: FC<CartContentProps> = ({ cart, cartTotalItems, item }) => {

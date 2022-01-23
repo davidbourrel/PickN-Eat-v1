@@ -1,14 +1,14 @@
 import { FC, useMemo } from 'react';
 import useAddToCart from '../../../../contexts/cartContext/useAddToCart ';
 import useRemoveCart from '../../../../contexts/cartContext/useRemoveCart';
-import { FoodItemTypes } from '../../../../_types/datas';
+import { FoodCategoryType } from '../../../../_types/datas';
 import MinusSvg from '../../../images/icons/MinusSvg';
 import PlusSvg from '../../../images/icons/PlusSvg';
 
 interface CartContentButtonsProps {
-  cart: FoodItemTypes[];
+  cart: FoodCategoryType[];
   cartTotalItems: number;
-  item: FoodItemTypes;
+  item: FoodCategoryType;
 }
 
 const CartContentButtons: FC<CartContentButtonsProps> = ({

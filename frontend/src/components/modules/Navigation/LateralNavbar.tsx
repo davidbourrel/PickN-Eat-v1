@@ -8,7 +8,7 @@ import BCLogo from '../../images/BCLogo';
 import BurgerToggleButton from '../../elements/Buttons/BurgerToggleButton';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { OPENED_ITEM_CLASSNAME, LINK_CLASSNAME } from './const';
-import { userRolesEnum } from '../../../_types/user';
+import { UserRolesEnum } from '../../../_types/user';
 import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
 import useUserRole from '../../../contexts/userContext/useUserRole';
 
@@ -43,7 +43,7 @@ const LateralNavbar: FC<FLateralNavbarProps> = ({
 
   const adminItem = useMemo(
     () =>
-      isAuth && userRole === userRolesEnum.admin ? (
+      isAuth && userRole === UserRolesEnum.admin ? (
         <li className='mr-2 px-4 rounded transition mb-7 text-red-600 bg-gray-100'>
           <Link to='/admin' onClick={closeMenu} className={LINK_CLASSNAME}>
             ADMIN

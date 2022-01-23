@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import HeaderThree from './Headings/HeaderThree';
 import OrderButton from './Buttons/OrderButton';
 import SeeMoreButton from './Buttons/SeeMoreButton';
-import { FoodItemTypes, categoryFoodEnum } from '../../_types/datas';
+import { FoodCategoryType, FoodCategoryEnum } from '../../_types/datas';
 import useCart from '../../contexts/cartContext/useCart';
 import useAddToCart from '../../contexts/cartContext/useAddToCart ';
 import useTotalCart from '../../contexts/cartContext/useCartTotal';
 import useSeeMoreText from '../../hooks/useSeeMoreText';
 
 interface CardItemProps {
-  item: FoodItemTypes;
+  item: FoodCategoryType;
 }
 
 const CardItem: FC<CardItemProps> = ({ item }) => {
@@ -70,7 +70,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
       >
         <p className='pb-3 px-3'>
           {descriptionCutted}
-          <Link to={`/${categoryFoodEnum[categories_id]}/${id}`}>
+          <Link to={`/${FoodCategoryEnum[categories_id]}/${id}`}>
             <SeeMoreButton>see more</SeeMoreButton>
           </Link>
         </p>

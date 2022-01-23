@@ -1,12 +1,12 @@
 import { FC, useState, useCallback, useMemo } from 'react';
-import { FoodItemTypes } from '../../_types/datas';
+import { FoodCategoryType } from '../../_types/datas';
 import cartContext from './cart.context';
 import { CartContextInterface } from './cart.types';
 
 const { Provider } = cartContext;
 
 const CartProvider: FC = ({ children }) => {
-  const [cart, setCart] = useState([] as unknown as FoodItemTypes[]);
+  const [cart, setCart] = useState([] as unknown as FoodCategoryType[]);
 
   const cartTotalPrice = useMemo(
     () =>
@@ -19,7 +19,7 @@ const CartProvider: FC = ({ children }) => {
     [cart]
   );
 
-  const addToCart = useCallback((clickedItem: FoodItemTypes) => {
+  const addToCart = useCallback((clickedItem: FoodCategoryType) => {
     setCart((currentCart) => {
       // Is the item already added in the cart?
       const checkIndex = currentCart.findIndex(
@@ -47,7 +47,7 @@ const CartProvider: FC = ({ children }) => {
         } else {
           return [...total, item];
         }
-      }, [] as FoodItemTypes[])
+      }, [] as FoodCategoryType[])
     );
   }, []);
 
@@ -69,7 +69,7 @@ const CartProvider: FC = ({ children }) => {
   }, []);
 
   const removeAllFromCart = useCallback(
-    () => setCart([] as unknown as FoodItemTypes[]),
+    () => setCart([] as unknown as FoodCategoryType[]),
     []
   );
 

@@ -7,9 +7,9 @@ import { UseFetchingDatasUrl } from '../../../_types/fetchData';
 import HeaderOne from '../../elements/Headings/HeaderOne';
 import Section from '../../modules/Section';
 import Loader from '../../images/icons/Loader';
-import { userRolesEnum } from '../../../_types/user';
+import { UserRolesEnum } from '../../../_types/user';
 import ItemDetailsDescription from './ItemDetailsDescription';
-import { FoodItemTypes } from '../../../_types/datas';
+import { FoodCategoryType } from '../../../_types/datas';
 import ItemDetailsMoreDetails from './ItemDetailsMoreDetails';
 import useUserRole from '../../../contexts/userContext/useUserRole';
 import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
@@ -80,10 +80,10 @@ const ItemDetails: FC = () => {
   );
   const adminSection = useMemo(
     () =>
-      isAuth && userRole === userRolesEnum.admin ? (
+      isAuth && userRole === UserRolesEnum.admin ? (
         <ItemDetailsAdmin
           handleDeleteItem={handleDeleteItem}
-          {...(data as FoodItemTypes)}
+          {...(data as FoodCategoryType)}
         />
       ) : null,
     [handleDeleteItem, isAuth, userRole, data]
@@ -108,8 +108,8 @@ const ItemDetails: FC = () => {
   return (
     <>
       {title}
-      <ItemDetailsDescription {...(data as FoodItemTypes)} />
-      <ItemDetailsMoreDetails {...(data as FoodItemTypes)} />
+      <ItemDetailsDescription {...(data as FoodCategoryType)} />
+      <ItemDetailsMoreDetails {...(data as FoodCategoryType)} />
       {adminSection}
     </>
   );

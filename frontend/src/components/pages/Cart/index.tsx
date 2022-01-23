@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import useCart from '../../../contexts/cartContext/useCart';
 import useTotalCart from '../../../contexts/cartContext/useCartTotal';
-import { FoodItemTypes } from '../../../_types/datas';
+import { FoodCategoryType } from '../../../_types/datas';
 import HeaderOne from '../../elements/Headings/HeaderOne';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
 import Section from '../../modules/Section';
@@ -30,7 +30,7 @@ const Cart: FC = () => {
               key={item.id}
               cart={cart}
               cartTotalItems={cartTotalItems}
-              item={item as FoodItemTypes}
+              item={item as FoodCategoryType}
             />
           ))
         : null,
