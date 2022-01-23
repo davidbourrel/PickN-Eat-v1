@@ -1,5 +1,11 @@
 # DOSSIER FRONT-END
 
+Aller dans le dossier frontend :
+
+```bash
+cd frontend
+```
+
 Mettre le .env à jour. Pour "REACT_APP_MAPTILER_ACCESS_TOKEN" il faut vous créer un compte sur https://api.maptiler.com.
 
 Installer les dépendances :
@@ -22,7 +28,7 @@ Aller dans le dossier backend :
 cd backend
 ```
 
-Mettre le .env à jour. Pour LES tokens, il faut lancer node dans le terminal, faire **require('crypto').randomBytes(64).toString('hex')** puis copier/coller dans "ACCESS_TOKEN_SECRET".
+Mettre le .env à jour. Pour le token, il faut lancer node dans le terminal, faire **require('crypto').randomBytes(64).toString('hex')** puis copier/coller dans "ACCESS_TOKEN_SECRET".
 
 Installer les dépendances :
 
