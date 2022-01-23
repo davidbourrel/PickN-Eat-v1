@@ -31,7 +31,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
       <img
         src={image}
         alt={title}
-        className='h-36 w-full object-cover transition transform-gpu filter md:contrast-75 md:group-hover:contrast-100'
+        className='h-36 w-full bg-gray-50 object-cover transition transform-gpu filter md:contrast-75 md:group-hover:contrast-100'
       />
     ),
     [image, title]
