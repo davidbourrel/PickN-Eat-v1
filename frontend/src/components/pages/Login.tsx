@@ -37,14 +37,12 @@ const Login: FC = () => {
       return await axiosInstance
         .post('/auth', values)
         .then((res) => {
-          if (res.statusText === 'OK') {
-            if (!!res.data.token && res.data.token.length > 0) {
-              localStorage.setItem(
-                PICKANDEAT_LS_T,
-                Buffer.from(JSON.stringify(res.data.token)).toString('base64')
-              );
-              handleLogin(res.data.token);
-            }
+          if (!!res.data.token && res.data.token.length > 0) {
+            localStorage.setItem(
+              PICKANDEAT_LS_T,
+              Buffer.from(JSON.stringify(res.data.token)).toString('base64')
+            );
+            handleLogin(res.data.token);
           }
           reset();
         })

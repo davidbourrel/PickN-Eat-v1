@@ -2,7 +2,7 @@ const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const handleLogin = async (req, res) => {
+const signIn = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password)
@@ -29,4 +29,4 @@ const handleLogin = async (req, res) => {
   }
 };
 
-module.exports = { handleLogin };
+module.exports = { signIn };
