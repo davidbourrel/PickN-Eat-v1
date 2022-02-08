@@ -6,6 +6,8 @@ import { UserContextInterface } from './user.types';
 import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 import Swal from 'sweetalert2';
 
+const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+
 const { Provider } = userContext;
 
 const UserProvider: FC = ({ children }) => {
@@ -39,7 +41,7 @@ const UserProvider: FC = ({ children }) => {
         timerProgressBar: true,
       });
 
-      if (!!token && token.length > 0) {
+      if (token && token.length > 0) {
         const authAxios = axios.create({
           baseURL: process.env.REACT_APP_API_URL,
           headers: {
@@ -87,7 +89,7 @@ const UserProvider: FC = ({ children }) => {
     const refetch = () => {
       const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
 
-      if (!!encodedUserToken && encodedUserToken.length > 0) {
+      if (encodedUserToken && encodedUserToken.length > 0) {
         handleLogin(
           JSON.parse(Buffer.from(encodedUserToken, 'base64').toString())
         );
@@ -108,7 +110,7 @@ const UserProvider: FC = ({ children }) => {
   const handleDeleteUserAccount = useCallback(() => {
     const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
 
-    if (!!encodedUserToken && encodedUserToken.length > 0) {
+    if (encodedUserToken && encodedUserToken.length > 0) {
       const decodedToken = JSON.parse(
         Buffer.from(encodedUserToken, 'base64').toString()
       );

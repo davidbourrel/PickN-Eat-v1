@@ -22,7 +22,7 @@ const CartContent: FC<CartContentProps> = ({ cart, cartTotalItems, item }) => {
 
   return (
     <div className='flex my-5 pb-2 border-b-2 border-gray-300'>
-      <div className='cart-image w-20 overflow-hidden rounded flex-shrink-0 sm:w-28 md:w-1/5'>
+      <div className='cart-image w-20 overflow-hidden rounded shrink-0 sm:w-28 md:w-1/5'>
         <img
           src={item.image}
           alt={item.title}

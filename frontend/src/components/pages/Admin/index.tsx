@@ -11,6 +11,8 @@ import ErrorMessage from '../../elements/ErrorMessage';
 import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
 import { INPUT_CLASSNAME, LABEL_CLASSNAME } from './const';
 
+const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+
 const Admin = () => {
   const {
     register,
@@ -38,7 +40,7 @@ const Admin = () => {
         const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
         if (
           result.isConfirmed &&
-          !!encodedUserToken &&
+          encodedUserToken &&
           encodedUserToken.length > 0
         ) {
           setLoading(true);

@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import UserContent from './UserContent';
 import useHandleDeleteUserAccount from '../../../contexts/userContext/useHandleDeleteUserAccount';
 import HeaderTwo from '../../elements/Headings/HeaderTwo';
+import RemoveButton from '../../elements/Buttons/RemoveButton';
 
 const User: FC = () => {
   const handleLogout = useHandleLogout();
@@ -67,13 +68,13 @@ const User: FC = () => {
           Once you delete your account, there is no going back. Please be
           certain.
         </p>
-        <SubmitButton
+        <RemoveButton
           onClick={onSubmitDeleteUserHandler}
           value='submit'
           className='py-2 px-8 my-5 bg-red-800 text-white font-semibold rounded cursor-pointer transition md:hover:bg-red-700 md:w-1/3 md:mr-auto'
         >
           Delete your account
-        </SubmitButton>
+        </RemoveButton>
       </Section>
     </>
   );

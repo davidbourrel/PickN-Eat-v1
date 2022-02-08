@@ -28,9 +28,9 @@ const largeSizes = {
 const allSizes = { ...smallSizes, ...largeSizes };
 
 module.exports = {
-  purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    fontFamily: { body: ['"Open Sans"'] },
     screens: {
       xxs: '340px',
       xs: '475px',
@@ -49,13 +49,6 @@ module.exports = {
         margin: 'margin',
         width: 'width',
       },
-    },
-  },
-  variants: {
-    extend: {
-      filter: ['hover', 'focus'],
-      contrast: ['hover', 'focus', 'group-hover'],
-      scale: ['active'],
     },
   },
   plugins: [],

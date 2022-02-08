@@ -13,20 +13,23 @@ import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 import useHandleLogin from '../../contexts/userContext/useHandleLogin';
 import useUser from '../../contexts/userContext/useUser';
 
+const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+
 const Login: FC = () => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<UserLoginInterface>();
+
   const handleLogin = useHandleLogin();
   const { userLoading, setUserLoading } = useUser();
 
   const [error, setError] = useState(false);
 
   const onSubmitHandler = useCallback(
-    async (values: UserLoginInterface) => {
+    (values: UserLoginInterface) => {
       setError(false);
       setUserLoading(true);
 
@@ -34,10 +37,10 @@ const Login: FC = () => {
         baseURL: process.env.REACT_APP_API_URL,
       });
 
-      return await axiosInstance
+      return axiosInstance
         .post('/auth', values)
         .then((res) => {
-          if (!!res.data.token && res.data.token.length > 0) {
+          if (res.data.token && res.data.token.length > 0) {
             localStorage.setItem(
               PICKANDEAT_LS_T,
               Buffer.from(JSON.stringify(res.data.token)).toString('base64')

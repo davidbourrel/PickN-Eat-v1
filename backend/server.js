@@ -19,8 +19,6 @@ app.use(helmet());
 // routes
 require('./routes')(app);
 
-app.disable('x-powered-by');
-
 app.listen(PORT, (error) => {
   if (error) {
     console.log(error);

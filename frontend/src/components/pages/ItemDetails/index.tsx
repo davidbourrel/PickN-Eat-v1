@@ -16,6 +16,8 @@ import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
 import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
 import ItemDetailsAdmin from './ItemDetailsAdmin';
 
+const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+
 const ItemDetails: FC = () => {
   const { userRole } = useUserRole();
   const isAuth = useUserIsAuth();
@@ -41,7 +43,7 @@ const ItemDetails: FC = () => {
         const encodedUserToken = localStorage.getItem(PICKANDEAT_LS_T);
         if (
           result.isConfirmed &&
-          !!encodedUserToken &&
+          encodedUserToken &&
           encodedUserToken.length > 0
         ) {
           const decodedToken = JSON.parse(

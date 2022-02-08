@@ -8,7 +8,9 @@ const verifyRole = async (req, res, next) => {
     Buffer.from(token.split('.')[1], 'base64').toString()
   );
 
-  const [[retrieveUsers]] = await User.getOne(parsedToken?.id);
+  const userId = parsedToken && parsedToken.id ? parsedToken.id : '';
+
+  const [[retrieveUsers]] = await User.getOne(userId);
 
   if (retrieveUsers.role !== ADMIN_RESULT) {
     return res.sendStatus(403); // Forbidden

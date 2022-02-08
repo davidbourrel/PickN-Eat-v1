@@ -17,7 +17,7 @@ const FakeWebsiteMessage: FC = () => {
           présentation à un examen. Vous ne pourrez rien commander et aucune
           information bancaire ne sera sauvegardée.
         </p>
-        <span className='w-1/6 flex-shrink-0 text-right'>
+        <span className='w-1/6 shrink-0 text-right'>
           <button
             onClick={handleRemoveMessage}
             className='cursor-pointer transition hover:text-gray-900 text-lg font-semibold'

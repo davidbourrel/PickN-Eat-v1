@@ -62,7 +62,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
   const seeMoreDescription = useMemo(
     () => (
       <div
-        className={`bg-white transition-height max-h-0 overflow-hidden opacity-0 duration-300 ${
+        className={`bg-white transition-height max-h-0 overflow-hidden duration-300 ${
           isActive
             ? 'max-h-screen overflow-visible opacity-100 duration-700'
             : ''
@@ -71,7 +71,7 @@ const CardItem: FC<CardItemProps> = ({ item }) => {
         <p className='pb-3 px-3'>
           {descriptionCutted}
           <Link to={`/${FoodCategoryEnum[categories_id]}/${id}`}>
-            <SeeMoreButton>see more</SeeMoreButton>
+            <SeeMoreButton>See more</SeeMoreButton>
           </Link>
         </p>
       </div>
