@@ -15,8 +15,7 @@ import useUserRole from '../../../contexts/userContext/useUserRole';
 import useUserIsAuth from '../../../contexts/userContext/useUserIsAuth';
 import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
 import ItemDetailsAdmin from './ItemDetailsAdmin';
-
-const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+import { Buffer } from "buffer"
 
 const ItemDetails: FC = () => {
   const { userRole } = useUserRole();

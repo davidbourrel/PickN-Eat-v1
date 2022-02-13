@@ -44,7 +44,7 @@ npm start
 
 ## DATABASE
 
-J'utilise **MySQL** avec Workbench. Le dump est disponible dans le dossier back-end.
+J'utilise **MySQL** avec Workbench. Le dump est disponible dans le projet.
 
 ## End-points
 

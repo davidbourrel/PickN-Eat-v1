@@ -29,7 +29,7 @@ const SignUp: FC = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = useCallback(
-    async (user) => {
+    (user) => {
       setErrorEmailDuplicated(false);
 
       if (user.password === user.secondPassword) {
@@ -40,7 +40,7 @@ const SignUp: FC = () => {
           baseURL: process.env.REACT_APP_API_URL,
         });
 
-        return await axiosInstance
+        return axiosInstance
           .post('/register', user)
           .then(() => {
             Swal.fire({

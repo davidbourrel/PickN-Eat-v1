@@ -5,8 +5,7 @@ import userContext from './user.context';
 import { UserContextInterface } from './user.types';
 import { PICKANDEAT_LS_T } from '../../_constants/localStorage';
 import Swal from 'sweetalert2';
-
-const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+import { Buffer } from "buffer"
 
 const { Provider } = userContext;
 
@@ -30,7 +29,7 @@ const UserProvider: FC = ({ children }) => {
    * User authentication
    /**************/
   const handleLogin = useCallback(
-    async (token) => {
+    (token) => {
       // Modal message
       const Toast = Swal.mixin({
         toast: true,
@@ -49,7 +48,7 @@ const UserProvider: FC = ({ children }) => {
           },
         });
 
-        const parsedToken = await JSON.parse(
+        const parsedToken = JSON.parse(
           Buffer.from(token.split('.')[1], 'base64').toString()
         );
 
@@ -57,7 +56,7 @@ const UserProvider: FC = ({ children }) => {
         const notExpiry = parsedToken?.exp * 1000 > Date.now();
 
         if (parsedToken?.id && notExpiry) {
-          return await authAxios
+          return authAxios
             .get(`users/${parsedToken.id}`)
             .then((res) => {
               setUser(res.data);

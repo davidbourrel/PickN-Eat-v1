@@ -10,8 +10,7 @@ import HeaderOne from '../../elements/Headings/HeaderOne';
 import ErrorMessage from '../../elements/ErrorMessage';
 import { PICKANDEAT_LS_T } from '../../../_constants/localStorage';
 import { INPUT_CLASSNAME, LABEL_CLASSNAME } from './const';
-
-const Buffer = (window.Buffer = window.Buffer || require('buffer').Buffer);
+import { Buffer } from "buffer"
 
 const Admin = () => {
   const {
