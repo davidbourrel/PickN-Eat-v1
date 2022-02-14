@@ -19,7 +19,7 @@ const Delivery: FC = () => {
           href='https://deliveroo.fr/fr/'
           className='place-self-center w-full'
         >
-          <OrderButton>ORDER WIH DELIVEROO</OrderButton>
+          <OrderButton>ORDER WITH DELIVEROO</OrderButton>
         </a>
 
         <div className='flex justify-between items-center my-6 mx-auto'>

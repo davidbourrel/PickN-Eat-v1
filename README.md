@@ -6,7 +6,8 @@ Aller dans le dossier frontend :
 cd frontend
 ```
 
-Mettre le .env à jour. Pour "REACT_APP_MAPTILER_ACCESS_TOKEN" il faut vous créer un compte sur https://api.maptiler.com.
+Mettre le .env à jour. 
+Pour "REACT_APP_MAPTILER_ACCESS_TOKEN" il faut vous créer un compte sur https://api.maptiler.com.
 
 Installer les dépendances :
 
@@ -28,7 +29,8 @@ Aller dans le dossier backend :
 cd backend
 ```
 
-Mettre le .env à jour. Pour le token, il faut lancer node dans le terminal, faire **require('crypto').randomBytes(64).toString('hex')** puis copier/coller dans "ACCESS_TOKEN_SECRET".
+Mettre le .env à jour. 
+Pour le secret, il faut lancer node dans le terminal, faire **require('crypto').randomBytes(64).toString('hex')** puis copier/coller le resultat pour "ACCESS_TOKEN_SECRET".
 
 Installer les dépendances :
 
@@ -42,10 +44,10 @@ Démarrer le serveur de développement :
 npm start
 ```
 
-## DATABASE
+## DATABASE (SQL)
 
-J'utilise **MySQL** avec Workbench. Le dump est disponible dans le projet.
+Le Dump est disponible dans le projet.
 
 ## End-points
 
-Tout ce trouve dans le dossier back-end / routes. Il y a rien de particulier, il faut faire par exemple : http://localhost:3001/burgers
+Tout ce trouve dans le dossier back-end / routes. Il faut faire par exemple : http://localhost:5000/burgers pour récupérer les burgers.

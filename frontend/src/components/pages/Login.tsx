@@ -105,7 +105,7 @@ const Login: FC = () => {
         </label>
         <SubmitButton className='w-full'>Sign in</SubmitButton>
         <p className='mt-4 text-sm text-center'>
-          New to PickNEat ?{' '}
+          New to PickN'Eat ?{' '}
           <Link to='/sign-up'>
             <span className='font-bold cursor-pointer transition md:hover:text-red-700'>
               Create an account

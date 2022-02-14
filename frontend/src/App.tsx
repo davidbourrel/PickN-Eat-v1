@@ -31,17 +31,17 @@ const App: FC = () => {
 
   return (
     <div id='app' className='text-gray-800 flex flex-col min-h-screen'>
+      <LateralNavbar
+        isOpen={isOpen}
+        closeMenu={closeMenu}
+        handleToggleMenu={handleToggleMenu}
+      />
       <Header
         handleToggleMenu={handleToggleMenu}
         isOpen={isOpen}
         closeMenu={closeMenu}
       />
       <main className='flex flex-1'>
-        <LateralNavbar
-          isOpen={isOpen}
-          closeMenu={closeMenu}
-          handleToggleMenu={handleToggleMenu}
-        />
         <div className='flex flex-col flex-1 relative'>
           <Routes>
             <Route path='/' element={<Homepage />} />
