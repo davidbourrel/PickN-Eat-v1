@@ -11,7 +11,7 @@ const Homepage: FC = () => {
   return (
     <>
       <HeaderOne className='border-none text-center mt-6 px-4 pb-0 w-full sm:px-8 sm:py-6 xl:mx-auto xl:max-w-6xl'>
-        Choose whatever you want, just{' '}
+        Choose what you want, just{' '}
         <strong className='font-black'>pick and eat</strong> !
       </HeaderOne>
       <BurgersList />
