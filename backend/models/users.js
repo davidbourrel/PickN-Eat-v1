@@ -24,10 +24,10 @@ const verifyPassword = (plainPassword, hashedPassword) =>
 const hashPassword = (plainPassword) =>
   argon2.hash(plainPassword, hashingOptions);
 
-const newId = crypto.randomBytes(15).toString('hex'); // newId.length = 30
-
 const createOne = async ({ first_name, last_name, email, age, password }) => {
   try {
+    const newId = crypto.randomBytes(15).toString('hex'); // newId.length = 30
+
     const hashedPassword = await hashPassword(password);
     return await connection.query(
       'INSERT INTO users (id, first_name, last_name, email, age, hashedPassword, roles_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
